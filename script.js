@@ -327,36 +327,80 @@
   };
 
   /* ---------------------------------------------------
-     SONG PLAYER (decorative — plays if a real src is added later)
+     BACKGROUND AUDIO
+     One track, picked at random from assets/audio/ on every
+     page load, autoplays on loop, and never overlaps itself —
+     the single <audio id="songAudio"> element is the only
+     source of playback for the whole page. The control lives
+     on the hero (landing) screen; while playing, it spawns
+     drifting musical notes across the hero.
   --------------------------------------------------- */
-  const initSongPlayer = () => {
-    const player = $('.song-player');
+  const AUDIO_TRACKS = [
+    '10781.mp3', '17371.mp3', '27413.mp3',
+    '45168.mp3', '80507.mp3', '8957.mp3'
+  ];
+  const NOTE_GLYPHS = ['♪', '♫', '♬'];
+
+  const initBackgroundAudio = () => {
+    const wrap = $('#heroMusic');
     const btn = $('#songPlayBtn');
     const audio = $('#songAudio');
-    if (!player || !btn || !audio) return;
+    const notesLayer = $('#musicNotes');
+    if (!wrap || !btn || !audio) return;
     const playIcon = $('.icon-play', btn);
     const pauseIcon = $('.icon-pause', btn);
 
+    const track = AUDIO_TRACKS[Math.floor(Math.random() * AUDIO_TRACKS.length)];
+    audio.src = `assets/audio/${track}`;
+    audio.loop = true;
+
+    let noteTimer = null;
+    const spawnNote = () => {
+      if (!notesLayer) return;
+      const note = document.createElement('span');
+      note.className = 'music-note';
+      note.textContent = NOTE_GLYPHS[Math.floor(Math.random() * NOTE_GLYPHS.length)];
+      note.style.setProperty('--note-x', `${8 + Math.random() * 80}%`);
+      note.style.setProperty('--note-drift', `${(Math.random() * 60 - 30).toFixed(0)}px`);
+      note.style.setProperty('--note-rot', `${(Math.random() * 40 - 20).toFixed(0)}deg`);
+      note.style.setProperty('--note-dur', `${(4.5 + Math.random() * 2.5).toFixed(1)}s`);
+      note.style.fontSize = `${1 + Math.random() * 0.9}rem`;
+      note.addEventListener('animationend', () => note.remove());
+      notesLayer.appendChild(note);
+    };
+    const startNotes = () => {
+      if (noteTimer) return;
+      spawnNote();
+      noteTimer = setInterval(spawnNote, 700);
+    };
+    const stopNotes = () => {
+      clearInterval(noteTimer);
+      noteTimer = null;
+    };
+
+    const setUiPlaying = (isPlaying) => {
+      btn.classList.toggle('playing', isPlaying);
+      playIcon.hidden = isPlaying;
+      pauseIcon.hidden = !isPlaying;
+      btn.setAttribute('aria-label', isPlaying ? 'Pause our song' : 'Play our song');
+      if (isPlaying) startNotes(); else stopNotes();
+    };
+    audio.addEventListener('play', () => setUiPlaying(true));
+    audio.addEventListener('pause', () => setUiPlaying(false));
+
+    // try to autoplay as soon as the page loads; browsers that block
+    // unmuted autoplay before any interaction will reject this quietly,
+    // so we also arm a one-time fallback on the very first user gesture
+    // (opening the envelope counts) to start it right away instead.
+    const tryPlay = () => audio.play().catch(() => {});
+    tryPlay();
+    ['pointerdown', 'keydown'].forEach(evt =>
+      document.addEventListener(evt, () => { if (audio.paused) tryPlay(); }, { once: true })
+    );
+
     btn.addEventListener('click', () => {
-      const isPlaying = player.classList.contains('playing');
-      if (isPlaying) {
-        audio.pause();
-        player.classList.remove('playing');
-        playIcon.hidden = false;
-        pauseIcon.hidden = true;
-        return;
-      }
-      if (audio.getAttribute('src')) {
-        audio.play().catch(() => {});
-      }
-      player.classList.add('playing');
-      playIcon.hidden = true;
-      pauseIcon.hidden = false;
-    });
-    audio.addEventListener('ended', () => {
-      player.classList.remove('playing');
-      playIcon.hidden = false;
-      pauseIcon.hidden = true;
+      if (audio.paused) tryPlay();
+      else audio.pause();
     });
   };
 
@@ -373,6 +417,6 @@
     initCountdown();
     initCalendar();
     initLightbox();
-    initSongPlayer();
+    initBackgroundAudio();
   });
 })();

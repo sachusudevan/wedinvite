@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arya &amp; Sachu | We're Getting Married</title>
-<meta name="description" content="Join us as we celebrate the wedding of Arya and Sachu on September 12, 2026.">
+<title>Arya &amp; Sachu Sudevan | We're Getting Married</title>
+<meta name="description" content="Join us as we celebrate the wedding of Arya and Sachu Sudevan on September 12, 2026.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,7 +73,7 @@
 <div class="hero-pin-wrap" id="heroPinWrap">
 <section class="hero" id="hero">
   <div class="hero-bg" id="heroBg">
-    <img src="images/IMG_9534.JPG" alt="Arya and Sachu" loading="eager">
+    <img src="assets/images/IMG_3465.png" alt="Arya and Sachu Sudevan" loading="eager">
     <div class="hero-overlay"></div>
   </div>
   <div class="floating-deco" id="heroDeco" aria-hidden="true">
@@ -85,11 +85,19 @@
   <div class="hero-content" id="heroContent">
     <p class="hero-eyebrow reveal-text">We're Getting Married</p>
     <h1 class="hero-title" id="heroTitle">
-      <span class="typewriter" id="typeBride">Arya</span><span class="hero-amp">&amp;</span><span class="typewriter" id="typeGroom">Sachu</span>
+      <span class="typewriter" id="typeBride">Arya</span><span class="hero-amp">&amp;</span><span class="typewriter" id="typeGroom">Sachu Sudevan</span>
     </h1>
     <div class="mini-flourish reveal-text"><span></span><i>❦</i><span></span></div>
     <p class="hero-date reveal-text">Saturday, September 12, 2026</p>
-    <p class="hero-place reveal-text">[City, Country]</p>
+  </div>
+
+  <div class="music-notes" id="musicNotes" aria-hidden="true"></div>
+  <div class="hero-music" id="heroMusic">
+    <button class="hero-music-btn" id="songPlayBtn" aria-label="Play our song">
+      <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16"><path d="M6 4l14 8-14 8V4z" fill="currentColor"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" hidden><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" fill="currentColor"/></svg>
+    </button>
+    <audio id="songAudio" loop preload="auto"></audio>
   </div>
 
   <a href="#save-the-date" class="scroll-cue" aria-label="Scroll down">
@@ -121,48 +129,38 @@
   <div class="mini-flourish scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
 
   <div class="story-block scene" data-fx="unfold">
-    <div class="story-img"><img src="images/IMG_9542.JPG" alt="First meeting" loading="lazy"></div>
-    <span class="story-year">[Year]</span>
+    <div class="story-img"><img src="assets/images/IMG_4564.png" alt="First meeting" loading="lazy"></div>
     <h3>First Meeting</h3>
-    <p>A chance encounter, a shared laugh, and a feeling neither of us could quite explain &mdash; the beginning of something neither of us saw coming.</p>
+    <p>
+      Among countless souls, fate chose two strangers to meet. One conversation became a melody, and two hearts quietly began writing their forever.
+    </p>
   </div>
 
   <div class="story-block scene" data-fx="unfold">
-    <div class="story-img"><img src="images/IMG_9539.JPG" alt="First date" loading="lazy"></div>
-    <span class="story-year">[Year]</span>
+    <div class="story-img"><img src="assets/images/IMG_4274.png" alt="First date" loading="lazy"></div>
     <h3>The First Date</h3>
-    <p>Coffee turned into hours of conversation. We talked about everything and nothing, and somehow already knew we'd found something rare.</p>
+    <p>
+      A single introduction became a thousand cherished memories. From our first conversation to our first selfie, our first lunch, our first journey together every "first" gently wove two hearts into one beautiful forever.
+    </p>
   </div>
 
   <blockquote class="story-quote scene" data-fx="unfold">&ldquo;Two souls, one heartbeat &mdash; every love story is beautiful, but ours is my favourite.&rdquo;</blockquote>
-
   <div class="story-block scene" data-fx="unfold">
-    <div class="story-img"><img src="images/IMG_9536.JPG" alt="Falling in love" loading="lazy"></div>
-    <span class="story-year">[Year]</span>
+    <div class="story-img"><img src="assets/images/IMG_4454.png" alt="Falling in love" loading="lazy"></div>
     <h3>Falling In Love</h3>
-    <p>Through late-night talks, little adventures and quiet Sundays, we fell in love &mdash; slowly, then all at once.</p>
+    <p>
+       Love arrived gently, without announcing itself. A single day became countless conversations, every call drew our hearts a little closer, and every shared thought became another thread in the tapestry of our forever. Somewhere between the good mornings and the good nights, you became my greatest blessing and my sweetest tomorrow.
+    </p>
   </div>
 
   <div class="story-block scene" data-fx="unfold">
-    <div class="story-img"><img src="images/IMG_9538.JPG" alt="The proposal" loading="lazy"></div>
-    <span class="story-year">[Year]</span>
+    <div class="story-img"><img src="assets/images/IMG_4854.png" alt="The proposal" loading="lazy"></div>
     <h3>The Proposal</h3>
-    <p>Down on one knee, under an open sky, a question was asked and answered with happy tears. [Add your proposal story here.]</p>
+    <p>
+      Every rose carried a silent "I love you," and every little surprise held a piece of your heart. In that beautiful moment, I realized that love isn't measured by grand gestures, but by the countless little ways we make each other feel cherished.
+    </p>
   </div>
 
-  <div class="song-player scene" data-fx="unfold">
-    <button class="song-play-btn" id="songPlayBtn" aria-label="Play our song">
-      <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16"><path d="M6 4l14 8-14 8V4z" fill="currentColor"/></svg>
-      <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" hidden><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" fill="currentColor"/></svg>
-    </button>
-    <div class="song-info">
-      <p class="song-label">Play our song</p>
-      <div class="song-wave" aria-hidden="true">
-        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
-    </div>
-    <audio id="songAudio" src="" preload="none"></audio>
-  </div>
 </section>
 
 <!-- ============ WEDDING EVENTS ============ -->
@@ -174,38 +172,11 @@
   <div class="event-card featured scene" data-fx="depth-tilt">
     <div class="event-icon">❀</div>
     <h3>Wedding Ceremony</h3>
-    <p class="event-datetime">[Day], [Date] [Month] &middot; [Time]</p>
-    <p class="event-venue">[Venue Name], [City]</p>
+    <p class="event-datetime">Saturday, 12 September &middot; 12:05 PM &ndash; 12:44 PM</p>
+    <p class="event-venue">Vipanchika Auditorium, Charummoodu</p>
     <p class="event-desc">The sacred ceremony where we exchange vows and begin our journey as one.</p>
     <a href="#location" class="btn-outline-sm light">View Location</a>
   </div>
-</section>
-
-<!-- ============ VENUE DETAILS ============ -->
-<section class="section venue" id="venue">
-  <p class="kicker scene" data-fx="mask-wipe">Where To Find Us</p>
-  <h2 class="section-title scene" data-fx="mask-wipe">Venue Details</h2>
-  <div class="mini-flourish scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
-
-  <div class="venue-card scene" data-fx="depth-tilt">
-    <div class="venue-icon">⛩</div>
-    <h3>Ceremony</h3>
-    <p class="venue-name">[Ceremony Venue Name]</p>
-    <p class="venue-address">[Street Address], [City], [State] &ndash; [PIN Code]</p>
-    <p class="venue-time">Doors open at [Time]</p>
-    <a href="#location" class="btn-outline-sm">View On Map</a>
-  </div>
-
-  <div class="venue-card scene" data-fx="depth-tilt">
-    <div class="venue-icon">☍</div>
-    <h3>Reception</h3>
-    <p class="venue-name">[Reception Venue Name]</p>
-    <p class="venue-address">[Street Address], [City], [State] &ndash; [PIN Code]</p>
-    <p class="venue-time">Doors open at [Time]</p>
-    <a href="#location" class="btn-outline-sm">View On Map</a>
-  </div>
-
-  <p class="venue-note scene" data-fx="mask-wipe">Complimentary shuttle service available from [Pickup Point]. For accommodation assistance, contact <a href="tel:+910000000000">+91 00000 00000</a>.</p>
 </section>
 
 <!-- ============ COUNTDOWN + CALENDAR ============ -->
@@ -215,7 +186,7 @@
   <h2 class="section-title light scene" data-fx="mask-wipe">Counting Down To &ldquo;I Do&rdquo;</h2>
   <div class="mini-flourish light scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
 
-  <div class="countdown-grid scene" data-fx="unfold" id="countdown" data-wedding-date="2026-09-12T09:00:00">
+  <div class="countdown-grid scene" data-fx="unfold" id="countdown" data-wedding-date="2026-09-12T12:05:00">
     <div class="countdown-box"><span class="countdown-num" id="cd-days">00</span><span class="countdown-label">Days</span></div>
     <div class="countdown-box"><span class="countdown-num" id="cd-hours">00</span><span class="countdown-label">Hours</span></div>
     <div class="countdown-box"><span class="countdown-num" id="cd-minutes">00</span><span class="countdown-label">Min</span></div>
@@ -238,13 +209,13 @@
   <div class="mini-flourish scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
 
   <div class="polaroid-grid">
-    <figure class="polaroid scene" data-fx="develop" style="--rot:-4deg"><img src="images/IMG_9534.JPG" alt="Gallery photo 1" loading="lazy"><figcaption>[Caption]</figcaption></figure>
-    <figure class="polaroid scene" data-fx="develop" style="--rot:3deg"><img src="images/IMG_9535.JPG" alt="Gallery photo 2" loading="lazy"><figcaption>[Caption]</figcaption></figure>
-    <figure class="polaroid scene" data-fx="develop" style="--rot:-2deg"><img src="images/IMG_9536.JPG" alt="Gallery photo 3" loading="lazy"><figcaption>[Caption]</figcaption></figure>
-    <figure class="polaroid scene" data-fx="develop" style="--rot:4deg"><img src="images/IMG_9537.JPG" alt="Gallery photo 4" loading="lazy"><figcaption>[Caption]</figcaption></figure>
-    <figure class="polaroid scene" data-fx="develop" style="--rot:-3deg"><img src="images/IMG_9538.JPG" alt="Gallery photo 5" loading="lazy"><figcaption>[Caption]</figcaption></figure>
-    <figure class="polaroid scene" data-fx="develop" style="--rot:2deg"><img src="images/IMG_9539.JPG" alt="Gallery photo 6" loading="lazy"><figcaption>[Caption]</figcaption></figure>
-    <figure class="polaroid scene" data-fx="develop" style="--rot:-3deg"><img src="images/IMG_9542.JPG" alt="Gallery photo 7" loading="lazy"><figcaption>[Caption]</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:-4deg"><img src="assets/images/IMG_3465.png" alt="Gallery photo 1" loading="lazy"><figcaption>So close to forever</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:3deg"><img src="assets/images/IMG_2464.png" alt="Gallery photo 2" loading="lazy"><figcaption>Resting in your arms</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:-2deg"><img src="assets/images/IMG_4454.png" alt="Gallery photo 3" loading="lazy"><figcaption>Just you and me</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:4deg"><img src="assets/images/IMG_4564.png" alt="Gallery photo 4" loading="lazy"><figcaption>Laughter looks good on us</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:-3deg"><img src="assets/images/IMG_4854.png" alt="Gallery photo 5" loading="lazy"><figcaption>Home is your hug</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:2deg"><img src="assets/images/IMG_4274.png" alt="Gallery photo 6" loading="lazy"><figcaption>Coffee dates &amp; conversations</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:-3deg"><img src="assets/images/IMG_3465.png" alt="Gallery photo 7" loading="lazy"><figcaption>Every moment, together</figcaption></figure>
   </div>
 </section>
 
@@ -264,15 +235,11 @@
   <h3 class="family-side-title scene" data-fx="mask-wipe">Bride's Family</h3>
   <div class="family-member scene" data-fx="depth-tilt">
     <div class="family-avatar">✿</div>
-    <div><p class="family-name">[Father's Name]</p><p class="family-rel">Father of the Bride</p></div>
+    <div><p class="family-name">Udayakumar</p><p class="family-rel">Father of the Bride</p></div>
   </div>
   <div class="family-member scene" data-fx="depth-tilt">
     <div class="family-avatar">✿</div>
-    <div><p class="family-name">[Mother's Name]</p><p class="family-rel">Mother of the Bride</p></div>
-  </div>
-  <div class="family-member scene" data-fx="depth-tilt">
-    <div class="family-avatar">✿</div>
-    <div><p class="family-name">[Sibling's Name]</p><p class="family-rel">Sister of the Bride</p></div>
+    <div><p class="family-name">Mini Udayakumar</p><p class="family-rel">Mother of the Bride</p></div>
   </div>
 
   <h3 class="family-side-title scene" data-fx="mask-wipe">Groom's Family</h3>
@@ -309,13 +276,13 @@
 
 <!-- ============ THANK YOU ============ -->
 <section class="section thankyou" id="thankyou">
-  <div class="thankyou-bg"><img src="images/IMG_9542.JPG" alt="Arya and Sachu" loading="lazy"></div>
+  <div class="thankyou-bg"><img src="assets/images/IMG_3465.png" alt="Arya and Sachu Sudevan" loading="lazy"></div>
   <div class="thankyou-overlay"></div>
   <div class="thankyou-content scene" data-fx="unfold">
     <div class="mini-flourish light"><span></span><i>❦</i><span></span></div>
     <h2 class="thankyou-title">Thank You</h2>
     <p class="thankyou-text">To our family and friends near and far &mdash; your love, blessings and presence mean the world to us.</p>
-    <p class="thankyou-signature">With Love,<br>Arya &amp; Sachu</p>
+    <p class="thankyou-signature">With Love,<br>Arya &amp; Sachu Sudevan</p>
   </div>
 </section>
 
@@ -323,7 +290,7 @@
 
 <footer class="footer">
   <div class="footer-monogram">A<span>&amp;</span>S</div>
-  <p class="footer-names">Arya &amp; Sachu</p>
+  <p class="footer-names">Arya &amp; Sachu Sudevan</p>
   <p class="footer-date">Saturday, September 12, 2026</p>
   <div class="mini-flourish light"><span></span><i>❦</i><span></span></div>
   <p class="footer-credit">Made with ♥ for our forever &middot; 2026</p>

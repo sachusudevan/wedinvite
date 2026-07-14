@@ -528,6 +528,43 @@ body.no-scroll{overflow:hidden;}
 .scroll-cue-line::after{content:"";position:absolute;top:-38px;left:0;width:100%;height:38px;background:linear-gradient(180deg,transparent,var(--white));animation:scrollLineMove 2s ease-in-out infinite;}
 @keyframes scrollLineMove{to{top:38px;}}
 
+/* Landing-page music control + floating note animation */
+.music-notes{
+  position:absolute;inset:0;z-index:3;overflow:hidden;pointer-events:none;
+  opacity:calc(1 - var(--hp, 0) * 3);
+  transition:opacity .12s linear;
+}
+.music-note{
+  position:absolute;left:var(--note-x,50%);bottom:8%;
+  font-family:var(--font-display);color:var(--gold-bright);
+  text-shadow:0 2px 10px rgba(0,0,0,.4);opacity:0;
+  animation:noteFloat var(--note-dur,5s) ease-in forwards;
+  will-change:transform,opacity;
+}
+@keyframes noteFloat{
+  0%{transform:translate(0,0) rotate(0deg) scale(.85);opacity:0;}
+  14%{opacity:.9;}
+  78%{opacity:.55;}
+  100%{transform:translate(var(--note-drift,24px),-78vh) rotate(var(--note-rot,18deg)) scale(1.05);opacity:0;}
+}
+.hero-music{
+  position:absolute;top:1.3rem;right:1.3rem;z-index:4;
+  opacity:calc(1 - var(--hp, 0) * 3);
+  transform:translateY(calc(var(--hp, 0) * -20px));
+  transition:opacity .12s linear, transform .12s linear;
+}
+.hero-music-btn{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(248,245,238,.14);border:1px solid rgba(217,188,133,.55);
+  color:var(--gold-bright);box-shadow:0 8px 24px -12px rgba(0,0,0,.6);
+  backdrop-filter:blur(6px) saturate(140%);-webkit-backdrop-filter:blur(6px) saturate(140%);
+  transition:transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.hero-music-btn:hover{transform:scale(1.08);background:rgba(248,245,238,.24);}
+.hero-music-btn.playing{background:var(--gold-bright);color:var(--olive-deep);border-color:var(--gold-bright);box-shadow:0 8px 26px -10px rgba(201,161,93,.7);}
+.hero-music-btn svg{width:17px;height:17px;}
+
 /* =========================================================
    SAVE THE DATE
 ========================================================= */
@@ -546,7 +583,7 @@ body.no-scroll{overflow:hidden;}
 ========================================================= */
 .story-block{margin-bottom:2.6rem;}
 .story-img{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-card);margin-bottom:1.1rem;}
-.story-img img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top center;transition:transform .8s var(--ease-soft);}
+.story-img img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top center;transition:transform .8s var(--ease-soft);}
 .story-img:hover img{transform:scale(1.06);}
 .story-year{font-family:var(--font-serif);font-style:italic;color:var(--gold);font-size:1.05rem;}
 .story-block h3{font-family:var(--font-display);font-size:1.35rem;color:var(--olive-deep);margin:.25rem 0 .6rem;}
@@ -555,26 +592,6 @@ body.no-scroll{overflow:hidden;}
 .story-quote::before,.story-quote::after{content:"\201C";font-family:var(--font-display);font-size:1.5rem;color:var(--gold);}
 .story-quote::after{content:"\201D";}
 
-.song-player{
-  display:flex;align-items:center;gap:1rem;background:var(--paper);border-radius:100px;
-  padding:.7rem 1.2rem;box-shadow:var(--shadow-card);max-width:340px;margin:0 auto;border:1px solid rgba(111,116,85,.15);
-}
-.song-play-btn{width:38px;height:38px;border-radius:50%;background:var(--olive);color:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform var(--dur-fast) var(--ease);}
-.song-play-btn:hover{transform:scale(1.08);}
-.song-play-btn .icon-pause{color:var(--cream);}
-.song-info{text-align:left;flex:1;}
-.song-label{font-family:var(--font-caps);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--olive-deep);margin-bottom:.35rem;}
-.song-wave{display:flex;align-items:flex-end;gap:3px;height:16px;}
-.song-wave span{width:3px;background:var(--gold);border-radius:2px;height:30%;transition:height .2s ease;}
-.song-player.playing .song-wave span{animation:waveBounce 1s ease-in-out infinite;}
-.song-player.playing .song-wave span:nth-child(1){animation-delay:0s;}
-.song-player.playing .song-wave span:nth-child(2){animation-delay:.1s;}
-.song-player.playing .song-wave span:nth-child(3){animation-delay:.2s;}
-.song-player.playing .song-wave span:nth-child(4){animation-delay:.3s;}
-.song-player.playing .song-wave span:nth-child(5){animation-delay:.15s;}
-.song-player.playing .song-wave span:nth-child(6){animation-delay:.25s;}
-.song-player.playing .song-wave span:nth-child(7){animation-delay:.05s;}
-@keyframes waveBounce{0%,100%{height:30%;}50%{height:100%;}}
 
 /* =========================================================
    EVENTS
@@ -593,17 +610,6 @@ body.no-scroll{overflow:hidden;}
 .event-datetime{font-size:.85rem;font-weight:600;color:var(--charcoal);}
 .event-venue{font-size:.85rem;color:var(--olive);margin:.15rem 0 .6rem;}
 .event-desc{font-size:.86rem;color:var(--charcoal-soft);}
-
-/* =========================================================
-   VENUE
-========================================================= */
-.venue-card{background:var(--paper);border-radius:var(--radius);padding:2rem 1.5rem;margin-bottom:1.3rem;box-shadow:var(--shadow-card);border:1px solid rgba(111,116,85,.15);}
-.venue-icon{font-size:1.6rem;color:var(--gold);margin-bottom:.7rem;}
-.venue-card h3{font-family:var(--font-display);color:var(--olive-deep);font-size:1.2rem;margin-bottom:.5rem;}
-.venue-name{font-weight:600;color:var(--charcoal);}
-.venue-address, .venue-time{color:var(--charcoal-soft);font-size:.88rem;margin-top:.25rem;}
-.venue-note{color:var(--charcoal-soft);font-size:.88rem;margin-top:1rem;}
-.venue-note a{color:var(--olive);text-decoration:underline;}
 
 /* =========================================================
    COUNTDOWN + CALENDAR
