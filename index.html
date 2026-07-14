@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arya &amp; Sachu | We're Getting Married</title>
+<meta name="description" content="Join us as we celebrate the wedding of Arya and Sachu on September 12, 2026.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Scroll progress -->
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
+
+<!-- ============ ENVELOPE INTRO ============ -->
+<div class="envelope-intro" id="envelopeIntro">
+  <div class="envelope-bokeh" id="envelopeBokeh" aria-hidden="true"></div>
+  <div class="envelope-particles" id="envelopeParticles" aria-hidden="true"></div>
+
+  <div class="envelope-stage" id="envelopeStage">
+    <div class="envelope-glow" aria-hidden="true"></div>
+    <div class="envelope" id="envelope">
+      <div class="envelope-pocket">
+        <div class="envelope-pocket-texture" aria-hidden="true"></div>
+      </div>
+      <div class="envelope-letter" id="envelopeLetter">
+        <span class="envelope-corner tl" aria-hidden="true"></span>
+        <span class="envelope-corner br" aria-hidden="true"></span>
+        <p class="envelope-label">The Wedding Of</p>
+        <h1 class="envelope-title">Arya <span class="envelope-amp">&amp;</span> Sachu</h1>
+        <p class="envelope-date">September 12, 2026</p>
+      </div>
+      <div class="envelope-flap" id="envelopeFlap"></div>
+      <div class="envelope-seal"><span>A+S</span></div>
+    </div>
+  </div>
+
+  <button class="open-invite-btn" id="openInviteBtn">
+    <span class="btn-shine" aria-hidden="true"></span>
+    <span class="btn-label">Open Invitation</span>
+  </button>
+</div>
+
+<!-- ============ INVITATION CARD ============ -->
+<div class="invitation-card" id="invitationCard">
+
+<!-- NAV -->
+<header class="card-nav" id="cardNav">
+  <a href="#hero" class="nav-logo">A<span>&amp;</span>S</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="nav-overlay" id="navOverlay">
+  <a href="#hero" class="nav-link" data-nav>Home</a>
+  <a href="#story" class="nav-link" data-nav>Our Story</a>
+  <a href="#events" class="nav-link" data-nav>Events</a>
+  <a href="#countdown-section" class="nav-link" data-nav>Countdown</a>
+  <a href="#gallery" class="nav-link" data-nav>Gallery</a>
+  <a href="#family" class="nav-link" data-nav>Family</a>
+</nav>
+
+<main>
+
+<!-- ============ HERO (pinned cinematic intro) ============ -->
+<div class="hero-pin-wrap" id="heroPinWrap">
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg">
+    <img src="images/IMG_9534.JPG" alt="Arya and Sachu" loading="eager">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="floating-deco" id="heroDeco" aria-hidden="true">
+    <span class="deco leaf" style="--x:12%; --delay:0s;">🍃</span>
+    <span class="deco flower" style="--x:78%; --delay:2s;">✿</span>
+    <span class="deco leaf" style="--x:60%; --delay:4s;">🍃</span>
+  </div>
+
+  <div class="hero-content" id="heroContent">
+    <p class="hero-eyebrow reveal-text">We're Getting Married</p>
+    <h1 class="hero-title" id="heroTitle">
+      <span class="typewriter" id="typeBride">Arya</span><span class="hero-amp">&amp;</span><span class="typewriter" id="typeGroom">Sachu</span>
+    </h1>
+    <div class="mini-flourish reveal-text"><span></span><i>❦</i><span></span></div>
+    <p class="hero-date reveal-text">Saturday, September 12, 2026</p>
+    <p class="hero-place reveal-text">[City, Country]</p>
+  </div>
+
+  <a href="#save-the-date" class="scroll-cue" aria-label="Scroll down">
+    <span class="scroll-cue-line"></span>
+  </a>
+</section>
+</div>
+
+<!-- ============ SAVE THE DATE ============ -->
+<section class="section std" id="save-the-date">
+  <div class="std-page" data-fx="page-rise">
+  <p class="kicker scene" data-fx="mask-wipe">Save The Date</p>
+  <div class="std-date scene" data-fx="unfold">
+    <span class="std-day">12</span>
+    <span class="std-sep"></span>
+    <span class="std-month">September</span>
+    <span class="std-year">2026</span>
+  </div>
+  <p class="std-weekday scene" data-fx="mask-wipe">Saturday</p>
+  <div class="mini-flourish scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
+  <p class="std-note scene" data-fx="mask-wipe">With hearts full of joy, we invite you to witness the beginning of our forever.</p>
+  </div>
+</section>
+
+<!-- ============ COUPLE STORY ============ -->
+<section class="section story" id="story">
+  <p class="kicker scene" data-fx="mask-wipe">How It All Began</p>
+  <h2 class="section-title scene" data-fx="mask-wipe">Our Story</h2>
+  <div class="mini-flourish scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
+
+  <div class="story-block scene" data-fx="unfold">
+    <div class="story-img"><img src="images/IMG_9542.JPG" alt="First meeting" loading="lazy"></div>
+    <span class="story-year">[Year]</span>
+    <h3>First Meeting</h3>
+    <p>A chance encounter, a shared laugh, and a feeling neither of us could quite explain &mdash; the beginning of something neither of us saw coming.</p>
+  </div>
+
+  <div class="story-block scene" data-fx="unfold">
+    <div class="story-img"><img src="images/IMG_9539.JPG" alt="First date" loading="lazy"></div>
+    <span class="story-year">[Year]</span>
+    <h3>The First Date</h3>
+    <p>Coffee turned into hours of conversation. We talked about everything and nothing, and somehow already knew we'd found something rare.</p>
+  </div>
+
+  <blockquote class="story-quote scene" data-fx="unfold">&ldquo;Two souls, one heartbeat &mdash; every love story is beautiful, but ours is my favourite.&rdquo;</blockquote>
+
+  <div class="story-block scene" data-fx="unfold">
+    <div class="story-img"><img src="images/IMG_9536.JPG" alt="Falling in love" loading="lazy"></div>
+    <span class="story-year">[Year]</span>
+    <h3>Falling In Love</h3>
+    <p>Through late-night talks, little adventures and quiet Sundays, we fell in love &mdash; slowly, then all at once.</p>
+  </div>
+
+  <div class="story-block scene" data-fx="unfold">
+    <div class="story-img"><img src="images/IMG_9538.JPG" alt="The proposal" loading="lazy"></div>
+    <span class="story-year">[Year]</span>
+    <h3>The Proposal</h3>
+    <p>Down on one knee, under an open sky, a question was asked and answered with happy tears. [Add your proposal story here.]</p>
+  </div>
+
+  <div class="song-player scene" data-fx="unfold">
+    <button class="song-play-btn" id="songPlayBtn" aria-label="Play our song">
+      <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16"><path d="M6 4l14 8-14 8V4z" fill="currentColor"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" hidden><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" fill="currentColor"/></svg>
+    </button>
+    <div class="song-info">
+      <p class="song-label">Play our song</p>
+      <div class="song-wave" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <audio id="songAudio" src="" preload="none"></audio>
+  </div>
+</section>
+
+<!-- ============ WEDDING EVENTS ============ -->
+<section class="section events" id="events">
+  <p class="kicker scene" data-fx="mask-wipe">Join The Celebrations</p>
+  <h2 class="section-title scene" data-fx="mask-wipe">Wedding Events</h2>
+  <div class="mini-flourish scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
+
+  <div class="event-card featured scene" data-fx="depth-tilt">
+    <div class="event-icon">❀</div>
+    <h3>Wedding Ceremony</h3>
+    <p class="event-datetime">[Day], [Date] [Month] &middot; [Time]</p>
+    <p class="event-venue">[Venue Name], [City]</p>
+    <p class="event-desc">The sacred ceremony where we exchange vows and begin our journey as one.</p>
+    <a href="#location" class="btn-outline-sm light">View Location</a>
+  </div>
+</section>
+
+<!-- ============ VENUE DETAILS ============ -->
+<section class="section venue" id="venue">
+  <p class="kicker scene" data-fx="mask-wipe">Where To Find Us</p>
+  <h2 class="section-title scene" data-fx="mask-wipe">Venue Details</h2>
+  <div class="mini-flourish scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
+
+  <div class="venue-card scene" data-fx="depth-tilt">
+    <div class="venue-icon">⛩</div>
+    <h3>Ceremony</h3>
+    <p class="venue-name">[Ceremony Venue Name]</p>
+    <p class="venue-address">[Street Address], [City], [State] &ndash; [PIN Code]</p>
+    <p class="venue-time">Doors open at [Time]</p>
+    <a href="#location" class="btn-outline-sm">View On Map</a>
+  </div>
+
+  <div class="venue-card scene" data-fx="depth-tilt">
+    <div class="venue-icon">☍</div>
+    <h3>Reception</h3>
+    <p class="venue-name">[Reception Venue Name]</p>
+    <p class="venue-address">[Street Address], [City], [State] &ndash; [PIN Code]</p>
+    <p class="venue-time">Doors open at [Time]</p>
+    <a href="#location" class="btn-outline-sm">View On Map</a>
+  </div>
+
+  <p class="venue-note scene" data-fx="mask-wipe">Complimentary shuttle service available from [Pickup Point]. For accommodation assistance, contact <a href="tel:+910000000000">+91 00000 00000</a>.</p>
+</section>
+
+<!-- ============ COUNTDOWN + CALENDAR ============ -->
+<section class="section countdown" id="countdown-section">
+  <div class="countdown-bg" aria-hidden="true"></div>
+  <p class="kicker light scene" data-fx="mask-wipe">The Wait Is Almost Over</p>
+  <h2 class="section-title light scene" data-fx="mask-wipe">Counting Down To &ldquo;I Do&rdquo;</h2>
+  <div class="mini-flourish light scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
+
+  <div class="countdown-grid scene" data-fx="unfold" id="countdown" data-wedding-date="2026-09-12T09:00:00">
+    <div class="countdown-box"><span class="countdown-num" id="cd-days">00</span><span class="countdown-label">Days</span></div>
+    <div class="countdown-box"><span class="countdown-num" id="cd-hours">00</span><span class="countdown-label">Hours</span></div>
+    <div class="countdown-box"><span class="countdown-num" id="cd-minutes">00</span><span class="countdown-label">Min</span></div>
+    <div class="countdown-box"><span class="countdown-num" id="cd-seconds">00</span><span class="countdown-label">Sec</span></div>
+  </div>
+
+  <div class="calendar-widget scene" data-fx="unfold" id="calendarWidget">
+    <p class="calendar-month" id="calendarMonth">[Month] [Year]</p>
+    <div class="calendar-dow">
+      <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+    </div>
+    <div class="calendar-grid" id="calendarGrid"></div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="section gallery" id="gallery">
+  <p class="kicker scene" data-fx="mask-wipe">Moments We Treasure</p>
+  <h2 class="section-title scene" data-fx="mask-wipe">Gallery</h2>
+  <div class="mini-flourish scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
+
+  <div class="polaroid-grid">
+    <figure class="polaroid scene" data-fx="develop" style="--rot:-4deg"><img src="images/IMG_9534.JPG" alt="Gallery photo 1" loading="lazy"><figcaption>[Caption]</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:3deg"><img src="images/IMG_9535.JPG" alt="Gallery photo 2" loading="lazy"><figcaption>[Caption]</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:-2deg"><img src="images/IMG_9536.JPG" alt="Gallery photo 3" loading="lazy"><figcaption>[Caption]</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:4deg"><img src="images/IMG_9537.JPG" alt="Gallery photo 4" loading="lazy"><figcaption>[Caption]</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:-3deg"><img src="images/IMG_9538.JPG" alt="Gallery photo 5" loading="lazy"><figcaption>[Caption]</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:2deg"><img src="images/IMG_9539.JPG" alt="Gallery photo 6" loading="lazy"><figcaption>[Caption]</figcaption></figure>
+    <figure class="polaroid scene" data-fx="develop" style="--rot:-3deg"><img src="images/IMG_9542.JPG" alt="Gallery photo 7" loading="lazy"><figcaption>[Caption]</figcaption></figure>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#10094;</button>
+  <img src="" alt="" id="lightboxImg">
+  <button class="lightbox-next" id="lightboxNext" aria-label="Next">&#10095;</button>
+</div>
+
+<!-- ============ FAMILY ============ -->
+<section class="section family" id="family">
+  <p class="kicker scene" data-fx="mask-wipe">With Love &amp; Blessings</p>
+  <h2 class="section-title scene" data-fx="mask-wipe">Our Families</h2>
+  <div class="mini-flourish scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
+
+  <h3 class="family-side-title scene" data-fx="mask-wipe">Bride's Family</h3>
+  <div class="family-member scene" data-fx="depth-tilt">
+    <div class="family-avatar">✿</div>
+    <div><p class="family-name">[Father's Name]</p><p class="family-rel">Father of the Bride</p></div>
+  </div>
+  <div class="family-member scene" data-fx="depth-tilt">
+    <div class="family-avatar">✿</div>
+    <div><p class="family-name">[Mother's Name]</p><p class="family-rel">Mother of the Bride</p></div>
+  </div>
+  <div class="family-member scene" data-fx="depth-tilt">
+    <div class="family-avatar">✿</div>
+    <div><p class="family-name">[Sibling's Name]</p><p class="family-rel">Sister of the Bride</p></div>
+  </div>
+
+  <h3 class="family-side-title scene" data-fx="mask-wipe">Groom's Family</h3>
+  <div class="family-member scene" data-fx="depth-tilt">
+    <div class="family-avatar">✿</div>
+    <div><p class="family-name">Sudevan N</p><p class="family-rel">Father of the Groom</p></div>
+  </div>
+  <div class="family-member scene" data-fx="depth-tilt">
+    <div class="family-avatar">✿</div>
+    <div><p class="family-name">Jaya R</p><p class="family-rel">Mother of the Groom</p></div>
+  </div>
+  <div class="family-member scene" data-fx="depth-tilt">
+    <div class="family-avatar">✿</div>
+    <div><p class="family-name">Sooraj Sudevan</p><p class="family-rel">Brother of the Groom</p></div>
+  </div>
+</section>
+
+<!-- ============ LOCATION MAP ============ -->
+<section class="section location" id="location">
+  <p class="kicker scene" data-fx="mask-wipe">Getting There</p>
+  <h2 class="section-title scene" data-fx="mask-wipe">Location</h2>
+  <div class="mini-flourish scene" data-fx="mask-wipe"><span></span><i>❦</i><span></span></div>
+
+  <div class="map-wrap scene" data-fx="mask-wipe">
+    <iframe
+      title="Venue Location Map"
+      src="https://maps.google.com/maps?q=Vipanchika%20Auditorium&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    <a class="btn-outline-sm map-btn" href="https://www.google.com/maps/dir/?api=1&destination=Vipanchika%20Auditorium" target="_blank" rel="noopener">Get Directions</a>
+  </div>
+</section>
+
+<!-- ============ THANK YOU ============ -->
+<section class="section thankyou" id="thankyou">
+  <div class="thankyou-bg"><img src="images/IMG_9542.JPG" alt="Arya and Sachu" loading="lazy"></div>
+  <div class="thankyou-overlay"></div>
+  <div class="thankyou-content scene" data-fx="unfold">
+    <div class="mini-flourish light"><span></span><i>❦</i><span></span></div>
+    <h2 class="thankyou-title">Thank You</h2>
+    <p class="thankyou-text">To our family and friends near and far &mdash; your love, blessings and presence mean the world to us.</p>
+    <p class="thankyou-signature">With Love,<br>Arya &amp; Sachu</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-monogram">A<span>&amp;</span>S</div>
+  <p class="footer-names">Arya &amp; Sachu</p>
+  <p class="footer-date">Saturday, September 12, 2026</p>
+  <div class="mini-flourish light"><span></span><i>❦</i><span></span></div>
+  <p class="footer-credit">Made with ♥ for our forever &middot; 2026</p>
+</footer>
+
+</div><!-- /invitation-card -->
+
+<a href="#hero" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
+
+<script src="script.js"></script>
+</body>
+</html>
