@@ -63,6 +63,42 @@ WED.onReady(() => {
     document.body.classList.remove("js-loading");
     startLenis();
     if (hasGsap) requestAnimationFrame(() => ScrollTrigger.refresh());
+
+    // Auto-scroll logic
+    let autoScrollSpeed = 0.8; // pixels per frame
+    let lastScrollY = window.scrollY;
+    let isUserScrolling = false;
+    let scrollTimeout;
+
+    window.addEventListener("wheel", () => {
+      isUserScrolling = true;
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => { isUserScrolling = false; }, 1000);
+    }, { passive: true });
+    
+    window.addEventListener("touchstart", () => {
+      isUserScrolling = true;
+      clearTimeout(scrollTimeout);
+    }, { passive: true });
+    
+    window.addEventListener("touchend", () => {
+      scrollTimeout = setTimeout(() => { isUserScrolling = false; }, 1000);
+    }, { passive: true });
+
+    function autoScroll() {
+      // Only auto-scroll if the user hasn't manually scrolled recently
+      // and we haven't reached the bottom of the page
+      if (!isUserScrolling) {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        if (window.scrollY < maxScroll) {
+          window.scrollBy(0, autoScrollSpeed);
+        }
+      }
+      requestAnimationFrame(autoScroll);
+    }
+    
+    // Start auto scroll slightly after intro completes
+    setTimeout(autoScroll, 2000);
   });
 
   window.addEventListener("load", () => {

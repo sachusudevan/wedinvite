@@ -75,14 +75,16 @@
 .nav-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1099;
+  // Below .site-nav's stacking context (var(--z-nav): 800) so the toggle
+  // button stays clickable (as a close button) while the menu is open.
+  z-index: 790;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: clamp(0.6rem, 2vw, 1.1rem);
   background: var(--emerald-deep);
-  clip-path: circle(2% at calc(100% - 3.2rem) 3.2rem);
+  clip-path: circle(0% at calc(100% - 3.2rem) 3.2rem);
   pointer-events: none;
   transition: clip-path 0.9s var(--ease-lux);
 

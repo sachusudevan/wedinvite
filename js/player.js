@@ -30,13 +30,13 @@ WED.onReady(() => {
   ring.style.strokeDasharray = `${RING_C}`;
   ring.style.strokeDashoffset = `${RING_C}`;
 
-  let trackIndex = parseInt(localStorage.getItem("wed_track_idx") || "0", 10) % tracks.length;
+  // Pick a random track every time the page refreshes
+  let trackIndex = Math.floor(Math.random() * tracks.length);
   let audioCtx, analyser, dataArray, sourceNode;
   let rafId = null;
 
   function loadTrack(index, autoplay) {
     trackIndex = (index + tracks.length) % tracks.length;
-    localStorage.setItem("wed_track_idx", trackIndex);
     audio.src = tracks[trackIndex].src;
     trackName.textContent = tracks[trackIndex].label;
     if (autoplay) audio.play().catch(() => {});
