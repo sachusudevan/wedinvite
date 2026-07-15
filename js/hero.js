@@ -17,15 +17,15 @@ WED.onReady(() => {
 
   function playHeroReveal() {
     if (!hasGsap) return;
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-    tl.to(".hero-eyebrow", { opacity: 1, y: 0, duration: 0.8 }, 0);
+    const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
+    tl.to(".hero-eyebrow", { opacity: 1, y: 0, duration: 0.7 }, 0);
 
     if (splitInstances.length) {
       splitInstances.forEach((split, i) => {
-        tl.to(split.chars, { yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.028 }, 0.15 + i * 0.05);
+        tl.to(split.chars, { yPercent: 0, opacity: 1, duration: 0.7, stagger: 0.022 }, 0.15 + i * 0.05);
       });
     } else {
-      tl.to(".hero-title", { opacity: 1, y: 0, duration: 0.9 }, 0.15);
+      tl.to(".hero-title", { opacity: 1, y: 0, duration: 0.7 }, 0.15);
     }
 
     tl.to(".hero-amp", { opacity: 1, scale: 1, duration: 0.7, ease: "back.out(2)" }, 0.5)

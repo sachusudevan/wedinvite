@@ -29,70 +29,34 @@
 
 <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
 
-<!-- ============ INTRO GATE — ripped-paper invitation card + silk ribbon ============ -->
+<!-- ============ INTRO GATE — minimal photographic loader + seal ============ -->
 <div class="intro-gate" id="introGate">
-  <div class="intro-bg" aria-hidden="true"></div>
-  <canvas class="intro-fireflies" id="introFireflies" aria-hidden="true"></canvas>
+  <div class="intro-media" aria-hidden="true">
+    <img src="assets/images/optimized/lg/IMG_3465.webp"
+         srcset="assets/images/optimized/md/IMG_3465.webp 1000w, assets/images/optimized/lg/IMG_3465.webp 1800w"
+         sizes="100vw" alt="" fetchpriority="high" decoding="async">
+    <div class="intro-scrim"></div>
+  </div>
+  <div class="intro-grain" aria-hidden="true"></div>
 
-  <div class="invite-card" id="inviteCard">
-    <div class="invite-panel invite-panel--left" id="panelLeft">
-      <div class="invite-panel-media">
-        <img src="assets/images/optimized/md/IMG_9534.webp"
-             srcset="assets/images/optimized/sm/IMG_9534.webp 480w, assets/images/optimized/md/IMG_9534.webp 1000w"
-             sizes="50vw" alt="Arya and Sachu" fetchpriority="high" decoding="async">
-        <div class="invite-panel-texture" aria-hidden="true"></div>
-        <div class="invite-panel-vignette" aria-hidden="true"></div>
-      </div>
-      <span class="invite-torn-edge invite-torn-edge--left" aria-hidden="true"></span>
-    </div>
+  <div class="intro-content">
+    <p class="intro-kicker">We're Getting Married</p>
+    <p class="intro-names">
+      <span class="intro-name">Arya</span><span class="intro-amp">&amp;</span><span class="intro-name">Sachu</span>
+    </p>
+    <div class="intro-rule" aria-hidden="true"></div>
+    <p class="intro-date">Saturday, September 12, 2026</p>
 
-    <div class="invite-panel invite-panel--right" id="panelRight">
-      <div class="invite-panel-paper" aria-hidden="true"></div>
-      <span class="invite-torn-edge invite-torn-edge--right" aria-hidden="true"></span>
-
-      <svg class="corner-flourish corner-flourish--tr" viewBox="0 0 120 120" aria-hidden="true">
-        <path d="M4,116 C4,60 20,20 76,8" fill="none" stroke="currentColor" stroke-width="1"/>
-        <path d="M76,8 C90,5 100,10 104,20" fill="none" stroke="currentColor" stroke-width="1"/>
-        <path d="M14,100 C40,92 55,78 60,58" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.7"/>
-        <circle cx="104" cy="20" r="2.5" fill="currentColor"/>
-        <circle cx="60" cy="58" r="2" fill="currentColor" opacity="0.7"/>
-        <path d="M20,34 q6,-10 16,-6" fill="none" stroke="currentColor" stroke-width="0.8"/>
+    <button class="intro-seal" id="introSeal" type="button" disabled aria-label="Enter the invitation">
+      <svg class="intro-seal-ring" viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="ring-track" cx="60" cy="60" r="56"></circle>
+        <circle class="ring-progress" id="ringProgress" cx="60" cy="60" r="56"></circle>
       </svg>
-      <svg class="corner-flourish corner-flourish--br" viewBox="0 0 120 120" aria-hidden="true">
-        <path d="M4,116 C4,60 20,20 76,8" fill="none" stroke="currentColor" stroke-width="1"/>
-        <path d="M76,8 C90,5 100,10 104,20" fill="none" stroke="currentColor" stroke-width="1"/>
-        <path d="M14,100 C40,92 55,78 60,58" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.7"/>
-        <circle cx="104" cy="20" r="2.5" fill="currentColor"/>
-        <circle cx="60" cy="58" r="2" fill="currentColor" opacity="0.7"/>
-        <path d="M20,34 q6,-10 16,-6" fill="none" stroke="currentColor" stroke-width="0.8"/>
-      </svg>
-
-      <div class="invite-names">
-        <p class="invite-kicker">Together With Their Families</p>
-        <div class="mini-flourish center"><span></span><i>❦</i><span></span></div>
-        <p class="invite-role">The Groom</p>
-        <h1 class="invite-name invite-name--groom">Sachu</h1>
-        <div class="invite-and" aria-hidden="true">&amp;</div>
-        <p class="invite-role">The Bride</p>
-        <h1 class="invite-name invite-name--bride">Arya</h1>
-        <p class="invite-date-line">12 &middot; 09 &middot; 2026</p>
-      </div>
-    </div>
-
-    <span class="invite-seam-shadow" id="seamShadow" aria-hidden="true"></span>
-
-    <button class="invite-ribbon" id="inviteRibbon" type="button" disabled aria-label="Click the ribbon to open your invitation">
-      <span class="ribbon-knot" id="ribbonKnot" aria-hidden="true">
-        <span class="ribbon-loop ribbon-loop--left"></span>
-        <span class="ribbon-loop ribbon-loop--right"></span>
-        <span class="ribbon-wrap"></span>
-        <span class="ribbon-tail ribbon-tail--left"></span>
-        <span class="ribbon-tail ribbon-tail--right"></span>
-        <span class="ribbon-center-dot"></span>
-      </span>
-      <span class="ribbon-hint" id="ribbonHint">Loading&hellip;</span>
+      <span class="intro-seal-label" id="introSealLabel">Loading</span>
     </button>
   </div>
+
+  <span class="intro-wipe" id="introWipe" aria-hidden="true"></span>
 </div>
 
 <!-- ============ NAV ============ -->
@@ -127,13 +91,6 @@
       decoding="async">
     <div class="hero-overlay"></div>
     <div class="hero-grain"></div>
-  </div>
-
-  <div class="floating-deco" id="heroDeco" aria-hidden="true">
-    <span class="deco" style="--x:10%; --delay:0s;">❦</span>
-    <span class="deco" style="--x:80%; --delay:3s;">✿</span>
-    <span class="deco" style="--x:55%; --delay:6s;">❦</span>
-    <span class="deco" style="--x:30%; --delay:9s;">✧</span>
   </div>
 
   <div class="hero-content hero-content--merged">
