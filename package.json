@@ -1,0 +1,14 @@
+{
+  "name": "arya-sachu-wedding",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Arya & Sachu — wedding invitation site",
+  "scripts": {
+    "build:css": "sass scss/style.scss css/style.css --style=compressed --no-source-map",
+    "build:css:dev": "sass scss/style.scss css/style.css --style=expanded --source-map",
+    "watch:css": "sass --watch scss/style.scss css/style.css --style=expanded --source-map"
+  },
+  "devDependencies": {
+    "sass": "^1.101.0"
+  }
+}

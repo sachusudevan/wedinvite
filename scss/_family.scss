@@ -1,0 +1,60 @@
+// ==========================================================================
+// Family
+// ==========================================================================
+@use "tokens" as *;
+
+.family { background: var(--bg-page); }
+
+.family-columns {
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+
+  @include bp(md) { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+}
+
+.family-side-title {
+  font-family: var(--font-script);
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  color: var(--champagne-deep);
+  margin-bottom: 1.6rem;
+  text-align: center;
+
+  @include bp(md) { text-align: left; }
+}
+
+.family-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.family-member {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.1rem 1.3rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  transition: transform var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
+
+  @include fine-pointer {
+    &:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); }
+  }
+}
+
+.family-avatar {
+  flex: none;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--ivory);
+  background: linear-gradient(135deg, var(--emerald-light), var(--emerald-deep));
+}
+
+.family-name { font-weight: 600; font-size: 1.02rem; color: var(--text-primary); }
+.family-rel { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.15rem; }

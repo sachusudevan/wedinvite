@@ -1,0 +1,109 @@
+// ==========================================================================
+// Design Tokens — Arya & Sachu
+// A cinematic-editorial palette: ivory & ink grounded by emerald,
+// warmed by champagne and rose gold. Defined as CSS custom properties
+// so both SCSS and runtime JS (canvas particles, visualizer) can read them.
+// ==========================================================================
+
+:root {
+  // ---- Core palette --------------------------------------------------
+  --ink: #15150f;
+  --ink-soft: #23231a;
+  --ink-mute: #4a4a3d;
+
+  --ivory: #fbf6ec;
+  --cream: #f4ead9;
+  --paper: #ece0c9;
+  --paper-deep: #ddc9a3;
+
+  --champagne: #c9a35f;
+  --champagne-light: #e8d4a3;
+  --champagne-deep: #8f6f38;
+
+  --rose: #c99a8d;
+  --rose-light: #e7c6ba;
+  --rose-deep: #a06a5c;
+
+  --emerald: #0f3d30;
+  --emerald-light: #2f6b54;
+  --emerald-deep: #082720;
+  --emerald-glow: #4f8f75;
+
+  // ---- Semantic roles --------------------------------------------------
+  --bg-page: var(--ivory);
+  --bg-panel: var(--cream);
+  --bg-dark: var(--ink);
+  --bg-emerald: var(--emerald);
+
+  --text-primary: var(--ink);
+  --text-muted: var(--ink-mute);
+  --text-on-dark: var(--ivory);
+  --text-accent: var(--champagne-deep);
+
+  --line: rgba(21, 21, 15, 0.12);
+  --line-on-dark: rgba(251, 246, 236, 0.16);
+
+  --glass-fill: rgba(251, 246, 236, 0.10);
+  --glass-fill-strong: rgba(251, 246, 236, 0.16);
+  --glass-border: rgba(251, 246, 236, 0.28);
+  --glass-blur: 16px;
+
+  --shadow-soft: 0 20px 60px rgba(15, 20, 15, 0.12);
+  --shadow-deep: 0 30px 90px rgba(8, 10, 8, 0.35);
+
+  // ---- Typography --------------------------------------------------
+  --font-display: "Fraunces", "Iowan Old Style", serif;
+  --font-body: "Manrope", "Segoe UI", sans-serif;
+  --font-script: "Beau Rivage", cursive;
+
+  // ---- Motion --------------------------------------------------
+  --ease-lux: cubic-bezier(0.16, 0.8, 0.24, 1);
+  --ease-silk: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.4s;
+  --dur-med: 0.8s;
+  --dur-slow: 1.4s;
+
+  // ---- Layout --------------------------------------------------
+  --gutter: clamp(1.5rem, 5vw, 4.5rem);
+  --container-max: 1360px;
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 28px;
+
+  // ---- Z-index scale --------------------------------------------------
+  --z-cursor: 900;
+  --z-player: 700;
+  --z-nav: 800;
+  --z-loader: 1000;
+  --z-lightbox: 950;
+}
+
+// ---- SCSS-only values (compile-time, breakpoints) --------------------------------------------------
+$bp-xs: 380px;
+$bp-sm: 560px;
+$bp-md: 780px;
+$bp-lg: 1020px;
+$bp-xl: 1280px;
+$bp-xxl: 1600px;
+
+@mixin bp($size) {
+  @if $size == xs { @media (min-width: $bp-xs) { @content; } }
+  @if $size == sm { @media (min-width: $bp-sm) { @content; } }
+  @if $size == md { @media (min-width: $bp-md) { @content; } }
+  @if $size == lg { @media (min-width: $bp-lg) { @content; } }
+  @if $size == xl { @media (min-width: $bp-xl) { @content; } }
+  @if $size == xxl { @media (min-width: $bp-xxl) { @content; } }
+}
+
+@mixin fine-pointer {
+  @media (hover: hover) and (pointer: fine) { @content; }
+}
+
+@mixin coarse-pointer {
+  @media (hover: none), (pointer: coarse) { @content; }
+}
+
+@mixin reduce-motion {
+  @media (prefers-reduced-motion: reduce) { @content; }
+}

@@ -1,0 +1,30 @@
+// ==========================================================================
+// Arya & Sachu — Wedding Invitation
+// Main stylesheet entry
+// ==========================================================================
+
+@use "tokens" as *;
+@use "reset";
+@use "base";
+@use "cursor";
+@use "intro";
+@use "nav";
+@use "hero";
+@use "std";
+@use "story";
+@use "events";
+@use "countdown";
+@use "gallery";
+@use "family";
+@use "blessings";
+@use "rsvp";
+@use "player";
+@use "footer";
+
+// ---- Global section rhythm tweaks --------------------------------------------------
+
+.section + .section { border-top: none; }
+
+::view-transition-group(*) { animation-duration: 0s; }
+
+.js-loading { overflow: hidden; height: 100%; }

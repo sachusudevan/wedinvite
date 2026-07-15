@@ -1,0 +1,60 @@
+// ==========================================================================
+// Custom cursor — fine-pointer devices only
+// ==========================================================================
+@use "tokens" as *;
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  border-radius: 50%;
+  will-change: transform;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+
+.cursor-dot {
+  width: 7px; height: 7px;
+  background: var(--ivory);
+}
+
+.cursor-ring {
+  width: 38px; height: 38px;
+  border: 1px solid var(--ivory);
+  transition: width var(--dur-fast) var(--ease-out-soft),
+              height var(--dur-fast) var(--ease-out-soft),
+              opacity var(--dur-fast) var(--ease-out-soft),
+              border-color var(--dur-fast) var(--ease-out-soft);
+}
+
+.cursor-ring.is-active {
+  width: 64px; height: 64px;
+  background: rgba(251,246,236,0.08);
+}
+
+.cursor-ring .cursor-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out-soft);
+  white-space: nowrap;
+}
+
+.cursor-ring.is-active .cursor-label { opacity: 1; }
+
+body.no-fine-cursor .cursor-dot,
+body.no-fine-cursor .cursor-ring {
+  display: none;
+}
+
+@include coarse-pointer {
+  .cursor-dot, .cursor-ring { display: none; }
+}

@@ -1,0 +1,105 @@
+// ==========================================================================
+// RSVP
+// ==========================================================================
+@use "tokens" as *;
+
+.rsvp {
+  position: relative;
+  background: var(--ink);
+  overflow: hidden;
+}
+
+.rsvp-bg-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(201,163,95,0.14), transparent 45%),
+              radial-gradient(circle at 85% 75%, rgba(79,143,117,0.18), transparent 50%);
+}
+
+.rsvp-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.rsvp-card {
+  margin-top: clamp(2.4rem, 6vw, 3.4rem);
+  padding: clamp(2rem, 5vw, 3rem);
+  border-radius: var(--radius-lg);
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  text-align: left;
+}
+
+.rsvp-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+  @include bp(sm) { grid-template-columns: 1fr 1fr; }
+}
+
+.rsvp-card .field label { color: var(--champagne-light); }
+.rsvp-card .field input,
+.rsvp-card .field textarea,
+.rsvp-card .field select {
+  background: rgba(251,246,236,0.06);
+  border: 1px solid var(--line-on-dark);
+  color: var(--ivory);
+}
+.rsvp-card .field select option { color: var(--ink); }
+
+.rsvp-attend-toggle {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.1rem;
+}
+
+.attend-option {
+  flex: 1;
+  text-align: center;
+  padding: 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-on-dark);
+  color: var(--cream);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast);
+
+  input { position: absolute; opacity: 0; pointer-events: none; }
+
+  &.is-selected { background: var(--champagne); border-color: var(--champagne); color: var(--ink); }
+}
+
+.rsvp-card .btn-solid { width: 100%; margin-top: 0.6rem; background: var(--champagne); color: var(--ink); box-shadow: 0 10px 30px rgba(201,163,95,0.25); }
+
+.rsvp-note {
+  margin-top: 1.4rem;
+  text-align: center;
+  color: var(--cream);
+  opacity: 0.65;
+  font-size: 0.82rem;
+}
+
+.rsvp-success {
+  display: none;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--ivory);
+
+  &.is-visible { display: block; }
+
+  .rsvp-success-icon { font-size: 2.4rem; color: var(--champagne-light); margin-bottom: 1rem; }
+  h3 { font-size: 1.5rem; }
+  p { color: var(--cream); margin-top: 0.6rem; }
+}
+
+.confetti-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1150;
+  pointer-events: none;
+}

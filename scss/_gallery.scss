@@ -1,0 +1,203 @@
+// ==========================================================================
+// Gallery — masonry grid, filter, lightbox, memories carousel
+// ==========================================================================
+@use "tokens" as *;
+
+.gallery { background: var(--bg-panel); }
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: clamp(2rem, 5vw, 2.8rem);
+}
+
+.gallery-filter-btn {
+  padding: 0.55rem 1.3rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: background var(--dur-fast) var(--ease-out-soft), color var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast) var(--ease-out-soft);
+
+  &.is-active, &:hover { background: var(--emerald); color: var(--ivory); border-color: var(--emerald); }
+}
+
+.masonry {
+  margin-top: clamp(1.6rem, 4vw, 2.4rem);
+  column-count: 1;
+  column-gap: 1.1rem;
+
+  @include bp(sm) { column-count: 2; }
+  @include bp(lg) { column-count: 3; }
+}
+
+.masonry-item {
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 1.1rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+
+  img {
+    width: 100%;
+    display: block;
+    transition: transform 0.7s var(--ease-out-soft);
+  }
+
+  .masonry-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.2rem;
+    background: linear-gradient(0deg, rgba(15,15,10,0.75), transparent 55%);
+    opacity: 0;
+    transition: opacity var(--dur-fast) var(--ease-out-soft);
+  }
+
+  .masonry-caption {
+    color: var(--ivory);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1rem;
+    transform: translateY(10px);
+    transition: transform var(--dur-fast) var(--ease-out-soft);
+  }
+
+  .masonry-zoom {
+    position: absolute;
+    top: 0.9rem; right: 0.9rem;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(251,246,236,0.85);
+    color: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity var(--dur-fast) var(--ease-out-soft), transform var(--dur-fast) var(--ease-out-soft);
+  }
+
+  @include fine-pointer {
+    &:hover img { transform: scale(1.07); }
+    &:hover .masonry-overlay { opacity: 1; }
+    &:hover .masonry-caption { transform: translateY(0); }
+    &:hover .masonry-zoom { opacity: 1; transform: scale(1); }
+  }
+}
+
+// ---- Lightbox --------------------------------------------------
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 8, 0.94);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-fast) var(--ease-out-soft);
+
+  &.is-open { opacity: 1; visibility: visible; }
+
+  img {
+    max-width: min(88vw, 720px);
+    max-height: 82vh;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.6);
+  }
+
+  figcaption {
+    text-align: center;
+    color: var(--champagne-light);
+    font-family: var(--font-display);
+    font-style: italic;
+    margin-top: 1rem;
+  }
+}
+
+.lightbox-fig { display: flex; flex-direction: column; align-items: center; }
+
+.lightbox-close, .lightbox-prev, .lightbox-next {
+  position: absolute;
+  color: var(--ivory);
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line-on-dark);
+  font-size: 1.3rem;
+  transition: background var(--dur-fast) var(--ease-out-soft);
+  @include fine-pointer { &:hover { background: rgba(251,246,236,0.12); } }
+}
+
+.lightbox-close { top: 1.6rem; right: 1.6rem; }
+.lightbox-prev { left: 1.2rem; top: 50%; transform: translateY(-50%); }
+.lightbox-next { right: 1.2rem; top: 50%; transform: translateY(-50%); }
+
+// ---- Memories carousel --------------------------------------------------
+
+.memories {
+  margin-top: clamp(3.5rem, 8vw, 5.5rem);
+}
+
+.memories-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.memories-nav {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.memories-arrow {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--dur-fast), color var(--dur-fast);
+  @include fine-pointer { &:hover { background: var(--emerald); color: var(--ivory); } }
+}
+
+.memories-track-wrap {
+  margin-top: 1.8rem;
+  overflow: hidden;
+}
+
+.memories-track {
+  display: flex;
+  gap: 1.2rem;
+  will-change: transform;
+}
+
+.memory-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(200px, 32vw, 280px);
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+
+  img { width: 100%; height: 100%; object-fit: cover; }
+
+  figcaption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 1.1rem;
+    color: var(--ivory);
+    font-family: var(--font-display);
+    font-style: italic;
+    background: linear-gradient(0deg, rgba(15,15,10,0.8), transparent 70%);
+  }
+}

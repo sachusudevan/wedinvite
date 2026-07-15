@@ -1,0 +1,95 @@
+// ==========================================================================
+// Blessings — guest wall of love
+// ==========================================================================
+@use "tokens" as *;
+
+.blessings { background: var(--bg-panel); }
+
+.blessings-layout {
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
+
+  @include bp(lg) { grid-template-columns: 0.85fr 1.15fr; gap: 3rem; }
+}
+
+.blessing-form {
+  padding: clamp(1.8rem, 4vw, 2.4rem);
+  border-radius: var(--radius-lg);
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+  height: fit-content;
+}
+
+.field {
+  margin-bottom: 1.1rem;
+
+  label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--bg-page);
+    font-size: 0.98rem;
+    transition: border-color var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
+
+    &:focus { outline: none; border-color: var(--champagne); box-shadow: 0 0 0 3px rgba(201,163,95,0.18); }
+  }
+
+  textarea { resize: vertical; min-height: 96px; }
+}
+
+.blessing-form .btn { width: 100%; margin-top: 0.4rem; }
+
+.blessing-wall {
+  columns: 1;
+  column-gap: 1rem;
+  max-height: 560px;
+  overflow-y: auto;
+  padding-right: 0.4rem;
+  scrollbar-gutter: stable;
+
+  @include bp(sm) { columns: 2; }
+}
+
+.blessing-card {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  padding: 1.3rem 1.4rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-page);
+  border: 1px solid var(--line);
+
+  .blessing-quote-mark { color: var(--champagne); font-family: var(--font-display); font-size: 1.4rem; line-height: 0.6; }
+  p { margin-top: 0.4rem; color: var(--text-primary); line-height: 1.7; font-size: 0.95rem; }
+  .blessing-from { margin-top: 0.8rem; font-size: 0.78rem; color: var(--champagne-deep); font-weight: 600; letter-spacing: 0.04em; }
+}
+
+.blessing-toast {
+  position: fixed;
+  bottom: 6.5rem;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: var(--ink);
+  color: var(--ivory);
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  z-index: 1200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-fast) var(--ease-out-soft), transform var(--dur-fast) var(--ease-out-soft);
+
+  &.is-visible { opacity: 1; transform: translate(-50%, 0); }
+}

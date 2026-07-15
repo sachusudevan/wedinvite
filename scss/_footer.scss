@@ -1,0 +1,71 @@
+// ==========================================================================
+// Footer
+// ==========================================================================
+@use "tokens" as *;
+
+.thankyou {
+  position: relative;
+  height: 100vh;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.thankyou-bg {
+  position: absolute;
+  inset: 0;
+  img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; transform: scale(1.15); }
+}
+
+.thankyou-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15,15,10,0.55), rgba(15,15,10,0.85));
+}
+
+.thankyou-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--ivory);
+  padding: 2rem;
+}
+
+.thankyou-title {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+}
+
+.thankyou-text {
+  max-width: 46ch;
+  margin: 1.2rem auto 0;
+  color: var(--cream);
+  line-height: 1.8;
+}
+
+.thankyou-signature {
+  margin-top: 1.8rem;
+  font-family: var(--font-script);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--champagne-light);
+}
+
+.footer {
+  position: relative;
+  background: var(--emerald-deep);
+  color: var(--ivory);
+  text-align: center;
+  padding: clamp(3rem, 8vw, 4.5rem) 1.5rem clamp(6rem, 10vw, 4.5rem);
+}
+
+.footer-monogram {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  span { color: var(--champagne-light); }
+}
+
+.footer-names { margin-top: 0.8rem; font-family: var(--font-script); font-size: 1.6rem; color: var(--champagne-light); }
+.footer-date { margin-top: 0.4rem; font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream); opacity: 0.8; }
+.footer-credit { margin-top: 1.6rem; font-size: 0.78rem; color: var(--cream); opacity: 0.55; }

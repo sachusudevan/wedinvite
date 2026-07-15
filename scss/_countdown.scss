@@ -1,0 +1,75 @@
+// ==========================================================================
+// Countdown
+// ==========================================================================
+@use "tokens" as *;
+
+.countdown {
+  position: relative;
+  background: radial-gradient(ellipse at 50% 0%, var(--emerald-light) 0%, var(--emerald) 45%, var(--emerald-deep) 100%);
+  overflow: hidden;
+  text-align: center;
+}
+
+.countdown-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.countdown-grid {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(0.8rem, 3vw, 1.8rem);
+  margin-top: clamp(2.4rem, 6vw, 3.6rem);
+}
+
+.countdown-box {
+  position: relative;
+  width: clamp(76px, 18vw, 128px);
+  padding: clamp(1.2rem, 3vw, 1.8rem) 0;
+  border-radius: var(--radius-md);
+  background: rgba(251, 246, 236, 0.06);
+  border: 1px solid rgba(251, 246, 236, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--champagne-light), transparent);
+  }
+}
+
+.countdown-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 6vw, 3.4rem);
+  color: var(--ivory);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.countdown-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--champagne-light);
+  opacity: 0.85;
+}
+
+.countdown-sub {
+  margin-top: 2.2rem;
+  color: var(--cream);
+  opacity: 0.75;
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+}
