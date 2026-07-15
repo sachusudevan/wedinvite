@@ -5,19 +5,8 @@ WED.onReady(() => {
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
 
   const reduced = WED.flags.reducedMotion;
-  const isHoriz = typeof horizontalTween !== "undefined";
 
-  function getOpts(el, start) {
-    return {
-      trigger: el,
-      start: start,
-      once: true,
-      containerAnimation: isHoriz ? horizontalTween : null
-    };
-  }
-
-  // --- 1. Generic Reveals (Data Attributes) ---
-  function reveal(selector, fromVars, toVars, startOffset = "top 85%") {
+  function reveal(selector, fromVars, toVars, opts = {}) {
     const items = gsap.utils.toArray(selector);
     if (!items.length) return;
 
@@ -29,94 +18,75 @@ WED.onReady(() => {
     items.forEach((el) => {
       gsap.set(el, fromVars);
       ScrollTrigger.create({
-        ...getOpts(el, startOffset),
-        onEnter: () => gsap.to(el, { ...toVars, overwrite: true })
+        trigger: el,
+        start: opts.start || "top 87%",
+        once: true,
+        onEnter: () => gsap.to(el, { ...toVars, overwrite: true }),
       });
     });
   }
 
-  // Elegant simple fade and glide up
-  reveal('[data-fx="mask-wipe"]', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: "power2.out", stagger: 0.1 });
-  // Subtle fade in
-  reveal('[data-fx="unfold"]', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" });
-  // Gentle section rise
-  reveal('[data-fx="page-rise"]', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.4, ease: "power2.out" });
-  // Simple image reveal
-  reveal('[data-fx="develop"]', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.4, ease: "power2.out" });
+  // Elegant slow glide up for typography and dividers
+  reveal(
+    '[data-fx="mask-wipe"]',
+    { y: 35, opacity: 0 },
+    { y: 0, opacity: 1, duration: 1.4, ease: "power2.out" }
+  );
 
+  // Subtle, sophisticated expansion for cards and dates
+  reveal(
+    '[data-fx="unfold"]',
+    { opacity: 0, scale: 0.96, y: 20 },
+    { opacity: 1, scale: 1, y: 0, duration: 1.5, ease: "power2.out" }
+  );
 
-  // --- 2. Clean Section Animations ---
-  if (!reduced) {
-    
-    // A. Events Glass Card (Simple smooth slide in)
-    const eventCard = document.querySelector(".event-glass-card");
-    if (eventCard) {
-      gsap.set(eventCard, { opacity: 0, x: isHoriz ? 40 : 0, y: isHoriz ? 0 : 40 });
-      ScrollTrigger.create({
-        ...getOpts(eventCard, "top 80%"),
-        onEnter: () => {
-          gsap.to(eventCard, { opacity: 1, x: 0, y: 0, duration: 1.4, ease: "power3.out" });
-        }
-      });
+  // Graceful long-distance upward float for large sections
+  reveal(
+    '[data-fx="page-rise"]',
+    { opacity: 0, y: 70 },
+    { opacity: 1, y: 0, duration: 1.8, ease: "power3.out" }
+  );
+
+  // Clean, slow settling effect for images
+  reveal(
+    '[data-fx="develop"]',
+    { opacity: 0, scale: 1.05, y: 20 },
+    { opacity: 1, scale: 1, y: 0, duration: 1.6, ease: "power2.out" }
+  );
+
+  // ---- Story timeline: image mask wipe + alternating copy slide --------------------------------------------------
+  const storyBlocks = gsap.utils.toArray('[data-fx="story-reveal"]');
+  storyBlocks.forEach((block, i) => {
+    const mask = block.querySelector(".story-img-mask");
+    const img = block.querySelector(".story-img img");
+    const copy = block.querySelector(".story-copy");
+    const node = block.querySelector(".story-node");
+    const fromX = i % 2 === 0 ? -40 : 40;
+
+    if (reduced) {
+      gsap.set([mask, img, copy, node], { clearProps: "all" });
+      if (mask) gsap.set(mask, { scaleY: 0 });
+      return;
     }
 
-    // B. Background Parallax (Subtle)
-    gsap.utils.toArray(".events-bg img").forEach(bg => {
-      gsap.to(bg, {
-        xPercent: isHoriz ? -8 : 0,
-        yPercent: isHoriz ? 0 : 8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: bg.closest("section"),
-          containerAnimation: isHoriz ? horizontalTween : null,
-          start: isHoriz ? "left right" : "top bottom",
-          end: isHoriz ? "right left" : "bottom top",
-          scrub: true
-        }
-      });
+    gsap.set(mask, { scaleY: 1, transformOrigin: "top" });
+    gsap.set(img, { scale: 1.18 });
+    gsap.set(copy, { opacity: 0, x: fromX });
+    if (node) gsap.set(node, { scale: 0 });
+
+    ScrollTrigger.create({
+      trigger: block,
+      start: "top 80%",
+      once: true,
+      onEnter: () => {
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        tl.to(mask, { scaleY: 0, duration: 0.9, ease: "power4.inOut" }, 0)
+          .to(img, { scale: 1, duration: 1.3 }, 0)
+          .to(copy, { opacity: 1, x: 0, duration: 0.9 }, 0.2)
+          .to(node, { scale: 1, duration: 0.5, ease: "back.out(3)" }, 0.3);
+      },
     });
-
-    // C. Story Timeline Clean Reveal
-    const storyBlocks = gsap.utils.toArray(".story-block");
-    storyBlocks.forEach((block, i) => {
-      const img = block.querySelector(".story-img img");
-      const copyItems = block.querySelectorAll(".story-copy > *");
-      
-      gsap.set(img, { opacity: 0, x: isHoriz ? 20 : 0, y: isHoriz ? 0 : 20 });
-      gsap.set(copyItems, { opacity: 0, x: isHoriz ? 20 : 0, y: isHoriz ? 0 : 20 });
-
-      ScrollTrigger.create({
-        ...getOpts(block, "top 80%"),
-        onEnter: () => {
-          const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-          tl.to(img, { opacity: 1, x: 0, y: 0, duration: 1.2 }, 0)
-            .to(copyItems, { opacity: 1, x: 0, y: 0, duration: 1, stagger: 0.1 }, 0.2);
-        }
-      });
-    });
-
-    // D. Gallery Clean Stagger
-    const galleryItems = gsap.utils.toArray(".gallery-item");
-    if (galleryItems.length) {
-      gsap.set(galleryItems, { opacity: 0, y: 20 });
-      
-      const galleryTrigger = document.querySelector(".gallery-grid");
-      if (galleryTrigger) {
-        ScrollTrigger.create({
-          ...getOpts(galleryTrigger, "top 75%"),
-          onEnter: () => {
-            gsap.to(galleryItems, {
-              opacity: 1, y: 0,
-              duration: 1.2,
-              stagger: 0.1,
-              ease: "power2.out",
-              overwrite: true
-            });
-          }
-        });
-      }
-    }
-  }
+  });
 
   document.addEventListener("intro:complete", () => ScrollTrigger.refresh());
 });
