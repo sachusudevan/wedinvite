@@ -22,24 +22,26 @@ body.lenis, html.lenis { height: auto; }
 
 body.nav-locked { overflow: hidden; }
 
-::selection {
-  background: var(--emerald);
-  color: var(--ivory);
+::selection { background: var(--accent); color: var(--paper); }
+::-moz-selection { background: var(--accent); color: var(--paper); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--ivory); }
+::-webkit-scrollbar-track { background: var(--paper); }
 ::-webkit-scrollbar-thumb {
-  background: var(--champagne);
-  border-radius: 10px;
-  border: 2px solid var(--ivory);
+  background: var(--ink);
+  border: 2px solid var(--paper);
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
 }
 
 p { color: var(--text-muted); }
@@ -56,37 +58,52 @@ p { color: var(--text-muted); }
   padding-block: clamp(5rem, 12vw, 10rem);
 }
 
+// ---- Reusable flat surfaces --------------------------------------------------
+// Dark-context card (used over photos / ink backgrounds).
+.card-block {
+  background: var(--ink);
+  border: 1px solid var(--line-on-dark);
+  box-shadow: var(--shadow-hard-on-dark);
+}
+
+// Light-context card (used over paper / white backgrounds).
+.card-block-light {
+  background: var(--white);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-hard);
+}
+
 // ---- Shared editorial elements --------------------------------------------------
 
 .kicker {
   display: inline-flex;
   align-items: center;
-  gap: 0.6em;
+  gap: 0.65em;
   font-family: var(--font-body);
-  font-size: clamp(0.7rem, 1.4vw, 0.8rem);
-  font-weight: 600;
-  letter-spacing: 0.32em;
+  font-size: clamp(0.7rem, 1.4vw, 0.82rem);
+  font-weight: 700;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--text-accent);
 
   &::before {
     content: "";
-    width: 28px;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.6;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    flex: none;
   }
 
-  &.light { color: var(--champagne-light); }
+  &.light { color: var(--paper); }
   &.center { justify-content: center; }
 }
 
 .section-title {
-  font-size: clamp(2.2rem, 5.5vw, 4rem);
-  margin-top: 0.5em;
+  font-size: clamp(2.6rem, 7.4vw, 5.6rem);
+  margin-top: 0.4em;
   color: var(--text-primary);
 
-  &.light { color: var(--ivory); }
+  &.light { color: var(--paper); }
 }
 
 .section-lede {
@@ -101,33 +118,27 @@ p { color: var(--text-muted); }
   align-items: center;
   gap: 0.9rem;
   margin-top: 1.3rem;
-  color: var(--champagne);
+  color: var(--accent);
 
   span {
-    width: 44px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, currentColor);
+    width: 36px;
+    height: 2px;
+    background: currentColor;
   }
-  span:last-child { background: linear-gradient(270deg, transparent, currentColor); }
 
   i {
     font-style: normal;
-    font-size: 1.1rem;
-    transform: translateY(-1px);
+    font-size: 0.7rem;
+    line-height: 1;
   }
 
-  &.light { color: var(--champagne-light); }
+  &.light { color: var(--accent); }
   &.center { justify-content: center; }
 }
 
-.eyebrow-script {
-  font-family: var(--font-script);
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  color: var(--champagne-deep);
-  font-weight: 400;
-}
-
 // ---- Buttons --------------------------------------------------
+// Flat, square-edged, physical: buttons rest flush; on hover they lift
+// off a hard offset shadow, and snap back flat on press.
 
 .btn {
   position: relative;
@@ -136,45 +147,38 @@ p { color: var(--text-muted); }
   justify-content: center;
   gap: 0.6rem;
   padding: 1.05rem 2.4rem;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  border-radius: 999px;
-  overflow: hidden;
-  isolation: isolate;
-  transition: transform var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
+  border: 2px solid var(--ink);
+  transition: transform var(--dur-xfast) var(--ease-out-soft), box-shadow var(--dur-xfast) var(--ease-out-soft), background var(--dur-fast) var(--ease-out-soft), color var(--dur-fast) var(--ease-out-soft);
 
-  @include fine-pointer { &:hover { transform: translateY(-2px); } }
-  &:active { transform: translateY(0); }
+  @include fine-pointer {
+    &:hover { transform: translate(-4px, -4px); box-shadow: var(--shadow-hard); }
+  }
+  &:active { transform: translate(0, 0); box-shadow: none; }
 }
 
 .btn-solid {
-  background: var(--emerald);
-  color: var(--ivory);
-  box-shadow: 0 10px 30px rgba(15, 61, 48, 0.28);
-
-  @include fine-pointer {
-    &:hover { box-shadow: 0 16px 40px rgba(15, 61, 48, 0.38); }
-  }
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .btn-outline {
-  border: 1px solid var(--line);
+  background: transparent;
+  border-color: var(--ink);
   color: var(--text-primary);
 
   &.on-dark {
-    border-color: var(--line-on-dark);
-    color: var(--ivory);
-  }
-}
+    border-color: var(--paper);
+    color: var(--paper);
 
-.btn-shine {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.35) 48%, transparent 66%);
-  transform: translateX(-120%);
-  pointer-events: none;
+    @include fine-pointer {
+      &:hover { box-shadow: var(--shadow-hard-on-dark); }
+    }
+  }
 }
 
 // ---- Reveal / scene helpers (initial JS-driven states) --------------------------------------------------
@@ -205,9 +209,8 @@ p { color: var(--text-muted); }
   left: 1rem;
   z-index: 1100;
   background: var(--ink);
-  color: var(--ivory);
+  color: var(--paper);
   padding: 0.8rem 1.4rem;
-  border-radius: var(--radius-sm);
   transition: top var(--dur-fast) var(--ease-out-soft);
 
   &:focus { top: 1rem; }

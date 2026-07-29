@@ -14,62 +14,56 @@
   inset: 0;
   z-index: 0;
 
-  img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+  img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: grayscale(0.3) contrast(1.05); }
 }
 
 .events-bg-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15,15,10,0.75) 0%, rgba(15,15,10,0.55) 45%, rgba(15,15,10,0.85) 100%);
+  background: linear-gradient(180deg, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.62) 45%, rgba(10,10,10,0.88) 100%);
 }
 
 .relative { position: relative; z-index: 1; }
 
-.events-header { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.events-header { display: flex; flex-direction: column; align-items: flex-start; }
 
 .event-glass-card {
   position: relative;
-  margin: clamp(3rem, 7vw, 4.5rem) auto 0;
+  margin: clamp(3rem, 7vw, 4.5rem) 0 0;
   max-width: 640px;
   padding: clamp(2rem, 5vw, 3rem);
-  border-radius: var(--radius-lg);
-  text-align: center;
-  color: var(--ivory);
-  background: var(--glass-fill);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: var(--shadow-deep);
+  text-align: left;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--line-on-dark);
+  box-shadow: var(--shadow-hard-on-dark);
 }
 
 .event-glass-card .event-icon-mark {
-  width: 52px; height: 52px;
-  margin: 0 auto 1.4rem;
-  border-radius: 50%;
-  border: 1px solid var(--line-on-dark);
+  width: 48px; height: 48px;
+  margin-bottom: 1.4rem;
   display: flex; align-items: center; justify-content: center;
-  color: var(--champagne-light);
-  font-size: 1.3rem;
+  color: var(--accent);
+  background: var(--white);
+  font-size: 1.2rem;
 }
 
 .event-glass-card h3 {
   font-size: clamp(1.8rem, 4vw, 2.4rem);
-  color: var(--ivory);
+  color: var(--paper);
 }
 
 .event-glass-card .event-desc {
   margin-top: 1.1rem;
-  color: var(--cream);
-  opacity: 0.85;
+  color: var(--paper);
+  opacity: 0.75;
   line-height: 1.8;
   max-width: 42ch;
-  margin-inline: auto;
 }
 
 .event-details-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 1.4rem 2.2rem;
   margin-top: 2rem;
   padding-top: 1.8rem;
@@ -84,15 +78,15 @@
 
 .detail-label {
   font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--champagne-light);
-  opacity: 0.8;
+  color: var(--accent);
 }
 
 .detail-value {
   font-size: 1rem;
-  color: var(--cream);
+  color: var(--paper);
 }
 
 .event-glass-card .btn { margin-top: 2rem; }
@@ -112,10 +106,23 @@
 }
 
 .venue-info {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1.6rem;
+  padding: clamp(1.8rem, 4vw, 2.8rem);
+  background: var(--white);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-hard);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 14px; height: 14px;
+    background: var(--accent);
+  }
 }
 
 .venue-name {
@@ -140,23 +147,23 @@
     color: var(--text-muted);
     font-size: 0.95rem;
 
-    strong { color: var(--text-primary); font-weight: 600; min-width: 8em; }
+    strong { color: var(--text-primary); font-weight: 700; min-width: 8em; }
   }
 }
 
 .map-wrap {
   position: relative;
-  border-radius: var(--radius-lg);
   overflow: hidden;
   min-height: 340px;
-  box-shadow: var(--shadow-soft);
+  box-shadow: var(--shadow-hard);
+  border: 1px solid var(--line-strong);
 
   iframe {
     position: absolute;
     inset: 0;
     width: 100%; height: 100%;
     border: 0;
-    filter: sepia(8%) saturate(88%) hue-rotate(-6deg);
+    filter: grayscale(0.6) contrast(1.05);
   }
 
   .map-btn {
@@ -164,7 +171,7 @@
     left: 1.2rem;
     bottom: 1.2rem;
     z-index: 2;
-    background: var(--ivory);
+    background: var(--white);
     color: var(--ink);
   }
 }

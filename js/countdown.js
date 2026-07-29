@@ -79,7 +79,7 @@ WED.onReady(() => {
         const x = p.x % w;
         const glow = 0.35 + 0.65 * Math.abs(Math.sin(t / 1400 + p.phase));
         ctx.beginPath();
-        ctx.fillStyle = `rgba(232, 212, 163, ${glow * 0.7})`;
+        ctx.fillStyle = `rgba(195, 31, 45, ${glow * 0.6})`;
         ctx.arc(x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       });

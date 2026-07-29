@@ -1,69 +1,57 @@
 // ==========================================================================
 // Design Tokens — Arya & Sachu
-// A cinematic-editorial palette: ivory & ink grounded by emerald,
-// warmed by champagne and rose gold. Defined as CSS custom properties
-// so both SCSS and runtime JS (canvas particles, visualizer) can read them.
+// Bold Editorial system: near-black + warm paper, one statement color
+// (vermillion red), flat surfaces, hard offset shadows, sharp corners.
+// Defined as CSS custom properties so both SCSS and runtime JS (canvas
+// particles, visualizer) can read them.
 // ==========================================================================
 
 :root {
   // ---- Core palette --------------------------------------------------
-  --ink: #15150f;
-  --ink-soft: #23231a;
-  --ink-mute: #4a4a3d;
+  --ink: #0a0a0a;
+  --ink-soft: #1c1c1a;
+  --ink-mute: #55524a;
 
-  --ivory: #fbf6ec;
-  --cream: #f4ead9;
-  --paper: #ece0c9;
-  --paper-deep: #ddc9a3;
+  --paper: #f5f1e8;
+  --paper-dim: #e8e1d0;
+  --white: #ffffff;
 
-  --champagne: #c9a35f;
-  --champagne-light: #e8d4a3;
-  --champagne-deep: #8f6f38;
+  --gray: #6b6862;
+  --gray-light: #b6b0a2;
 
-  --rose: #c99a8d;
-  --rose-light: #e7c6ba;
-  --rose-deep: #a06a5c;
-
-  --sage: #b7c4a4;
-  --sage-light: #e7ecdd;
-  --sage-deep: #869768;
-
-  --emerald: #0f3d30;
-  --emerald-light: #2f6b54;
-  --emerald-deep: #082720;
-  --emerald-glow: #4f8f75;
+  --accent: #c31f2d;
+  --accent-deep: #8c1620;
+  --accent-tint: #f3d6d3;
 
   // ---- Semantic roles --------------------------------------------------
-  --bg-page: var(--ivory);
-  --bg-panel: var(--cream);
+  --bg-page: var(--paper);
+  --bg-panel: var(--white);
   --bg-dark: var(--ink);
-  --bg-emerald: var(--emerald);
 
   --text-primary: var(--ink);
-  --text-muted: var(--ink-mute);
-  --text-on-dark: var(--ivory);
-  --text-accent: var(--champagne-deep);
+  --text-muted: var(--gray);
+  --text-on-dark: var(--paper);
+  --text-accent: var(--accent-deep);
 
-  --line: rgba(21, 21, 15, 0.12);
-  --line-on-dark: rgba(251, 246, 236, 0.16);
+  --line: rgba(10, 10, 10, 0.16);
+  --line-on-dark: rgba(245, 241, 232, 0.22);
+  --line-strong: var(--ink);
 
-  --glass-fill: rgba(251, 246, 236, 0.10);
-  --glass-fill-strong: rgba(251, 246, 236, 0.16);
-  --glass-border: rgba(251, 246, 236, 0.28);
-  --glass-blur: 16px;
-
-  --shadow-soft: 0 20px 60px rgba(15, 20, 15, 0.12);
-  --shadow-deep: 0 30px 90px rgba(8, 10, 8, 0.35);
+  --shadow-hard-sm: 5px 5px 0 var(--ink);
+  --shadow-hard: 8px 8px 0 var(--ink);
+  --shadow-hard-accent: 8px 8px 0 var(--accent);
+  --shadow-hard-on-dark: 8px 8px 0 var(--paper);
 
   // ---- Typography --------------------------------------------------
   --font-display: "Fraunces", "Iowan Old Style", serif;
   --font-body: "Manrope", "Segoe UI", sans-serif;
-  --font-script: "Beau Rivage", cursive;
 
   // ---- Motion --------------------------------------------------
   --ease-lux: cubic-bezier(0.16, 0.8, 0.24, 1);
   --ease-silk: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-xfast: 0.22s;
   --dur-fast: 0.4s;
   --dur-med: 0.8s;
   --dur-slow: 1.4s;
@@ -71,9 +59,9 @@
   // ---- Layout --------------------------------------------------
   --gutter: clamp(1.5rem, 5vw, 4.5rem);
   --container-max: 1360px;
-  --radius-sm: 6px;
-  --radius-md: 14px;
-  --radius-lg: 28px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
 
   // ---- Z-index scale --------------------------------------------------
   --z-cursor: 900;

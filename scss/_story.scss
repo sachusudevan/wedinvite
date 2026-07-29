@@ -1,5 +1,5 @@
 // ==========================================================================
-// Love Story timeline
+// Love Story timeline — editorial magazine spread
 // ==========================================================================
 @use "tokens" as *;
 
@@ -8,10 +8,9 @@
 }
 
 .story-header {
-  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .story-timeline {
@@ -24,12 +23,26 @@
     position: absolute;
     left: 50%;
     top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(180deg, transparent, var(--line) 8%, var(--line) 92%, transparent);
+    width: 2px;
+    background: var(--line);
     transform: translateX(-50%);
     display: none;
     @include bp(lg) { display: block; }
   }
+}
+
+.story-progress-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top;
+  background: var(--accent);
+  display: none;
+  pointer-events: none;
+  @include bp(lg) { display: block; }
 }
 
 .story-block {
@@ -54,12 +67,11 @@
 .story-node {
   display: none;
   @include bp(lg) {
-    display: flex;
+    display: block;
     order: 2;
     width: 14px; height: 14px;
-    border-radius: 50%;
-    background: var(--champagne);
-    box-shadow: 0 0 0 6px var(--bg-page), 0 0 0 7px var(--line);
+    background: var(--accent);
+    box-shadow: 0 0 0 6px var(--bg-page);
     align-self: center;
     justify-self: center;
   }
@@ -67,23 +79,29 @@
 
 .story-img {
   position: relative;
-  border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 4 / 5;
   max-width: 420px;
   margin-inline: auto;
-  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-hard);
+  transition: box-shadow var(--dur-fast) var(--ease-out-soft), transform var(--dur-fast) var(--ease-out-soft);
+
+  @include fine-pointer {
+    &:hover { box-shadow: var(--shadow-hard-accent); }
+  }
 
   img {
     width: 100%; height: 100%;
     object-fit: cover;
     transform: scale(1.08);
+    filter: grayscale(0.35) contrast(1.05);
   }
 
   .story-img-mask {
     position: absolute;
     inset: 0;
-    background: var(--emerald);
+    background: var(--ink);
     transform-origin: bottom;
     z-index: 1;
   }
@@ -93,16 +111,17 @@
   max-width: 440px;
 
   .story-index {
-    font-family: var(--font-display);
-    font-size: 0.85rem;
-    letter-spacing: 0.25em;
-    color: var(--champagne-deep);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
+    color: var(--accent-deep);
   }
 
   h3 {
     margin-top: 0.5rem;
-    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-size: clamp(1.7rem, 3.4vw, 2.4rem);
   }
 
   p {
@@ -116,18 +135,25 @@
   position: relative;
   max-width: 780px;
   margin: clamp(2rem, 6vw, 4rem) auto;
-  text-align: center;
+  padding: clamp(1.8rem, 4vw, 2.6rem) 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  text-align: left;
   font-family: var(--font-display);
   font-style: italic;
+  font-weight: 600;
   font-size: clamp(1.3rem, 3vw, 2rem);
-  line-height: 1.5;
-  color: var(--emerald);
-  padding: 0 1.5rem;
+  line-height: 1.45;
+  color: var(--ink);
 
-  &::before, &::after {
+  &::before {
     content: '"';
-    color: var(--champagne);
-    font-size: 1.6em;
-    opacity: 0.6;
+    color: var(--accent);
+    font-style: normal;
+  }
+  &::after {
+    content: '"';
+    color: var(--accent);
+    font-style: normal;
   }
 }

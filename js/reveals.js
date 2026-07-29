@@ -88,5 +88,21 @@ WED.onReady(() => {
     });
   });
 
+  // ---- Story timeline: gold progress line tracking scroll --------------------------------------------------
+  const progressLine = document.querySelector(".story-progress-line");
+  const timeline = document.querySelector(".story-timeline");
+  if (progressLine && timeline && !reduced) {
+    gsap.to(progressLine, {
+      scaleY: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: timeline,
+        start: "top 65%",
+        end: "bottom 65%",
+        scrub: true,
+      },
+    });
+  }
+
   document.addEventListener("intro:complete", () => ScrollTrigger.refresh());
 });

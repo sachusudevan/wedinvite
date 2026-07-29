@@ -1,5 +1,5 @@
 // ==========================================================================
-// Hero
+// Hero — asymmetric, bottom-left oversized type block (echoes the intro)
 // ==========================================================================
 @use "tokens" as *;
 
@@ -8,9 +8,7 @@
   height: 100dvh;
   min-height: 560px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
   overflow: hidden;
   background: var(--ink);
 }
@@ -26,60 +24,94 @@
     object-fit: cover;
     object-position: 50% 22%;
     transform: scale(1.12);
-    filter: saturate(1.02);
+    filter: grayscale(0.12) contrast(1.06);
   }
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(15,15,10,0.6) 0%, rgba(15,15,10,0.42) 32%, rgba(15,15,10,0.48) 65%, rgba(15,15,10,0.84) 100%),
-    linear-gradient(90deg, rgba(15,15,10,0.4), transparent 40%, transparent 60%, rgba(15,15,10,0.4));
+  background: linear-gradient(0deg, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.5) 42%, rgba(10, 10, 10, 0.2) 68%, rgba(10, 10, 10, 0.55) 100%);
 }
 
 .hero-grain {
   position: absolute;
   inset: 0;
-  opacity: 0.05;
+  opacity: 0.06;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+// ---- Drifting accent dust --------------------------------------------------
+.hero-dust {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+
+  span {
+    position: absolute;
+    bottom: -6%;
+    left: var(--x, 50%);
+    width: var(--s, 3px);
+    height: var(--s, 3px);
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0;
+    box-shadow: 0 0 6px 1px rgba(195, 31, 45, 0.45);
+    animation: dustRise var(--dur, 14s) ease-in var(--delay, 0s) infinite;
+  }
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  text-align: center;
-  color: var(--ivory);
-  padding-inline: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  color: var(--paper);
+  padding: clamp(1.6rem, 5vw, 4.5rem);
+  padding-bottom: clamp(4.5rem, 10vh, 6rem);
+  max-width: 900px;
 }
 
 .hero-eyebrow {
+  font-family: var(--font-body);
   font-size: clamp(0.75rem, 1.6vw, 0.9rem);
-  letter-spacing: 0.4em;
+  font-weight: 700;
+  letter-spacing: 0.36em;
   text-transform: uppercase;
-  color: var(--champagne-light);
+  color: var(--paper);
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 0.7em;
+    background: var(--accent);
+    vertical-align: middle;
+  }
 }
 
 .hero-title {
-  margin-top: 1.1rem;
-  font-size: clamp(2.4rem, 7vw, 5.6rem);
-  line-height: 1.02;
+  margin-top: 0.7rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.2rem, 10vw, 7.6rem);
+  line-height: 0.86;
+  letter-spacing: -0.02em;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.08em;
-  overflow-wrap: normal;
-
-  @include bp(md) { flex-direction: row; gap: 0.35em; }
+  align-items: flex-start;
 }
 
 .hero-amp {
-  font-family: var(--font-script);
-  font-size: 0.6em;
-  color: var(--champagne);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
   margin: 0 0.05em;
 }
 
@@ -91,39 +123,27 @@
   overflow-wrap: normal;
 }
 
-.hero-date {
-  margin-top: 1.4rem;
-  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
-  letter-spacing: 0.18em;
-  color: var(--cream);
-}
-
-.hero-music {
-  position: absolute;
-  z-index: 2;
-  bottom: clamp(6rem, 12vh, 8rem);
-}
-
 .scroll-cue {
   position: absolute;
   z-index: 2;
-  bottom: 2.4rem;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: clamp(1.6rem, 5vw, 2.6rem);
+  right: clamp(1.6rem, 5vw, 4.5rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.6rem;
-  color: var(--ivory);
+  color: var(--paper);
+  font-family: var(--font-body);
   font-size: 0.65rem;
+  font-weight: 700;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  opacity: 0.75;
+  opacity: 0.8;
 
   .scroll-cue-line {
     width: 1px;
     height: 38px;
-    background: linear-gradient(180deg, var(--champagne-light), transparent);
+    background: var(--line-on-dark);
     position: relative;
     overflow: hidden;
 
@@ -133,7 +153,7 @@
       top: -100%;
       left: 0; right: 0;
       height: 50%;
-      background: var(--ivory);
+      background: var(--accent);
       animation: cueDrip 2.2s ease-in-out infinite;
     }
   }
@@ -144,38 +164,37 @@
   100% { top: 100%; }
 }
 
-// ---- Merged "save the date" content living inside the hero --------------------------------------------------
-// Centered stack beneath the couple's names: date, weekday, invitation note.
+// ---- "Save the date" content living inside the hero --------------------------------------------------
+// Left-aligned stack beneath the couple's names: date, weekday, invitation note.
 
 .hero-content--merged {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  max-width: 720px;
+  align-items: flex-start;
 }
 
-.hero-flourish { margin-top: 1.5rem; }
+.hero-flourish { margin-top: 1.6rem; }
 
 .hero-std-date {
   display: flex;
   align-items: baseline;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.6rem;
-  margin-top: 1.6rem;
+  margin-top: 1.7rem;
   font-family: var(--font-display);
+  font-weight: 700;
 }
 
 .hero-std-day {
   font-size: clamp(2.2rem, 6vw, 3.4rem);
   line-height: 0.9;
-  color: var(--ivory);
+  color: var(--paper);
 }
 
 .hero-std-sep {
-  width: 1px;
+  width: 2px;
   height: clamp(1.6rem, 4vw, 2.4rem);
-  background: var(--champagne);
-  opacity: 0.7;
+  background: var(--accent);
   align-self: center;
 }
 
@@ -183,18 +202,21 @@
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+  font-family: var(--font-body);
+  font-weight: 700;
   font-size: clamp(0.85rem, 1.8vw, 1.05rem);
   letter-spacing: 0.1em;
-  color: var(--champagne-light);
+  color: var(--paper);
 }
 
 .hero-std-weekday {
   margin-top: 0.7rem;
+  font-family: var(--font-body);
   font-size: 0.78rem;
+  font-weight: 700;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--cream);
-  opacity: 0.85;
+  color: var(--accent);
 }
 
 .hero-std-note {
@@ -203,6 +225,8 @@
   font-style: italic;
   font-size: clamp(0.95rem, 1.7vw, 1.15rem);
   line-height: 1.8;
-  color: var(--cream);
+  color: var(--paper);
+  opacity: 0.85;
   max-width: 46ch;
+  text-align: left;
 }

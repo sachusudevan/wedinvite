@@ -40,7 +40,7 @@ WED.confetti = (() => {
   resize();
   window.addEventListener("resize", WED.debounce(resize, 200));
 
-  const colors = ["#c9a35f", "#e8d4a3", "#c99a8d", "#0f3d30", "#fbf6ec"];
+  const colors = ["#0a0a0a", "#c31f2d", "#f5f1e8", "#8c1620", "#ffffff"];
 
   function burst({ x, y, count = 90 } = {}) {
     if (WED.flags.reducedMotion) return;

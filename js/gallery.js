@@ -45,6 +45,7 @@ WED.onReady(() => {
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
   const lightboxCaption = document.getElementById("lightboxCaption");
+  const lightboxCounter = document.getElementById("lightboxCounter");
   const closeBtn = document.getElementById("lightboxClose");
   const prevBtn = document.getElementById("lightboxPrev");
   const nextBtn = document.getElementById("lightboxNext");
@@ -64,9 +65,23 @@ WED.onReady(() => {
     if (!visible.length) return;
     currentIndex = ((index % visible.length) + visible.length) % visible.length;
     const item = visible[currentIndex];
-    lightboxImg.src = largeSrc(item);
-    lightboxImg.alt = item.getAttribute("data-caption") || "";
-    lightboxCaption.textContent = item.getAttribute("data-caption") || "";
+    const swap = () => {
+      lightboxImg.src = largeSrc(item);
+      lightboxImg.alt = item.getAttribute("data-caption") || "";
+      lightboxCaption.textContent = item.getAttribute("data-caption") || "";
+      if (lightboxCounter) lightboxCounter.textContent = `${currentIndex + 1} / ${visible.length}`;
+    };
+    if (typeof gsap !== "undefined" && !WED.flags.reducedMotion && lightbox.classList.contains("is-open")) {
+      gsap.to(lightboxImg, {
+        opacity: 0, scale: 0.97, duration: 0.18, ease: "power2.in",
+        onComplete: () => {
+          swap();
+          gsap.fromTo(lightboxImg, { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.32, ease: "power2.out" });
+        },
+      });
+    } else {
+      swap();
+    }
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
     document.body.classList.add("nav-locked");

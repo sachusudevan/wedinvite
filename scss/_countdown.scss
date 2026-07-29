@@ -5,9 +5,8 @@
 
 .countdown {
   position: relative;
-  background: radial-gradient(ellipse at 50% 0%, var(--emerald-light) 0%, var(--emerald) 45%, var(--emerald-deep) 100%);
+  background: var(--ink);
   overflow: hidden;
-  text-align: center;
 }
 
 .countdown-particles {
@@ -21,55 +20,59 @@
   z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: clamp(0.8rem, 3vw, 1.8rem);
+  justify-content: flex-start;
+  gap: clamp(0.8rem, 3vw, 1.4rem);
   margin-top: clamp(2.4rem, 6vw, 3.6rem);
 }
 
 .countdown-box {
   position: relative;
-  width: clamp(76px, 18vw, 128px);
+  width: clamp(80px, 18vw, 130px);
   padding: clamp(1.2rem, 3vw, 1.8rem) 0;
-  border-radius: var(--radius-md);
-  background: rgba(251, 246, 236, 0.06);
-  border: 1px solid rgba(251, 246, 236, 0.14);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--ink-soft);
+  border: 1px solid var(--line-on-dark);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
   overflow: hidden;
+  transition: transform var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--champagne-light), transparent);
+  &:nth-child(1) { border-top: 3px solid var(--accent); }
+  &:nth-child(2) { border-top: 3px solid var(--accent); }
+  &:nth-child(3) { border-top: 3px solid var(--accent); }
+  &:nth-child(4) { border-top: 3px solid var(--accent); }
+
+  @include fine-pointer {
+    &:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: var(--shadow-hard-on-dark);
+    }
   }
 }
 
 .countdown-num {
   font-family: var(--font-display);
-  font-size: clamp(1.9rem, 6vw, 3.4rem);
-  color: var(--ivory);
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  color: var(--paper);
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
 .countdown-label {
+  font-family: var(--font-body);
   font-size: 0.65rem;
+  font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--champagne-light);
-  opacity: 0.85;
+  color: var(--accent);
 }
 
 .countdown-sub {
   margin-top: 2.2rem;
-  color: var(--cream);
-  opacity: 0.75;
+  color: var(--paper);
+  opacity: 0.7;
   font-size: 0.92rem;
   letter-spacing: 0.05em;
 }

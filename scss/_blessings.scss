@@ -28,23 +28,25 @@
 
   label {
     display: block;
+    font-family: var(--font-body);
     font-size: 0.72rem;
-    letter-spacing: 0.14em;
+    font-weight: 700;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: 0.5rem;
   }
 
-  input, textarea {
+  input, textarea, select {
     width: 100%;
     padding: 0.85rem 1rem;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
+    border: 2px solid var(--line-strong);
     background: var(--bg-page);
+    font-family: var(--font-body);
     font-size: 0.98rem;
     transition: border-color var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
 
-    &:focus { outline: none; border-color: var(--champagne); box-shadow: 0 0 0 3px rgba(201,163,95,0.18); }
+    &:focus { outline: none; border-color: var(--accent); box-shadow: 3px 3px 0 var(--accent); }
   }
 
   textarea { resize: vertical; min-height: 96px; }

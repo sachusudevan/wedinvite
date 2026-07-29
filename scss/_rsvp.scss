@@ -12,8 +12,9 @@
 .rsvp-bg-glow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(201,163,95,0.14), transparent 45%),
-              radial-gradient(circle at 85% 75%, rgba(79,143,117,0.18), transparent 50%);
+  background:
+    linear-gradient(90deg, var(--accent) 0%, var(--accent) 6px, transparent 6px),
+    radial-gradient(circle at 85% 80%, rgba(195, 31, 45, 0.16), transparent 55%);
 }
 
 .rsvp-inner {
@@ -21,17 +22,14 @@
   z-index: 1;
   max-width: 720px;
   margin-inline: auto;
-  text-align: center;
 }
 
 .rsvp-card {
   margin-top: clamp(2.4rem, 6vw, 3.4rem);
   padding: clamp(2rem, 5vw, 3rem);
-  border-radius: var(--radius-lg);
-  background: var(--glass-fill);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
+  background: var(--ink-soft);
+  border: 1px solid var(--line-on-dark);
+  box-shadow: var(--shadow-hard-on-dark);
   text-align: left;
 }
 
@@ -42,15 +40,21 @@
   @include bp(sm) { grid-template-columns: 1fr 1fr; }
 }
 
-.rsvp-card .field label { color: var(--champagne-light); }
+.rsvp-card .field label { color: var(--paper); opacity: 0.7; }
 .rsvp-card .field input,
 .rsvp-card .field textarea,
 .rsvp-card .field select {
-  background: rgba(251,246,236,0.06);
-  border: 1px solid var(--line-on-dark);
-  color: var(--ivory);
+  background: var(--ink);
+  border: 2px solid var(--line-on-dark);
+  color: var(--paper);
 }
 .rsvp-card .field select option { color: var(--ink); }
+.rsvp-card .field input:focus,
+.rsvp-card .field textarea:focus,
+.rsvp-card .field select:focus {
+  border-color: var(--accent);
+  box-shadow: 3px 3px 0 var(--accent);
+}
 
 .rsvp-attend-toggle {
   display: flex;
@@ -59,28 +63,38 @@
 }
 
 .attend-option {
+  position: relative;
   flex: 1;
   text-align: center;
   padding: 0.9rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--line-on-dark);
-  color: var(--cream);
+  border: 2px solid var(--line-on-dark);
+  color: var(--paper);
+  font-family: var(--font-body);
   font-size: 0.85rem;
+  font-weight: 700;
   letter-spacing: 0.06em;
-  transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast) var(--ease-out-soft), color var(--dur-fast) var(--ease-out-soft), transform var(--dur-xfast) var(--ease-out-soft);
 
   input { position: absolute; opacity: 0; pointer-events: none; }
 
-  &.is-selected { background: var(--champagne); border-color: var(--champagne); color: var(--ink); }
+  &.is-selected { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+
+  @include fine-pointer {
+    &:not(.is-selected):hover { border-color: var(--paper); }
+  }
+  &:active { transform: scale(0.98); }
 }
 
-.rsvp-card .btn-solid { width: 100%; margin-top: 0.6rem; background: var(--champagne); color: var(--ink); box-shadow: 0 10px 30px rgba(201,163,95,0.25); }
+.rsvp-card .btn-solid { width: 100%; margin-top: 0.6rem; background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.rsvp-card .btn-solid:hover { box-shadow: var(--shadow-hard-on-dark); }
 
 .rsvp-note {
   margin-top: 1.4rem;
   text-align: center;
-  color: var(--cream);
-  opacity: 0.65;
+  color: var(--paper);
+  opacity: 0.6;
   font-size: 0.82rem;
 }
 
@@ -88,13 +102,25 @@
   display: none;
   text-align: center;
   padding: 2.5rem 1rem;
-  color: var(--ivory);
+  color: var(--paper);
 
-  &.is-visible { display: block; }
+  &.is-visible { display: block; animation: rsvpSuccessIn 0.5s var(--ease-out-soft) both; }
 
-  .rsvp-success-icon { font-size: 2.4rem; color: var(--champagne-light); margin-bottom: 1rem; }
+  .rsvp-success-icon {
+    width: 56px; height: 56px;
+    margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    color: var(--paper);
+    background: var(--accent);
+  }
   h3 { font-size: 1.5rem; }
-  p { color: var(--cream); margin-top: 0.6rem; }
+  p { color: var(--paper); opacity: 0.75; margin-top: 0.6rem; }
+}
+
+@keyframes rsvpSuccessIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .confetti-canvas {
