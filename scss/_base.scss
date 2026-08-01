@@ -1,11 +1,12 @@
 // ==========================================================================
-// Base — typography, scrollbars, selection
+// Base — typography, scrollbars, selection, shared glass/button primitives
 // ==========================================================================
 @use "tokens" as *;
 
 html {
   scroll-behavior: auto; // Lenis drives smooth scroll; native behavior stays auto
   background: var(--bg-page);
+  overflow-x: hidden;
 }
 
 body {
@@ -22,19 +23,20 @@ body.lenis, html.lenis { height: auto; }
 
 body.nav-locked { overflow: hidden; }
 
-::selection { background: var(--accent); color: var(--paper); }
-::-moz-selection { background: var(--accent); color: var(--paper); }
+::selection { background: var(--gold-light); color: var(--wine-deep); }
+::-moz-selection { background: var(--gold-light); color: var(--wine-deep); }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
 
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-track { background: var(--champagne); }
 ::-webkit-scrollbar-thumb {
-  background: var(--ink);
-  border: 2px solid var(--paper);
+  background: var(--gold);
+  border: 2px solid var(--champagne);
+  border-radius: var(--radius-pill);
 }
 
 h1, h2, h3, h4 {
@@ -58,22 +60,20 @@ p { color: var(--text-muted); }
   padding-block: clamp(5rem, 12vw, 10rem);
 }
 
-// ---- Reusable flat surfaces --------------------------------------------------
-// Dark-context card (used over photos / ink backgrounds).
+// ---- Reusable glass surfaces --------------------------------------------------
+// Dark-context card (used over photos / dark sections).
 .card-block {
-  background: var(--ink);
-  border: 1px solid var(--line-on-dark);
-  box-shadow: var(--shadow-hard-on-dark);
+  @include glass-dark;
+  border-radius: var(--radius-lg);
 }
 
-// Light-context card (used over paper / white backgrounds).
+// Light-context card (used over ivory/champagne backgrounds).
 .card-block-light {
-  background: var(--white);
-  border: 1px solid var(--line-strong);
-  box-shadow: var(--shadow-hard);
+  @include glass-light;
+  border-radius: var(--radius-lg);
 }
 
-// ---- Shared editorial elements --------------------------------------------------
+// ---- Shared elements --------------------------------------------------
 
 .kicker {
   display: inline-flex;
@@ -88,13 +88,13 @@ p { color: var(--text-muted); }
 
   &::before {
     content: "";
-    width: 10px;
-    height: 10px;
-    background: var(--accent);
+    width: 22px;
+    height: 1px;
+    background: var(--gold);
     flex: none;
   }
 
-  &.light { color: var(--paper); }
+  &.light { color: var(--gold-light); }
   &.center { justify-content: center; }
 }
 
@@ -103,7 +103,7 @@ p { color: var(--text-muted); }
   margin-top: 0.4em;
   color: var(--text-primary);
 
-  &.light { color: var(--paper); }
+  &.light { color: var(--ivory); }
 }
 
 .section-lede {
@@ -118,27 +118,31 @@ p { color: var(--text-muted); }
   align-items: center;
   gap: 0.9rem;
   margin-top: 1.3rem;
-  color: var(--accent);
+  color: var(--gold);
 
   span {
     width: 36px;
-    height: 2px;
-    background: currentColor;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, currentColor);
   }
+  span:last-child { background: linear-gradient(90deg, currentColor, transparent); }
 
   i {
     font-style: normal;
     font-size: 0.7rem;
-    line-height: 1;
+    color: var(--wine);
   }
 
-  &.light { color: var(--accent); }
+  &.light {
+    color: var(--gold-light);
+    i { color: var(--gold-light); }
+  }
   &.center { justify-content: center; }
 }
 
 // ---- Buttons --------------------------------------------------
-// Flat, square-edged, physical: buttons rest flush; on hover they lift
-// off a hard offset shadow, and snap back flat on press.
+// Soft, pill-shaped, physical: buttons lift gently with a gold glow on
+// hover and settle back down on press.
 
 .btn {
   position: relative;
@@ -152,33 +156,40 @@ p { color: var(--text-muted); }
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  border: 2px solid var(--ink);
-  transition: transform var(--dur-xfast) var(--ease-out-soft), box-shadow var(--dur-xfast) var(--ease-out-soft), background var(--dur-fast) var(--ease-out-soft), color var(--dur-fast) var(--ease-out-soft);
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  transition: transform var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft), background var(--dur-fast) var(--ease-out-soft), color var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast) var(--ease-out-soft);
 
   @include fine-pointer {
-    &:hover { transform: translate(-4px, -4px); box-shadow: var(--shadow-hard); }
+    &:hover { transform: translateY(-3px); box-shadow: var(--shadow-gold-glow); }
   }
-  &:active { transform: translate(0, 0); box-shadow: none; }
+  &:active { transform: translateY(0); box-shadow: none; }
 }
 
 .btn-solid {
-  background: var(--ink);
-  color: var(--paper);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold) 60%, var(--gold-deep));
+  color: var(--wine-deep);
 }
 
 .btn-outline {
   background: transparent;
-  border-color: var(--ink);
+  border-color: var(--gold);
   color: var(--text-primary);
 
   &.on-dark {
-    border-color: var(--paper);
-    color: var(--paper);
+    border-color: var(--glass-border-on-dark);
+    color: var(--ivory);
 
     @include fine-pointer {
-      &:hover { box-shadow: var(--shadow-hard-on-dark); }
+      &:hover { border-color: var(--gold-light); }
     }
   }
+}
+
+.btn-glass {
+  @include glass-dark;
+  border-radius: var(--radius-pill);
+  color: var(--ivory);
 }
 
 // ---- Reveal / scene helpers (initial JS-driven states) --------------------------------------------------
@@ -208,10 +219,19 @@ p { color: var(--text-muted); }
   top: -100%;
   left: 1rem;
   z-index: 1100;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--wine-deep);
+  color: var(--ivory);
   padding: 0.8rem 1.4rem;
+  border-radius: var(--radius-sm);
   transition: top var(--dur-fast) var(--ease-out-soft);
 
   &:focus { top: 1rem; }
+}
+
+// ---- Guest-wish celebration confetti canvas (also used by the Wishes wall) --------------------------------------------------
+.confetti-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1150;
+  pointer-events: none;
 }

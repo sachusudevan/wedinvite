@@ -1,5 +1,5 @@
 // ==========================================================================
-// Love Story timeline — editorial magazine spread
+// Love Story timeline — alternating gold-framed spread
 // ==========================================================================
 @use "tokens" as *;
 
@@ -23,8 +23,8 @@
     position: absolute;
     left: 50%;
     top: 0; bottom: 0;
-    width: 2px;
-    background: var(--line);
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--champagne-deep) 8%, var(--champagne-deep) 92%, transparent);
     transform: translateX(-50%);
     display: none;
     @include bp(lg) { display: block; }
@@ -39,7 +39,7 @@
   height: 100%;
   transform: translateX(-50%) scaleY(0);
   transform-origin: top;
-  background: var(--accent);
+  background: linear-gradient(180deg, var(--gold-light), var(--gold-deep));
   display: none;
   pointer-events: none;
   @include bp(lg) { display: block; }
@@ -69,9 +69,10 @@
   @include bp(lg) {
     display: block;
     order: 2;
-    width: 14px; height: 14px;
-    background: var(--accent);
-    box-shadow: 0 0 0 6px var(--bg-page);
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 6px var(--bg-page), 0 0 16px 2px rgba(201, 162, 75, 0.5);
     align-self: center;
     justify-self: center;
   }
@@ -83,25 +84,25 @@
   aspect-ratio: 4 / 5;
   max-width: 420px;
   margin-inline: auto;
-  border: 1px solid var(--line-strong);
-  box-shadow: var(--shadow-hard);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
   transition: box-shadow var(--dur-fast) var(--ease-out-soft), transform var(--dur-fast) var(--ease-out-soft);
 
   @include fine-pointer {
-    &:hover { box-shadow: var(--shadow-hard-accent); }
+    &:hover { box-shadow: var(--shadow-gold-glow); transform: translateY(-4px); }
   }
 
   img {
-    width: 100%; height: 100%;
+    width: 100%; height: 112%;
     object-fit: cover;
-    transform: scale(1.08);
-    filter: grayscale(0.35) contrast(1.05);
+    transform: scale(1.18);
   }
 
   .story-img-mask {
     position: absolute;
     inset: 0;
-    background: var(--ink);
+    background: linear-gradient(160deg, var(--champagne), var(--gold-deep));
     transform-origin: bottom;
     z-index: 1;
   }
@@ -116,12 +117,13 @@
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent-deep);
+    color: var(--gold-deep);
   }
 
   h3 {
     margin-top: 0.5rem;
     font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+    color: var(--text-primary);
   }
 
   p {
@@ -135,25 +137,17 @@
   position: relative;
   max-width: 780px;
   margin: clamp(2rem, 6vw, 4rem) auto;
-  padding: clamp(1.8rem, 4vw, 2.6rem) 0;
-  border-top: 2px solid var(--ink);
-  border-bottom: 2px solid var(--ink);
+  padding: clamp(1.8rem, 4vw, 2.6rem) clamp(1.6rem, 4vw, 2.6rem);
+  border-radius: var(--radius-lg);
+  @include glass-light;
   text-align: left;
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 600;
   font-size: clamp(1.3rem, 3vw, 2rem);
   line-height: 1.45;
-  color: var(--ink);
+  color: var(--wine-deep);
 
-  &::before {
-    content: '"';
-    color: var(--accent);
-    font-style: normal;
-  }
-  &::after {
-    content: '"';
-    color: var(--accent);
-    font-style: normal;
-  }
+  &::before { content: '"'; color: var(--gold); font-style: normal; }
+  &::after { content: '"'; color: var(--gold); font-style: normal; }
 }

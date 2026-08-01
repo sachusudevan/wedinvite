@@ -33,10 +33,11 @@ WED.onReady(() => {
       .to(".hero-std-date", { opacity: 1, y: 0, duration: 0.7 }, 0.7)
       .to(".hero-std-weekday", { opacity: 1, y: 0, duration: 0.7 }, 0.8)
       .to(".hero-std-note", { opacity: 1, y: 0, duration: 0.7 }, 0.9)
-      .to(".scroll-cue", { opacity: 0.75, duration: 0.7 }, 1.1);
+      .to(".hero-cta-row", { opacity: 1, y: 0, duration: 0.7 }, 1.0)
+      .to(".scroll-cue", { opacity: 0.75, duration: 0.7 }, 1.15);
   }
 
-  gsap.set(".hero-eyebrow, .hero-std-date, .hero-std-weekday, .hero-std-note", { opacity: 0, y: 16 });
+  gsap.set(".hero-eyebrow, .hero-std-date, .hero-std-weekday, .hero-std-note, .hero-cta-row", { opacity: 0, y: 16 });
   gsap.set(".hero-amp", { opacity: 0, scale: 0.6 });
   gsap.set(".hero-flourish, .scroll-cue", { opacity: 0 });
 

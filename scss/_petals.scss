@@ -1,0 +1,44 @@
+// ==========================================================================
+// Petals — shared floating flower-petal component.
+// Reused by the intro envelope scene and by a handful of `[data-petals]`
+// ambient sections (populated at runtime via WED.spawnPetals in utils.js).
+// ==========================================================================
+@use "tokens" as *;
+
+.petal-field {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.petal {
+  position: absolute;
+  top: -8%;
+  left: var(--x, 50%);
+  width: var(--s, 14px);
+  height: var(--s, 14px);
+  border-radius: 0% 65% 65% 65%;
+  transform: rotate(var(--rot, 25deg));
+  opacity: 0;
+  background: linear-gradient(135deg, var(--blush) 0%, var(--blush-deep) 55%, var(--gold-light) 100%);
+  box-shadow: 0 0 10px rgba(201, 162, 75, 0.25);
+  animation: petalFall var(--dur, 13s) ease-in var(--delay, 0s) infinite;
+
+  &--gold {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 60%, var(--gold-deep) 100%);
+  }
+}
+
+@keyframes petalFall {
+  0% { transform: translate(0, 0) rotate(var(--rot, 25deg)); opacity: 0; }
+  8% { opacity: 0.85; }
+  50% { transform: translate(calc(var(--drift, 26px) * 0.5), 55vh) rotate(calc(var(--rot, 25deg) + 140deg)); }
+  90% { opacity: 0.55; }
+  100% { transform: translate(var(--drift, 26px), 112vh) rotate(calc(var(--rot, 25deg) + 280deg)); opacity: 0; }
+}
+
+@include reduce-motion {
+  .petal-field { display: none; }
+}

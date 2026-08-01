@@ -10,7 +10,7 @@
   width: 100%;
   transform: scaleX(0);
   transform-origin: left;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-light));
   z-index: 1050;
 }
 
@@ -24,13 +24,16 @@
   padding: 1.4rem var(--gutter);
   transition: padding var(--dur-fast) var(--ease-out-soft),
               background var(--dur-fast) var(--ease-out-soft),
-              border-color var(--dur-fast) var(--ease-out-soft);
+              border-color var(--dur-fast) var(--ease-out-soft),
+              backdrop-filter var(--dur-fast) var(--ease-out-soft);
   border-bottom: 1px solid transparent;
 
   &.is-condensed {
     padding-block: 0.85rem;
-    background: var(--ink);
-    border-bottom-color: var(--line-on-dark);
+    background: var(--glass-bg-darker);
+    backdrop-filter: blur(var(--glass-blur-sm));
+    -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+    border-bottom-color: var(--glass-border-on-dark);
   }
 }
 
@@ -39,12 +42,12 @@
   font-weight: 700;
   font-size: 1.3rem;
   letter-spacing: 0.02em;
-  color: var(--paper);
+  color: var(--ivory);
   display: inline-flex;
   align-items: baseline;
   gap: 0.2em;
 
-  span { color: var(--accent); font-style: italic; font-size: 0.85em; }
+  span { color: var(--gold-light); font-style: italic; font-size: 0.85em; }
 }
 
 .nav-toggle {
@@ -54,25 +57,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--line-on-dark);
+  border-radius: 50%;
+  border: 1px solid var(--glass-border-on-dark);
   transition: border-color var(--dur-fast) var(--ease-out-soft);
 
   span {
     position: absolute;
     width: 18px; height: 2px;
-    background: var(--paper);
+    background: var(--ivory);
     transition: transform var(--dur-fast) var(--ease-out-soft), opacity var(--dur-fast) var(--ease-out-soft);
   }
   span:nth-child(1) { transform: translateY(-5px); }
   span:nth-child(3) { transform: translateY(5px); }
 
-  @include fine-pointer { &:hover { border-color: var(--accent); } }
+  @include fine-pointer { &:hover { border-color: var(--gold-light); } }
 }
 
 .nav-toggle.is-open {
   span:nth-child(1) { transform: rotate(45deg); }
   span:nth-child(2) { opacity: 0; }
   span:nth-child(3) { transform: rotate(-45deg); }
+}
+
+// The overlay menu is light (ivory/champagne); flip the fixed header's
+// logo + toggle to dark ink so they stay legible while it's open.
+.site-nav:has(.nav-toggle.is-open) {
+  .nav-logo { color: var(--wine-deep); }
+  .nav-logo span { color: var(--wine); }
+  .nav-toggle { border-color: var(--glass-border); }
+  .nav-toggle span { background: var(--wine-deep); }
 }
 
 .nav-overlay {
@@ -86,7 +99,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   gap: 0;
-  background: var(--ink);
+  background: linear-gradient(160deg, var(--ivory) 0%, var(--champagne) 60%, var(--blush) 130%);
   padding-inline: var(--gutter);
   padding-top: clamp(5.5rem, 14vh, 8rem);
   padding-bottom: 2rem;
@@ -99,9 +112,9 @@
     content: "";
     position: absolute;
     top: 0; left: 0;
-    width: 6px;
+    width: 4px;
     height: 100%;
-    background: var(--accent);
+    background: linear-gradient(180deg, var(--gold-light), var(--wine));
   }
 
   &.is-open {
@@ -117,11 +130,11 @@
   width: 100%;
   max-width: 900px;
   padding-block: clamp(0.5rem, 1.6vw, 0.9rem);
-  border-bottom: 1px solid var(--line-on-dark);
+  border-bottom: 1px solid var(--line);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(1.8rem, 6vw, 3.4rem);
-  color: var(--paper);
+  color: var(--ink);
   opacity: 0;
   transform: translateY(30px);
   transition: color var(--dur-fast) var(--ease-out-soft), padding-left var(--dur-fast) var(--ease-out-soft);
@@ -132,13 +145,13 @@
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.1em;
-    color: var(--accent);
+    color: var(--gold-deep);
     margin-right: 0.7em;
     vertical-align: middle;
   }
 
   @include fine-pointer {
-    &:hover { color: var(--accent); padding-left: 0.6em; }
+    &:hover { color: var(--wine); padding-left: 0.6em; }
   }
 }
 
@@ -151,15 +164,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--ink);
-  border: 1px solid var(--line-on-dark);
-  color: var(--paper);
+  border-radius: 50%;
+  @include glass-dark;
+  color: var(--ivory);
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
   transition: opacity var(--dur-fast) var(--ease-out-soft), transform var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast);
 
-  @include fine-pointer { &:hover { border-color: var(--accent); } }
+  @include fine-pointer { &:hover { border-color: var(--gold-light); } }
 
   &.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
 }

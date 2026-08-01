@@ -86,6 +86,18 @@ WED.onReady(() => {
           .to(node, { scale: 1, duration: 0.5, ease: "back.out(3)" }, 0.3);
       },
     });
+
+    // Gentle scroll-parallax on the settled image
+    gsap.to(img, {
+      yPercent: -6,
+      ease: "none",
+      scrollTrigger: {
+        trigger: block,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
   });
 
   // ---- Story timeline: gold progress line tracking scroll --------------------------------------------------

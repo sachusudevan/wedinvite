@@ -5,7 +5,7 @@
 
 .countdown {
   position: relative;
-  background: var(--ink);
+  background: var(--bg-dark);
   overflow: hidden;
 }
 
@@ -17,7 +17,7 @@
 
 .countdown-grid {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -29,8 +29,8 @@
   position: relative;
   width: clamp(80px, 18vw, 130px);
   padding: clamp(1.2rem, 3vw, 1.8rem) 0;
-  background: var(--ink-soft);
-  border: 1px solid var(--line-on-dark);
+  border-radius: var(--radius-lg);
+  @include glass-dark;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,15 +38,18 @@
   overflow: hidden;
   transition: transform var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
 
-  &:nth-child(1) { border-top: 3px solid var(--accent); }
-  &:nth-child(2) { border-top: 3px solid var(--accent); }
-  &:nth-child(3) { border-top: 3px solid var(--accent); }
-  &:nth-child(4) { border-top: 3px solid var(--accent); }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  }
 
   @include fine-pointer {
     &:hover {
-      transform: translate(-4px, -4px);
-      box-shadow: var(--shadow-hard-on-dark);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-gold-glow);
     }
   }
 }
@@ -55,7 +58,10 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(2rem, 6vw, 3.6rem);
-  color: var(--paper);
+  background: linear-gradient(160deg, var(--ivory), var(--gold-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
@@ -66,12 +72,14 @@
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--gold-light);
 }
 
 .countdown-sub {
+  position: relative;
+  z-index: 2;
   margin-top: 2.2rem;
-  color: var(--paper);
+  color: var(--ivory);
   opacity: 0.7;
   font-size: 0.92rem;
   letter-spacing: 0.05em;

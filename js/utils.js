@@ -40,7 +40,7 @@ WED.confetti = (() => {
   resize();
   window.addEventListener("resize", WED.debounce(resize, 200));
 
-  const colors = ["#0a0a0a", "#c31f2d", "#f5f1e8", "#8c1620", "#ffffff"];
+  const colors = ["#c9a24b", "#e3c687", "#f3dcd6", "#6e1e2b", "#faf6ef"];
 
   function burst({ x, y, count = 90 } = {}) {
     if (WED.flags.reducedMotion) return;
@@ -102,3 +102,23 @@ WED.confetti = (() => {
 
   return { burst };
 })();
+
+// ---- Floating petal fields (decorative, ambient) --------------------------------------------------
+WED.spawnPetals = (container, count = 7) => {
+  if (!container || WED.flags.reducedMotion) return;
+  const field = document.createElement("div");
+  field.className = "petal-field";
+  field.setAttribute("aria-hidden", "true");
+  for (let i = 0; i < count; i++) {
+    const petal = document.createElement("span");
+    petal.className = i % 3 === 0 ? "petal petal--gold" : "petal";
+    petal.style.setProperty("--x", `${4 + Math.random() * 92}%`);
+    petal.style.setProperty("--s", `${9 + Math.random() * 10}px`);
+    petal.style.setProperty("--dur", `${10 + Math.random() * 9}s`);
+    petal.style.setProperty("--delay", `${Math.random() * 10}s`);
+    petal.style.setProperty("--drift", `${Math.random() > 0.5 ? "" : "-"}${20 + Math.random() * 60}px`);
+    petal.style.setProperty("--rot", `${Math.random() * 360}deg`);
+    field.appendChild(petal);
+  }
+  container.appendChild(field);
+};

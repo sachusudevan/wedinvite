@@ -1,5 +1,5 @@
 // ==========================================================================
-// Footer
+// Thank You + Footer — dark bookend
 // ==========================================================================
 @use "tokens" as *;
 
@@ -11,68 +11,75 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--bg-dark);
 }
 
 .thankyou-bg {
   position: absolute;
   inset: 0;
-  img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; transform: scale(1.15); filter: grayscale(0.35) contrast(1.05); }
+  img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; transform: scale(1.15); }
 }
 
 .thankyou-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10,10,10,0.6), rgba(10,10,10,0.9));
+  background: linear-gradient(180deg, rgba(36,21,18,0.55), rgba(36,21,18,0.92));
 }
 
 .thankyou-content {
   position: relative;
   z-index: 1;
   text-align: center;
-  color: var(--paper);
+  color: var(--ivory);
   padding: 2rem;
 }
 
 .thankyou-title {
   font-size: clamp(2.6rem, 6vw, 4.4rem);
   font-weight: 700;
+  color: var(--ivory);
 }
 
 .thankyou-text {
   max-width: 46ch;
   margin: 1.2rem auto 0;
-  color: var(--paper);
+  color: var(--ivory);
   opacity: 0.8;
   line-height: 1.8;
 }
 
 .thankyou-signature {
   margin-top: 1.8rem;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 700;
-  font-size: clamp(1.3rem, 3vw, 1.7rem);
-  color: var(--accent);
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4.4vw, 2.6rem);
+  color: var(--gold-light);
 }
 
 .footer {
   position: relative;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--bg-dark);
+  color: var(--ivory);
   text-align: center;
   padding: clamp(3rem, 8vw, 4.5rem) 1.5rem clamp(6rem, 10vw, 4.5rem);
-  border-top: 3px solid var(--accent);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 15%; right: 15%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  }
 }
 
 .footer-monogram {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.8rem;
-  color: var(--paper);
-  span { color: var(--accent); font-style: italic; }
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 2.4rem;
+  color: var(--ivory);
+  span { color: var(--gold-light); }
 }
 
-.footer-names { margin-top: 0.8rem; font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 1.5rem; color: var(--paper); }
-.footer-date { margin-top: 0.4rem; font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
-.footer-credit { margin-top: 1.6rem; font-size: 0.78rem; color: var(--paper); opacity: 0.5; }
+.footer-names { margin-top: 0.8rem; font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 1.5rem; color: var(--ivory); }
+.footer-date { margin-top: 0.4rem; font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
+.footer-credit { margin-top: 1.6rem; font-size: 0.78rem; color: var(--ivory); opacity: 0.5; }

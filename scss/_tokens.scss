@@ -1,50 +1,73 @@
 // ==========================================================================
 // Design Tokens — Arya & Sachu
-// Bold Editorial system: near-black + warm paper, one statement color
-// (vermillion red), flat surfaces, hard offset shadows, sharp corners.
-// Defined as CSS custom properties so both SCSS and runtime JS (canvas
-// particles, visualizer) can read them.
+// Luxury Cinematic system: ivory + champagne base, blush pastel, metallic
+// gold accent, deep wine contrast. Soft glassmorphism surfaces, diffuse
+// shadows, generous radius. Defined as CSS custom properties so both SCSS
+// and runtime JS (canvas particles, visualizer, confetti) can read them.
 // ==========================================================================
 
 :root {
   // ---- Core palette --------------------------------------------------
-  --ink: #0a0a0a;
-  --ink-soft: #1c1c1a;
-  --ink-mute: #55524a;
+  --ivory: #faf6ef;
+  --champagne: #f3e9dc;
+  --champagne-deep: #e8d9c3;
 
-  --paper: #f5f1e8;
-  --paper-dim: #e8e1d0;
+  --blush: #f3dcd6;
+  --blush-deep: #e8c3bc;
+
+  --gold: #c9a24b;
+  --gold-light: #e3c687;
+  --gold-deep: #9c7a38;
+
+  --wine: #6e1e2b;
+  --wine-deep: #4a131c;
+
+  --ink: #2b241e;
+  --ink-soft: #4a4030;
   --white: #ffffff;
 
-  --gray: #6b6862;
-  --gray-light: #b6b0a2;
+  --bg-dark: #241512;
+  --bg-dark-soft: #33201b;
 
-  --accent: #c31f2d;
-  --accent-deep: #8c1620;
-  --accent-tint: #f3d6d3;
+  --gray: #7a6e5d;
+  --gray-light: #b8a98f;
 
   // ---- Semantic roles --------------------------------------------------
-  --bg-page: var(--paper);
-  --bg-panel: var(--white);
-  --bg-dark: var(--ink);
+  --bg-page: var(--ivory);
+  --bg-panel: var(--champagne);
+  --bg-dark-section: var(--bg-dark);
 
   --text-primary: var(--ink);
   --text-muted: var(--gray);
-  --text-on-dark: var(--paper);
-  --text-accent: var(--accent-deep);
+  --text-on-dark: var(--ivory);
+  --text-accent: var(--wine-deep);
+  --text-accent-on-dark: var(--gold-light);
 
-  --line: rgba(10, 10, 10, 0.16);
-  --line-on-dark: rgba(245, 241, 232, 0.22);
-  --line-strong: var(--ink);
+  --line: rgba(43, 36, 30, 0.14);
+  --line-on-dark: rgba(250, 246, 239, 0.18);
+  --line-strong: rgba(43, 36, 30, 0.22);
 
-  --shadow-hard-sm: 5px 5px 0 var(--ink);
-  --shadow-hard: 8px 8px 0 var(--ink);
-  --shadow-hard-accent: 8px 8px 0 var(--accent);
-  --shadow-hard-on-dark: 8px 8px 0 var(--paper);
+  // ---- Glassmorphism --------------------------------------------------
+  --glass-bg-light: rgba(255, 255, 255, 0.55);
+  --glass-bg-lighter: rgba(255, 255, 255, 0.72);
+  --glass-bg-dark: rgba(255, 255, 255, 0.08);
+  --glass-bg-darker: rgba(20, 12, 10, 0.42);
+  --glass-border: rgba(201, 162, 75, 0.35);
+  --glass-border-on-dark: rgba(230, 198, 135, 0.28);
+  --glass-blur: 18px;
+  --glass-blur-sm: 10px;
+
+  // ---- Shadows (soft / diffuse, no hard offsets) --------------------------------------------------
+  --shadow-soft-sm: 0 4px 18px rgba(60, 40, 20, 0.1);
+  --shadow-soft: 0 20px 50px -12px rgba(60, 40, 20, 0.22);
+  --shadow-soft-lg: 0 32px 80px -20px rgba(60, 32, 20, 0.32);
+  --shadow-gold-glow: 0 0 40px rgba(201, 162, 75, 0.35);
+  --shadow-soft-on-dark: 0 24px 60px rgba(0, 0, 0, 0.45);
 
   // ---- Typography --------------------------------------------------
   --font-display: "Fraunces", "Iowan Old Style", serif;
   --font-body: "Manrope", "Segoe UI", sans-serif;
+  --font-script: "Great Vibes", "Brush Script MT", cursive;
 
   // ---- Motion --------------------------------------------------
   --ease-lux: cubic-bezier(0.16, 0.8, 0.24, 1);
@@ -59,9 +82,10 @@
   // ---- Layout --------------------------------------------------
   --gutter: clamp(1.5rem, 5vw, 4.5rem);
   --container-max: 1360px;
-  --radius-sm: 0px;
-  --radius-md: 0px;
-  --radius-lg: 0px;
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
 
   // ---- Z-index scale --------------------------------------------------
   --z-cursor: 900;
@@ -98,4 +122,20 @@ $bp-xxl: 1600px;
 
 @mixin reduce-motion {
   @media (prefers-reduced-motion: reduce) { @content; }
+}
+
+@mixin glass-light {
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
+}
+
+@mixin glass-dark {
+  background: var(--glass-bg-darker);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border-on-dark);
+  box-shadow: var(--shadow-soft-on-dark);
 }

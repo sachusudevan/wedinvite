@@ -17,7 +17,7 @@
 
 .cursor-dot {
   width: 7px; height: 7px;
-  background: var(--ivory);
+  background: var(--gold-light);
 }
 
 .cursor-ring {
@@ -31,7 +31,8 @@
 
 .cursor-ring.is-active {
   width: 64px; height: 64px;
-  background: rgba(251,246,236,0.08);
+  background: rgba(227, 198, 135, 0.12);
+  border-color: var(--gold-light);
 }
 
 .cursor-ring .cursor-label {

@@ -1,0 +1,37 @@
+// ==========================================================================
+// Dust — floating gold-dust motes for the intro landing scene.
+// ==========================================================================
+@use "tokens" as *;
+
+.dust-field {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dust-mote {
+  position: absolute;
+  bottom: -4%;
+  left: var(--x, 50%);
+  width: var(--s, 3px);
+  height: var(--s, 3px);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--gold-light) 0%, var(--gold) 60%, transparent 100%);
+  opacity: 0;
+  box-shadow: 0 0 6px 1px rgba(201, 162, 75, 0.55);
+  animation: dustFloat var(--dur, 16s) ease-in-out var(--delay, 0s) infinite;
+}
+
+@keyframes dustFloat {
+  0% { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 0.9; }
+  50% { transform: translate(var(--drift, 18px), -52vh); opacity: 0.7; }
+  88% { opacity: 0.5; }
+  100% { transform: translate(calc(var(--drift, 18px) * -1), -104vh); opacity: 0; }
+}
+
+@include reduce-motion {
+  .dust-field { display: none; }
+}

@@ -11,13 +11,12 @@
   display: flex;
   align-items: center;
   gap: 0;
-  background: var(--ink);
-  border: 1px solid var(--line-on-dark);
-  box-shadow: var(--shadow-hard-on-dark);
+  border-radius: var(--radius-pill);
+  @include glass-dark;
   overflow: hidden;
-  transition: box-shadow var(--dur-med) var(--ease-out-soft);
+  transition: box-shadow var(--dur-med) var(--ease-out-soft), border-color var(--dur-med);
 
-  &.is-playing { border-color: var(--accent); }
+  &.is-playing { border-color: var(--gold-light); }
 }
 
 .player-disc-btn {
@@ -38,10 +37,10 @@
   fill: none;
   stroke-width: 2;
 }
-.player-disc-ring .ring-bg { stroke: rgba(245,241,232,0.15); }
+.player-disc-ring .ring-bg { stroke: rgba(250,246,239,0.15); }
 .player-disc-ring .ring-fg {
-  stroke: var(--accent);
-  stroke-linecap: butt;
+  stroke: var(--gold-light);
+  stroke-linecap: round;
   stroke-dasharray: 145;
   stroke-dashoffset: 145;
 }
@@ -49,10 +48,10 @@
 .player-disc {
   width: 38px; height: 38px;
   border-radius: 50%;
-  background: var(--ink-soft);
-  border: 1px solid var(--line-on-dark);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-deep));
+  border: 1px solid var(--glass-border-on-dark);
   display: flex; align-items: center; justify-content: center;
-  color: var(--accent);
+  color: var(--wine-deep);
   animation: discSpin 8s linear infinite;
   animation-play-state: paused;
 
@@ -60,7 +59,7 @@
     content: "";
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: var(--ink);
+    background: var(--bg-dark);
   }
 }
 
@@ -98,7 +97,7 @@
 }
 
 .player-title {
-  color: var(--paper);
+  color: var(--ivory);
   font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 700;
@@ -112,13 +111,13 @@
 
   span {
     width: 2px;
-    background: var(--accent);
+    background: var(--gold-light);
     height: 20%;
   }
 }
 
 .player-mute-btn {
-  color: var(--paper);
+  color: var(--ivory);
   width: 30px; height: 30px;
   display: flex; align-items: center; justify-content: center;
   flex: none;
@@ -128,20 +127,21 @@
   -webkit-appearance: none;
   width: 64px;
   height: 3px;
-  background: rgba(245,241,232,0.25);
+  border-radius: var(--radius-pill);
+  background: rgba(250,246,239,0.25);
   flex: none;
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 11px; height: 11px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--gold-light);
     cursor: pointer;
   }
   &::-moz-range-thumb {
     width: 11px; height: 11px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--gold-light);
     border: none;
     cursor: pointer;
   }

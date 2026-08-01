@@ -17,5 +17,12 @@ WED.onReady(() => {
     });
   }
 
-  document.querySelectorAll(".memories-arrow, .nav-toggle, .back-to-top").forEach((el) => addMagnetic(el, 0.25));
+  document.querySelectorAll(".memories-arrow, .nav-toggle, .back-to-top, .hero-cta-row .btn").forEach((el) => addMagnetic(el, 0.25));
+});
+
+// ---- Ambient petal fields --------------------------------------------------
+WED.onReady(() => {
+  document.addEventListener("intro:complete", () => {
+    document.querySelectorAll("[data-petals]").forEach((el) => WED.spawnPetals(el, 7));
+  });
 });
