@@ -51,8 +51,8 @@ WED.onReady(() => {
   }
 
   const criticalImages = [
-    "assets/images/optimized/lg/IMG_3465.webp",
-    "assets/images/optimized/md/IMG_9534.webp",
+    "assets/images/optimized/lg/gallery-feature.webp",
+    "assets/images/optimized/md/hero-embrace.webp",
   ];
 
   const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
