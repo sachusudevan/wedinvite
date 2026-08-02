@@ -191,6 +191,17 @@
 @keyframes decorFloatC { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-4px) rotate(0.7deg); } }
 @keyframes decorFloatD { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-5px) rotate(-0.9deg); } }
 
+// ---- FX canvas: ambient embers/petals/sparkles + one-shot bursts --------------------------------------------------
+// Sits between the flat backdrop (z 0/1) and the envelope stage (z 2, later
+// in source order so it always paints on top at equal z-index) — particles
+// drift over the illustrated backdrop but never occlude the envelope itself.
+.intro-fx-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
 // ---- Scene / stage (camera-zoom target) --------------------------------------------------
 .intro-scene {
   position: relative;
@@ -304,6 +315,21 @@
   color: var(--ink-soft);
 }
 
+// One-shot diagonal light sweep across the card, GSAP-triggered exactly
+// once at the reveal moment (not a looping shimmer like envelope-back's).
+.card-light-sweep {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+  overflow: hidden;
+  opacity: 0;
+  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.55) 48%, rgba(212, 175, 55, 0.3) 53%, transparent 68%);
+  background-size: 250% 100%;
+  background-position: 130% 0;
+}
+
 .envelope-flap {
   position: absolute;
   top: 0;
@@ -318,7 +344,7 @@
 }
 
 .envelope-seal {
-  position: absolute;
+  position: relative;
   top: calc(56% - 36px);
   left: 50%;
   transform: translate(-50%, -50%);
@@ -336,6 +362,22 @@
   opacity: 0.55;
   transition: opacity var(--dur-med) var(--ease-out-soft), transform var(--dur-fast) var(--ease-out-soft);
 
+  // Outer additive bloom — flares on hover, screen-blended so it reads as
+  // light spilling outward rather than a flat halo sitting on top.
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -60%;
+    z-index: -1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.55), rgba(255, 59, 92, 0.2) 55%, transparent 75%);
+    mix-blend-mode: screen;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity var(--dur-fast) var(--ease-out-soft), transform var(--dur-fast) var(--ease-out-soft);
+    pointer-events: none;
+  }
+
   &:disabled { cursor: not-allowed; }
 
   &.is-ready {
@@ -344,7 +386,10 @@
   }
 
   @include fine-pointer {
-    &.is-ready:hover { transform: translate(-50%, -50%) scale(1.07); }
+    &.is-ready:hover {
+      transform: translate(-50%, -50%) scale(1.07);
+      &::after { opacity: 1; transform: scale(1); }
+    }
   }
 
   &:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 5px; }
@@ -365,18 +410,37 @@
 
 .ring-track {
   fill: none;
-  stroke: rgba(255, 59, 92, 0.25);
-  stroke-width: 1.4;
+  stroke: var(--metallic-gold-soft);
+  stroke-width: 1.2;
+}
+
+// Blurred duplicate arc glowing behind the crisp progress ring — a "liquid"
+// bloom that grows in step with it (both driven by the same JS dashoffset).
+.ring-halo {
+  fill: none;
+  stroke: var(--rose);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 351.86;
+  stroke-dashoffset: 351.86;
+  opacity: 0.5;
+  filter: blur(5px);
 }
 
 .ring-progress {
   fill: none;
   stroke: var(--rose);
   filter: drop-shadow(0 0 4px rgba(229, 9, 20, 0.7));
-  stroke-width: 1.4;
+  stroke-width: 2.2;
   stroke-linecap: round;
   stroke-dasharray: 351.86;
   stroke-dashoffset: 351.86;
+  animation: ringGlowPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes ringGlowPulse {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(229, 9, 20, 0.6)); }
+  50% { filter: drop-shadow(0 0 9px rgba(229, 9, 20, 0.95)) drop-shadow(0 0 16px rgba(255, 59, 92, 0.5)); }
 }
 
 .seal-monogram {

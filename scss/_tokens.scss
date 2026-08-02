@@ -27,6 +27,10 @@
   --slate-dim: #6b6b72;
   --crimson-soft: #ff6b81;
 
+  // Metallic accent — used sparingly (seal rim, ring-box trim, sparkle particles)
+  --metallic-gold: #d4af37;
+  --metallic-gold-soft: rgba(212, 175, 55, 0.4);
+
   // ---- Legacy-named aliases --------------------------------------------------
   // Component partials reference these names directly; repointing them here
   // recolors the whole site without touching every file.

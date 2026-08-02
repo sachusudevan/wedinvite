@@ -11,6 +11,8 @@
   --slate: #a1a1aa;
   --slate-dim: #6b6b72;
   --crimson-soft: #ff6b81;
+  --metallic-gold: #d4af37;
+  --metallic-gold-soft: rgba(212, 175, 55, 0.4);
   --ivory: var(--white);
   --champagne: var(--surface);
   --champagne-deep: #2a2a30;
@@ -861,6 +863,13 @@ body.no-fine-cursor .cursor-ring {
     transform: translateY(-5px) rotate(-0.9deg);
   }
 }
+.intro-fx-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
 .intro-scene {
   position: relative;
   z-index: 2;
@@ -982,6 +991,19 @@ body.no-fine-cursor .cursor-ring {
   color: var(--ink-soft);
 }
 
+.card-light-sweep {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+  overflow: hidden;
+  opacity: 0;
+  background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.55) 48%, rgba(212, 175, 55, 0.3) 53%, transparent 68%);
+  background-size: 250% 100%;
+  background-position: 130% 0;
+}
+
 .envelope-flap {
   position: absolute;
   top: 0;
@@ -996,7 +1018,7 @@ body.no-fine-cursor .cursor-ring {
 }
 
 .envelope-seal {
-  position: absolute;
+  position: relative;
   top: calc(56% - 36px);
   left: 50%;
   transform: translate(-50%, -50%);
@@ -1014,6 +1036,19 @@ body.no-fine-cursor .cursor-ring {
   opacity: 0.55;
   transition: opacity var(--dur-med) var(--ease-out-soft), transform var(--dur-fast) var(--ease-out-soft);
 }
+.envelope-seal::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(229, 9, 20, 0.55), rgba(255, 59, 92, 0.2) 55%, transparent 75%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity var(--dur-fast) var(--ease-out-soft), transform var(--dur-fast) var(--ease-out-soft);
+  pointer-events: none;
+}
 .envelope-seal:disabled {
   cursor: not-allowed;
 }
@@ -1024,6 +1059,10 @@ body.no-fine-cursor .cursor-ring {
 @media (hover: hover) and (pointer: fine) {
   .envelope-seal.is-ready:hover {
     transform: translate(-50%, -50%) scale(1.07);
+  }
+  .envelope-seal.is-ready:hover::after {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 .envelope-seal:focus-visible {
@@ -1049,20 +1088,40 @@ body.no-fine-cursor .cursor-ring {
 
 .ring-track {
   fill: none;
-  stroke: rgba(255, 59, 92, 0.25);
-  stroke-width: 1.4;
+  stroke: var(--metallic-gold-soft);
+  stroke-width: 1.2;
+}
+
+.ring-halo {
+  fill: none;
+  stroke: var(--rose);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 351.86;
+  stroke-dashoffset: 351.86;
+  opacity: 0.5;
+  filter: blur(5px);
 }
 
 .ring-progress {
   fill: none;
   stroke: var(--rose);
   filter: drop-shadow(0 0 4px rgba(229, 9, 20, 0.7));
-  stroke-width: 1.4;
+  stroke-width: 2.2;
   stroke-linecap: round;
   stroke-dasharray: 351.86;
   stroke-dashoffset: 351.86;
+  animation: ringGlowPulse 2.4s ease-in-out infinite;
 }
 
+@keyframes ringGlowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(229, 9, 20, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 9px rgba(229, 9, 20, 0.95)) drop-shadow(0 0 16px rgba(255, 59, 92, 0.5));
+  }
+}
 .seal-monogram {
   position: relative;
   font-family: var(--font-display);
@@ -3081,4 +3140,12 @@ body.no-fine-cursor .cursor-ring {
 .js-loading {
   overflow: hidden;
   height: 100%;
+}
+.js-loading main,
+.js-loading .site-nav,
+.js-loading .footer,
+.js-loading .music-player,
+.js-loading .back-to-top,
+.js-loading .progress-bar {
+  visibility: hidden;
 }

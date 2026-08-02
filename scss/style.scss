@@ -27,4 +27,20 @@
 
 ::view-transition-group(*) { animation-duration: 0s; }
 
-.js-loading { overflow: hidden; height: 100%; }
+// FOUC guard: the landing page itself (nav, hero/sections, footer, player)
+// stays hidden until every critical asset is loaded and js/smooth-scroll.js
+// removes this class on `intro:complete`. The intro-gate lives outside
+// these selectors, so the preloader is unaffected and still renders first.
+.js-loading {
+  overflow: hidden;
+  height: 100%;
+
+  main,
+  .site-nav,
+  .footer,
+  .music-player,
+  .back-to-top,
+  .progress-bar {
+    visibility: hidden;
+  }
+}

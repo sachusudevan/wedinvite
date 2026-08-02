@@ -9,12 +9,15 @@ WED.onReady(() => {
   const seal = document.getElementById("introSeal");
   const sealLabel = document.getElementById("introSealLabel");
   const ringProgress = document.getElementById("ringProgress");
+  const ringHalo = document.getElementById("ringHalo");
   const stage = document.getElementById("introStage");
   const envelope = document.getElementById("envelope");
   const flap = document.getElementById("envelopeFlap");
   const card = document.getElementById("envelopeCard");
+  const cardSweep = document.getElementById("cardLightSweep");
   const flash = document.getElementById("introFlash");
   const tapHint = document.getElementById("introTapHint");
+  const fxCanvas = document.getElementById("introFx");
   if (!gate || !seal) return;
 
   const hasGsap = typeof gsap !== "undefined";
@@ -22,6 +25,12 @@ WED.onReady(() => {
 
   if (hasGsap && !WED.flags.reducedMotion) {
     gsap.set(card, { xPercent: -50, yPercent: 14, scale: 0.9, opacity: 0.94 });
+  }
+
+  // ---- Ambient particle field: embers from the seal, depth-blurred petals, sparkles --------------------------------------------------
+  if (fxCanvas && WED.introFx) {
+    WED.introFx.init(fxCanvas, seal);
+    WED.introFx.setPreloading(true);
   }
 
   // ---- Cursor parallax on the backdrop layers (fine pointer only) --------------------------------------------------
@@ -50,6 +59,31 @@ WED.onReady(() => {
     });
   }
 
+  // ---- Envelope hover tilt: subtle 3D parallax toward the cursor (fine pointer only) --------------------------------------------------
+  let stopTilt = null;
+  if (hasGsap && envelope && !WED.flags.coarsePointer && !WED.flags.reducedMotion) {
+    const tiltX = gsap.quickTo(envelope, "rotateX", { duration: 0.6, ease: "power3" });
+    const tiltY = gsap.quickTo(envelope, "rotateY", { duration: 0.6, ease: "power3" });
+    gsap.set(envelope, { transformPerspective: 1400 });
+
+    const onMove = (e) => {
+      const rect = envelope.getBoundingClientRect();
+      const relX = (e.clientX - (rect.left + rect.width / 2)) / rect.width;
+      const relY = (e.clientY - (rect.top + rect.height / 2)) / rect.height;
+      tiltX(relY * -7);
+      tiltY(relX * 7);
+    };
+    const onLeave = () => { tiltX(0); tiltY(0); };
+
+    gate.addEventListener("mousemove", onMove);
+    gate.addEventListener("mouseleave", onLeave);
+    stopTilt = () => {
+      gate.removeEventListener("mousemove", onMove);
+      gate.removeEventListener("mouseleave", onLeave);
+      onLeave();
+    };
+  }
+
   const criticalImages = [
     "assets/images/optimized/lg/gallery-feature.webp",
     "assets/images/optimized/md/hero-embrace.webp",
@@ -71,7 +105,9 @@ WED.onReady(() => {
   let done = false;
   const setProgress = (p) => {
     progress = WED.clamp(p, 0, 100);
-    if (ringProgress) ringProgress.style.strokeDashoffset = `${CIRCUMFERENCE * (1 - progress / 100)}`;
+    const offset = `${CIRCUMFERENCE * (1 - progress / 100)}`;
+    if (ringProgress) ringProgress.style.strokeDashoffset = offset;
+    if (ringHalo) ringHalo.style.strokeDashoffset = offset;
   };
 
   const minTimer = new Promise((resolve) => setTimeout(resolve, 1200));
@@ -87,17 +123,31 @@ WED.onReady(() => {
     seal.disabled = false;
     seal.classList.add("is-ready");
     if (stage) stage.classList.add("is-ready");
+    if (WED.introFx) WED.introFx.setPreloading(false);
   });
+
+  const toCanvasPoint = (clientX, clientY) => {
+    if (!fxCanvas) return { x: clientX, y: clientY };
+    const r = fxCanvas.getBoundingClientRect();
+    return { x: clientX - r.left, y: clientY - r.top };
+  };
 
   seal.addEventListener("click", () => {
     if (seal.disabled) return;
     seal.disabled = true;
     document.dispatchEvent(new CustomEvent("intro:enter"));
 
+    if (stopTilt) { stopTilt(); stopTilt = null; }
     gate.classList.add("is-leaving");
+
+    const sealRect = seal.getBoundingClientRect();
+    const sealPoint = toCanvasPoint(sealRect.left + sealRect.width / 2, sealRect.top + sealRect.height / 2);
+    const cardRectPre = card.getBoundingClientRect();
+    const cardPoint = toCanvasPoint(cardRectPre.left + cardRectPre.width / 2, cardRectPre.top + cardRectPre.height / 2);
 
     if (!hasGsap || WED.flags.reducedMotion) {
       gate.style.display = "none";
+      if (WED.introFx) WED.introFx.stop();
       document.dispatchEvent(new CustomEvent("intro:complete"));
       return;
     }
@@ -105,17 +155,19 @@ WED.onReady(() => {
     const finish = () => {
       document.dispatchEvent(new CustomEvent("intro:complete"));
       gate.style.display = "none";
+      if (WED.introFx) WED.introFx.stop();
     };
 
     gsap
       .timeline({ onComplete: finish })
-      // Seal cracks open
+      // Seal cracks open — glowing spark shower right as it shatters
       .to(seal, { scale: 1.15, duration: 0.18, ease: "power2.out" }, 0)
       .to(seal, { scale: 0, rotate: 14, opacity: 0, duration: 0.3, ease: "power2.in" }, 0.18)
+      .call(() => { if (WED.introFx) WED.introFx.burst(sealPoint.x, sealPoint.y, { type: "spark", count: 18 }); }, [], 0.16)
       .to(tapHint, { opacity: 0, y: 8, duration: 0.3, ease: "power2.in" }, 0)
       // Flap swings open
       .to(flap, { rotateX: -170, duration: 0.75, ease: "power3.inOut" }, 0.15)
-      // Card slides up out of the envelope
+      // Card slides up out of the envelope, light sweep across the typography
       .to(card, { yPercent: -40, scale: 1, opacity: 1, duration: 0.85, ease: "back.out(1.5)" }, 0.5)
       .fromTo(
         card.querySelectorAll(".card-kicker, .card-script, .card-flourish, .card-date"),
@@ -123,6 +175,10 @@ WED.onReady(() => {
         { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "power2.out" },
         0.75
       )
+      .call(() => { if (WED.introFx) WED.introFx.burst(cardPoint.x, cardPoint.y - 40, { type: "petal", count: 22 }); }, [], 0.65)
+      .set(cardSweep, { opacity: 1 }, 0.68)
+      .to(cardSweep, { backgroundPosition: "-40% 0%", duration: 0.9, ease: "power2.inOut" }, 0.68)
+      .to(cardSweep, { opacity: 0, duration: 0.35 }, 1.4)
       // Camera zoom + bridging flash + crossfade into the hero
       .to(flash, { opacity: 1, duration: 0.35, ease: "power2.out" }, 1.15)
       .to(stage, { scale: 1.4, duration: 0.9, ease: "power2.inOut" }, 1.1)
