@@ -218,39 +218,46 @@
       </div>
     </div>
 
-    <div class="intro-corner-decor decor-br" aria-hidden="true">
+    <div class="intro-corner-decor decor-br" id="decorRibbonBr" aria-hidden="true">
       <div class="decor-float">
-        <svg viewBox="0 0 200 150" fill="none">
+        <svg viewBox="0 0 200 150" fill="none" class="ribbon-svg">
           <defs>
-            <linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="var(--gold-light)"/>
-              <stop offset="100%" stop-color="var(--gold-deep)"/>
+            <linearGradient id="satinRibbon" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E50914"/>
+              <stop offset="55%" stop-color="#b8060f"/>
+              <stop offset="100%" stop-color="#8B0000"/>
             </linearGradient>
-            <linearGradient id="penBody" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="var(--gold-light)"/>
-              <stop offset="45%" stop-color="var(--gold)"/>
-              <stop offset="100%" stop-color="var(--gold-deep)"/>
+            <linearGradient id="satinFold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#8B0000"/>
+              <stop offset="100%" stop-color="#330305"/>
+            </linearGradient>
+            <linearGradient id="ribbonSweepGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="30%" stop-color="#ffffff" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#fff3e0" stop-opacity="0.8"/>
+              <stop offset="70%" stop-color="#ffffff" stop-opacity="0"/>
             </linearGradient>
           </defs>
-          <ellipse cx="110" cy="120" rx="80" ry="10" fill="rgba(0,0,0,0.3)"/>
-          <g transform="translate(150,38) rotate(22)">
-            <path d="M0,12 C8,-6 30,-8 46,2 C30,10 8,20 0,12 Z" fill="url(#leafGrad)"/>
-            <path d="M2,12 C12,4 30,2 42,4" stroke="var(--gold-deep)" stroke-width="0.8" opacity="0.7"/>
-          </g>
-          <g transform="translate(122,64) rotate(46)">
-            <path d="M0,10 C6,-4 24,-6 36,1 C24,8 6,16 0,10 Z" fill="url(#leafGrad)" opacity="0.92"/>
-            <path d="M2,10 C10,3 24,1 34,3" stroke="var(--gold-deep)" stroke-width="0.7" opacity="0.65"/>
-          </g>
-          <g transform="translate(38,132) rotate(-30)">
-            <path d="M0,0 L150,0 C154,0 158,2 160,5 L172,9 L160,13 C158,16 154,18 150,18 L0,18 C-3,15 -3,3 0,0 Z"
-                  fill="url(#penBody)"/>
-            <rect x="6" y="1.5" width="150" height="2.4" fill="#fff" opacity="0.35"/>
-            <rect x="24" y="-2" width="12" height="22" rx="2" fill="var(--wine)"/>
-            <rect x="24" y="-2" width="12" height="5" rx="2" fill="var(--wine-deep)"/>
-            <path d="M172,9 L184,7 L188,9 L184,11 Z" fill="#e9e6df"/>
-            <line x1="176" y1="7.5" x2="184" y2="8.6" stroke="var(--gold-deep)" stroke-width="0.5"/>
+
+          <ellipse cx="150" cy="140" rx="60" ry="9" fill="rgba(0,0,0,0.32)"/>
+
+          <g class="ribbon-sway">
+            <path class="ribbon-band" d="M210,150 C180,175 145,168 154,138 C160,116 134,120 124,92 C116,70 94,74 88,48
+                     L100,42 C107,64 126,60 134,84 C142,108 166,102 162,130 C158,150 182,158 222,138 Z"
+                  fill="url(#satinRibbon)"/>
+            <path class="ribbon-fold" d="M150,132 C138,120 142,104 126,90 L116,98 C130,110 128,124 140,138 Z"
+                  fill="url(#satinFold)" opacity="0.88"/>
+            <path class="ribbon-sheen" d="M210,150 C180,175 145,168 154,138 C160,116 134,120 124,92 C116,70 94,74 88,48"
+                  stroke="#fff5f0" stroke-width="1.5" opacity="0.5" fill="none" stroke-linecap="round"/>
+            <path class="ribbon-lightsweep" d="M210,150 C180,175 145,168 154,138 C160,116 134,120 124,92 C116,70 94,74 88,48
+                     L100,42 C107,64 126,60 134,84 C142,108 166,102 162,130 C158,150 182,158 222,138 Z"
+                  fill="url(#ribbonSweepGrad)"/>
           </g>
         </svg>
+
+        <span class="ribbon-ember" style="--ex:22%; --ey:78%; --edelay:0s;"></span>
+        <span class="ribbon-ember ribbon-ember--petal" style="--ex:38%; --ey:52%; --edelay:1.3s;"></span>
+        <span class="ribbon-ember" style="--ex:14%; --ey:30%; --edelay:2.4s;"></span>
+        <span class="ribbon-ember ribbon-ember--petal" style="--ex:48%; --ey:14%; --edelay:0.7s;"></span>
       </div>
     </div>
 

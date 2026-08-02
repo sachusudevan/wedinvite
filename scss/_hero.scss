@@ -267,3 +267,36 @@
   max-width: 46ch;
   text-align: left;
 }
+
+// ---- Short-viewport rescue --------------------------------------------------
+// The floating nav sits fixed above the hero, but hero-content is bottom-pinned
+// (.hero's align-items: flex-end) and sized for a full-height desktop hero. On
+// short mobile viewports (browser chrome visible, landscape, small phones —
+// commonly 560-700px tall) that content is taller than the space between the
+// nav and the bottom padding, so the top line of the couple's names renders
+// underneath/above the nav. Tighten the vertical rhythm so the whole block
+// fits comfortably below the nav at realistic short heights.
+@media (max-height: 700px) {
+  .hero-content {
+    padding-top: clamp(1rem, 4vh, 1.6rem);
+    padding-bottom: clamp(1.5rem, 4vh, 2.5rem);
+  }
+  .hero-title {
+    margin-top: 0.4rem;
+    font-size: clamp(2.2rem, 9vw, 7.6rem);
+    line-height: 0.92;
+  }
+  .hero-flourish { margin-top: 0.7rem; }
+  .hero-std-date { margin-top: 0.8rem; }
+  .hero-std-day { font-size: clamp(1.7rem, 6vw, 3.4rem); }
+  .hero-std-weekday { margin-top: 0.35rem; }
+  .hero-std-note {
+    margin-top: 0.7rem;
+    line-height: 1.45;
+  }
+  .hero-cta-row { margin-top: 1rem; }
+}
+
+@media (max-height: 560px) {
+  .hero-std-note { display: none; }
+}

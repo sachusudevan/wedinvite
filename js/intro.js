@@ -49,6 +49,12 @@ WED.onReady(() => {
         amp: t.amp,
       }));
 
+    // The satin ribbon (bottom-right) sweeps a light highlight when the
+    // cursor lingers in its quadrant — a coarse proximity check, not a
+    // pixel-precise hover, since the shape is thin and easy to miss.
+    const ribbonEl = document.getElementById("decorRibbonBr");
+    let ribbonNear = false;
+
     gate.addEventListener("mousemove", (e) => {
       const relX = e.clientX / window.innerWidth - 0.5;
       const relY = e.clientY / window.innerHeight - 0.5;
@@ -56,6 +62,14 @@ WED.onReady(() => {
         moveX(relX * amp);
         moveY(relY * amp);
       });
+
+      if (ribbonEl) {
+        const near = relX > 0.12 && relY > 0.12;
+        if (near !== ribbonNear) {
+          ribbonNear = near;
+          ribbonEl.classList.toggle("is-near", near);
+        }
+      }
     });
   }
 
