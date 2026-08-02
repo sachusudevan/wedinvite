@@ -24,10 +24,8 @@
 <body class="js-loading">
 <a href="#hero" class="skip-link">Skip to content</a>
 
-<!-- Scroll progress + cursor + confetti canvas (persist across whole doc) -->
+<!-- Scroll progress + cursor (persist across whole doc) -->
 <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
-
-<canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
 
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 <div class="cursor-ring" id="cursorRing" aria-hidden="true"><span class="cursor-label" id="cursorLabel"></span></div>
@@ -291,7 +289,6 @@
   <a href="#countdown-section" class="nav-link" data-nav><span>06</span>Countdown</a>
   <a href="#gallery" class="nav-link" data-nav><span>07</span>Gallery</a>
   <a href="#family" class="nav-link" data-nav><span>08</span>Family</a>
-  <a href="#wishes" class="nav-link" data-nav><span>09</span>Wishes</a>
 </nav>
 
 <main>
@@ -333,7 +330,7 @@
 
     <div class="hero-cta-row">
       <a href="#story" class="btn btn-outline on-dark">Our Story</a>
-      <a href="#wishes" class="btn btn-solid">Leave A Wish</a>
+      <a href="#venue" class="btn btn-solid">Get Directions</a>
     </div>
   </div>
 
@@ -620,35 +617,6 @@
   </div>
 </section>
 
-
-
-<!-- ============ WISHES ============ -->
-<section class="section blessings" id="wishes" data-petals>
-  <div class="container">
-    <p class="kicker light" data-fx="mask-wipe">Leave A Blessing</p>
-    <h2 class="section-title light" data-fx="mask-wipe">Wishes For Us</h2>
-    <div class="mini-flourish light" data-fx="mask-wipe"><span></span><i>&#10084;</i><span></span></div>
-
-    <div class="blessings-layout" data-fx="unfold">
-      <form class="blessing-form" id="blessingForm" novalidate>
-        <div class="field">
-          <label for="blessingName">Your Name</label>
-          <input type="text" id="blessingName" name="name" required autocomplete="name">
-        </div>
-        <div class="field">
-          <label for="blessingMessage">Your Wish For Us</label>
-          <textarea id="blessingMessage" name="message" rows="4" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-solid">Send Your Wish</button>
-      </form>
-
-      <div class="blessing-wall" id="blessingWall"></div>
-    </div>
-  </div>
-
-  <div class="blessing-toast" id="blessingToast">Your wish has been added &#10084;</div>
-</section>
-
 <!-- ============ THANK YOU ============ -->
 <section class="thankyou" id="thankyou">
   <div class="thankyou-bg">
@@ -659,7 +627,7 @@
     <div class="mini-flourish light center"><span></span><i>&#9670;</i><span></span></div>
     <h2 class="thankyou-title">Thank You</h2>
     <p class="thankyou-text">To our family and friends near and far &mdash; your love, blessings and presence mean the world to us.</p>
-    <p class="thankyou-signature">With Love, Arya &amp; Sachu</p>
+    <p class="thankyou-signature">With Love,<br>Arya &amp; Sachu</p>
   </div>
 </section>
 
@@ -722,7 +690,6 @@
 <script src="js/hero.js" defer></script>
 <script src="js/countdown.js" defer></script>
 <script src="js/gallery.js" defer></script>
-<script src="js/blessings.js" defer></script>
 <script src="js/player.js" defer></script>
 <script src="js/cursor.js" defer></script>
 <script src="js/main.js" defer></script>

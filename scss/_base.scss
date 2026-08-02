@@ -228,10 +228,3 @@ p { color: var(--text-muted); }
   &:focus { top: 1rem; }
 }
 
-// ---- Guest-wish celebration confetti canvas (also used by the Wishes wall) --------------------------------------------------
-.confetti-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 1150;
-  pointer-events: none;
-}
