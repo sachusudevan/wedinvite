@@ -1,5 +1,5 @@
 // ==========================================================================
-// Progress bar + Nav
+// Progress bar + Nav — floating dark-glass capsule with glowing crimson mark
 // ==========================================================================
 @use "tokens" as *;
 
@@ -10,34 +10,45 @@
   width: 100%;
   transform: scaleX(0);
   transform-origin: left;
-  background: linear-gradient(90deg, var(--gold-deep), var(--gold-light));
+  background: linear-gradient(90deg, var(--crimson-deep), var(--rose));
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.6);
   z-index: 1050;
 }
 
 .site-nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: clamp(0.8rem, 2.4vw, 1.4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(96%, 1360px);
   z-index: var(--z-nav);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.4rem var(--gutter);
+  padding: 0.9rem clamp(1.1rem, 3vw, 1.8rem);
+  border-radius: var(--radius-pill);
+  background: rgba(8, 7, 8, 0.58);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid var(--glass-border-on-dark);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
   transition: padding var(--dur-fast) var(--ease-out-soft),
               background var(--dur-fast) var(--ease-out-soft),
               border-color var(--dur-fast) var(--ease-out-soft),
-              backdrop-filter var(--dur-fast) var(--ease-out-soft);
-  border-bottom: 1px solid transparent;
+              box-shadow var(--dur-fast) var(--ease-out-soft),
+              top var(--dur-fast) var(--ease-out-soft);
 
   &.is-condensed {
-    padding-block: 0.85rem;
+    top: 0.7rem;
+    padding-block: 0.6rem;
     background: var(--glass-bg-darker);
-    backdrop-filter: blur(var(--glass-blur-sm));
-    -webkit-backdrop-filter: blur(var(--glass-blur-sm));
-    border-bottom-color: var(--glass-border-on-dark);
+    border-color: rgba(229, 9, 20, 0.3);
+    box-shadow: 0 16px 46px rgba(0, 0, 0, 0.5), 0 0 24px rgba(229, 9, 20, 0.12);
   }
 }
 
 .nav-logo {
+  position: relative;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.3rem;
@@ -46,8 +57,15 @@
   display: inline-flex;
   align-items: baseline;
   gap: 0.2em;
+  text-shadow: 0 0 18px rgba(229, 9, 20, 0.55);
+  animation: navMarkGlow 3.4s ease-in-out infinite;
 
-  span { color: var(--gold-light); font-style: italic; font-size: 0.85em; }
+  span { color: var(--rose); font-style: italic; font-size: 0.85em; }
+}
+
+@keyframes navMarkGlow {
+  0%, 100% { text-shadow: 0 0 14px rgba(229, 9, 20, 0.45); }
+  50% { text-shadow: 0 0 24px rgba(229, 9, 20, 0.85), 0 0 44px rgba(255, 59, 92, 0.35); }
 }
 
 .nav-toggle {
@@ -59,7 +77,7 @@
   justify-content: center;
   border-radius: 50%;
   border: 1px solid var(--glass-border-on-dark);
-  transition: border-color var(--dur-fast) var(--ease-out-soft);
+  transition: border-color var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
 
   span {
     position: absolute;
@@ -70,22 +88,14 @@
   span:nth-child(1) { transform: translateY(-5px); }
   span:nth-child(3) { transform: translateY(5px); }
 
-  @include fine-pointer { &:hover { border-color: var(--gold-light); } }
+  @include fine-pointer { &:hover { border-color: var(--rose); box-shadow: 0 0 18px rgba(255, 59, 92, 0.35); } }
 }
 
 .nav-toggle.is-open {
+  border-color: var(--crimson);
   span:nth-child(1) { transform: rotate(45deg); }
   span:nth-child(2) { opacity: 0; }
   span:nth-child(3) { transform: rotate(-45deg); }
-}
-
-// The overlay menu is light (ivory/champagne); flip the fixed header's
-// logo + toggle to dark ink so they stay legible while it's open.
-.site-nav:has(.nav-toggle.is-open) {
-  .nav-logo { color: var(--wine-deep); }
-  .nav-logo span { color: var(--wine); }
-  .nav-toggle { border-color: var(--glass-border); }
-  .nav-toggle span { background: var(--wine-deep); }
 }
 
 .nav-overlay {
@@ -99,7 +109,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   gap: 0;
-  background: linear-gradient(160deg, var(--ivory) 0%, var(--champagne) 60%, var(--blush) 130%);
+  background: radial-gradient(circle at 15% 0%, rgba(229, 9, 20, 0.16), transparent 55%), linear-gradient(160deg, var(--obsidian) 0%, var(--charcoal) 55%, #1c0507 130%);
   padding-inline: var(--gutter);
   padding-top: clamp(5.5rem, 14vh, 8rem);
   padding-bottom: 2rem;
@@ -114,7 +124,8 @@
     top: 0; left: 0;
     width: 4px;
     height: 100%;
-    background: linear-gradient(180deg, var(--gold-light), var(--wine));
+    background: linear-gradient(180deg, var(--rose), var(--crimson-deep));
+    box-shadow: 0 0 24px rgba(229, 9, 20, 0.5);
   }
 
   &.is-open {
@@ -130,6 +141,7 @@
   width: 100%;
   max-width: 900px;
   padding-block: clamp(0.5rem, 1.6vw, 0.9rem);
+  padding-left: 0;
   border-bottom: 1px solid var(--line);
   font-family: var(--font-display);
   font-weight: 700;
@@ -137,7 +149,20 @@
   color: var(--ink);
   opacity: 0;
   transform: translateY(30px);
-  transition: color var(--dur-fast) var(--ease-out-soft), padding-left var(--dur-fast) var(--ease-out-soft);
+  transition: color var(--dur-fast) var(--ease-out-soft), padding-left var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast) var(--ease-out-soft);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -1.1rem;
+    top: 50%;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--crimson);
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.8);
+    transform: translateY(-50%) scale(0);
+    transition: transform var(--dur-fast) var(--ease-spring);
+  }
 
   span {
     display: inline-block;
@@ -145,13 +170,21 @@
     font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.1em;
-    color: var(--gold-deep);
+    color: var(--crimson-soft);
     margin-right: 0.7em;
     vertical-align: middle;
   }
 
   @include fine-pointer {
-    &:hover { color: var(--wine); padding-left: 0.6em; }
+    &:hover { color: var(--rose); padding-left: 0.6em; }
+  }
+
+  // Highlights the link matching the section currently in view (nav.js).
+  &.is-active {
+    color: var(--rose);
+    border-color: rgba(229, 9, 20, 0.4);
+    &::before { transform: translateY(-50%) scale(1); }
+    span { color: var(--rose); }
   }
 }
 
@@ -170,9 +203,9 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
-  transition: opacity var(--dur-fast) var(--ease-out-soft), transform var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast);
+  transition: opacity var(--dur-fast) var(--ease-out-soft), transform var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast), box-shadow var(--dur-fast);
 
-  @include fine-pointer { &:hover { border-color: var(--gold-light); } }
+  @include fine-pointer { &:hover { border-color: var(--rose); box-shadow: var(--shadow-gold-glow); } }
 
   &.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
 }

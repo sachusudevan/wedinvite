@@ -41,4 +41,27 @@ WED.onReady(() => {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && open) setOpen(false);
   });
+
+  // ---- Active-route indicator: highlight the nav-link for the section in view --------------------------------------------------
+  if (links.length && "IntersectionObserver" in window) {
+    const sections = Array.from(links)
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    const setActive = (id) => {
+      links.forEach((link) => link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`));
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
 });

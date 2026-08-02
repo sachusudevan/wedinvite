@@ -24,14 +24,14 @@
     object-fit: cover;
     object-position: 50% 22%;
     transform: scale(1.12);
-    filter: saturate(1.05) contrast(1.03);
+    filter: saturate(0.55) contrast(1.12) brightness(0.9);
   }
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(36, 21, 18, 0.94) 0%, rgba(74, 19, 28, 0.42) 42%, rgba(74, 19, 28, 0.14) 68%, rgba(36, 21, 18, 0.58) 100%);
+  background: linear-gradient(0deg, rgba(10, 10, 12, 0.97) 0%, rgba(18, 3, 5, 0.85) 35%, rgba(18, 3, 5, 0.62) 60%, rgba(10, 10, 12, 0.82) 100%);
 }
 
 .hero-grain {
@@ -40,6 +40,47 @@
   opacity: 0.05;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+// ---- Animated mesh grid + pulsing ambient crimson glow --------------------------------------------------
+.hero-mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 65% at 50% 55%, #000 30%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 55%, #000 30%, transparent 78%);
+  animation: meshDrift 22s linear infinite;
+}
+
+.hero-mesh-glow {
+  position: absolute;
+  inset: -10%;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 62%, rgba(229, 9, 20, 0.35), transparent 55%);
+  animation: meshPulse 6s ease-in-out infinite;
+}
+
+@keyframes meshDrift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 128px 64px, 128px 64px; }
+}
+
+@keyframes meshPulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.06); }
+}
+
+@include reduce-motion {
+  .hero-mesh { animation: none; }
+  .hero-mesh-glow { animation: none; }
 }
 
 // ---- Ambient floating petals (populated at runtime via WED.spawnPetals) --------------------------------------------------
@@ -99,8 +140,9 @@
 .hero-amp {
   font-family: var(--font-script);
   font-weight: 400;
-  color: var(--gold-light);
+  color: var(--rose);
   margin: 0 0.08em;
+  text-shadow: 0 0 30px rgba(255, 59, 92, 0.55);
 }
 
 .split-char { display: inline-block; will-change: transform, opacity; }

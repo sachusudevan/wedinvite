@@ -23,8 +23,8 @@ body.lenis, html.lenis { height: auto; }
 
 body.nav-locked { overflow: hidden; }
 
-::selection { background: var(--gold-light); color: var(--wine-deep); }
-::-moz-selection { background: var(--gold-light); color: var(--wine-deep); }
+::selection { background: var(--crimson); color: var(--white); }
+::-moz-selection { background: var(--crimson); color: var(--white); }
 
 :focus-visible {
   outline: 2px solid var(--gold);
@@ -61,16 +61,26 @@ p { color: var(--text-muted); }
 }
 
 // ---- Reusable glass surfaces --------------------------------------------------
-// Dark-context card (used over photos / dark sections).
+// Recessed dark-glass card (used over photos / dark sections).
 .card-block {
   @include glass-dark;
   border-radius: var(--radius-lg);
+  transition: border-radius var(--dur-med) var(--ease-lux), border-color var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
+
+  @include fine-pointer {
+    &:hover { border-radius: calc(var(--radius-lg) + 10px); border-color: var(--crimson); box-shadow: var(--shadow-gold-glow); }
+  }
 }
 
-// Light-context card (used over ivory/champagne backgrounds).
+// Elevated dark-glass card (used for lighter-tier surfaces across the page).
 .card-block-light {
   @include glass-light;
   border-radius: var(--radius-lg);
+  transition: border-radius var(--dur-med) var(--ease-lux), border-color var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
+
+  @include fine-pointer {
+    &:hover { border-radius: calc(var(--radius-lg) + 10px); border-color: var(--crimson); box-shadow: var(--shadow-gold-glow); }
+  }
 }
 
 // ---- Shared elements --------------------------------------------------
@@ -130,7 +140,7 @@ p { color: var(--text-muted); }
   i {
     font-style: normal;
     font-size: 0.7rem;
-    color: var(--wine);
+    color: var(--crimson);
   }
 
   &.light {
@@ -158,23 +168,44 @@ p { color: var(--text-muted); }
   text-transform: uppercase;
   border-radius: var(--radius-pill);
   border: 1px solid transparent;
+  overflow: hidden;
+  isolation: isolate;
   transition: transform var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft), background var(--dur-fast) var(--ease-out-soft), color var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast) var(--ease-out-soft);
 
   @include fine-pointer {
-    &:hover { transform: translateY(-3px); box-shadow: var(--shadow-gold-glow); }
+    &:hover { transform: translateY(-3px) scale(1.02); box-shadow: var(--shadow-gold-glow); }
   }
-  &:active { transform: translateY(0); box-shadow: none; }
+  &:active { transform: translateY(0) scale(0.99); box-shadow: none; }
 }
 
 .btn-solid {
-  background: linear-gradient(135deg, var(--gold-light), var(--gold) 60%, var(--gold-deep));
-  color: var(--wine-deep);
+  background: linear-gradient(135deg, var(--rose), var(--crimson) 55%, var(--crimson-deep));
+  color: var(--white);
+  box-shadow: 0 8px 26px rgba(229, 9, 20, 0.28);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.4) 50%, transparent 65%);
+    background-size: 220% 100%;
+    background-position: 130% 0;
+    transition: background-position var(--dur-med) var(--ease-out-soft);
+  }
+  @include fine-pointer {
+    &:hover::before { background-position: -30% 0; }
+  }
 }
 
 .btn-outline {
   background: transparent;
-  border-color: var(--gold);
+  border-color: var(--crimson);
   color: var(--text-primary);
+
+  @include fine-pointer {
+    &:hover { border-color: var(--rose); box-shadow: 0 0 0 1px var(--rose) inset; }
+  }
 
   &.on-dark {
     border-color: var(--glass-border-on-dark);

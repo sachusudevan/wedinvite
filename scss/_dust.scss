@@ -18,9 +18,9 @@
   width: var(--s, 3px);
   height: var(--s, 3px);
   border-radius: 50%;
-  background: radial-gradient(circle, var(--gold-light) 0%, var(--gold) 60%, transparent 100%);
+  background: radial-gradient(circle, var(--rose) 0%, var(--crimson) 60%, transparent 100%);
   opacity: 0;
-  box-shadow: 0 0 6px 1px rgba(201, 162, 75, 0.55);
+  box-shadow: 0 0 6px 1px rgba(229, 9, 20, 0.6);
   animation: dustFloat var(--dur, 16s) ease-in-out var(--delay, 0s) infinite;
 }
 

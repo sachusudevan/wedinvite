@@ -1,68 +1,91 @@
 // ==========================================================================
 // Design Tokens — Arya & Sachu
-// Luxury Cinematic system: ivory + champagne base, blush pastel, metallic
-// gold accent, deep wine contrast. Soft glassmorphism surfaces, diffuse
-// shadows, generous radius. Defined as CSS custom properties so both SCSS
-// and runtime JS (canvas particles, visualizer, confetti) can read them.
+// Luxury Red & Black system: obsidian/charcoal surfaces, vivid crimson +
+// electric ruby + neon rose accents, high-contrast white type. Dark-mode
+// glassmorphism throughout, glowing crimson borders, diffuse black shadows.
+// Defined as CSS custom properties so both SCSS and runtime JS (canvas
+// particles, visualizer, confetti) can read them.
 // ==========================================================================
 
 :root {
   // ---- Core palette --------------------------------------------------
-  --ivory: #faf6ef;
-  --champagne: #f3e9dc;
-  --champagne-deep: #e8d9c3;
+  // Backgrounds
+  --obsidian: #0a0a0c;
+  --charcoal: #121215;
+  --surface: #1a1a1e;
+  --surface-raised: #232328;
 
-  --blush: #f3dcd6;
-  --blush-deep: #e8c3bc;
+  // Accents — vivid crimson (primary), electric ruby (secondary), neon rose (bright)
+  --crimson: #e50914;
+  --crimson-deep: #a10710;
+  --ruby: #ff1e42;
+  --rose: #ff3b5c;
 
-  --gold: #c9a24b;
-  --gold-light: #e3c687;
-  --gold-deep: #9c7a38;
-
-  --wine: #6e1e2b;
-  --wine-deep: #4a131c;
-
-  --ink: #2b241e;
-  --ink-soft: #4a4030;
+  // Text
   --white: #ffffff;
+  --slate: #a1a1aa;
+  --slate-dim: #6b6b72;
+  --crimson-soft: #ff6b81;
 
-  --bg-dark: #241512;
-  --bg-dark-soft: #33201b;
+  // ---- Legacy-named aliases --------------------------------------------------
+  // Component partials reference these names directly; repointing them here
+  // recolors the whole site without touching every file.
+  --ivory: var(--white);
+  --champagne: var(--surface);
+  --champagne-deep: #2a2a30;
 
-  --gray: #7a6e5d;
-  --gray-light: #b8a98f;
+  --blush: var(--rose);
+  --blush-deep: var(--ruby);
+
+  --gold: var(--crimson);
+  --gold-light: var(--rose);
+  --gold-deep: var(--crimson-deep);
+
+  // Deep velvet fill — decorative (seal, ring box, ribbon), not text.
+  --wine: #7a0f1c;
+  --wine-deep: #33050a;
+
+  --ink: var(--white);
+  --ink-soft: var(--slate);
+
+  --bg-dark: var(--obsidian);
+  --bg-dark-soft: var(--charcoal);
+
+  --gray: var(--slate);
+  --gray-light: var(--slate-dim);
 
   // ---- Semantic roles --------------------------------------------------
-  --bg-page: var(--ivory);
-  --bg-panel: var(--champagne);
-  --bg-dark-section: var(--bg-dark);
+  --bg-page: var(--charcoal);
+  --bg-panel: var(--surface);
+  --bg-dark-section: var(--obsidian);
 
-  --text-primary: var(--ink);
-  --text-muted: var(--gray);
-  --text-on-dark: var(--ivory);
-  --text-accent: var(--wine-deep);
-  --text-accent-on-dark: var(--gold-light);
+  --text-primary: var(--white);
+  --text-muted: var(--slate);
+  --text-on-dark: var(--white);
+  --text-accent: var(--crimson);
+  --text-accent-on-dark: var(--rose);
 
-  --line: rgba(43, 36, 30, 0.14);
-  --line-on-dark: rgba(250, 246, 239, 0.18);
-  --line-strong: rgba(43, 36, 30, 0.22);
+  --line: rgba(255, 255, 255, 0.08);
+  --line-on-dark: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.16);
 
   // ---- Glassmorphism --------------------------------------------------
-  --glass-bg-light: rgba(255, 255, 255, 0.55);
-  --glass-bg-lighter: rgba(255, 255, 255, 0.72);
-  --glass-bg-dark: rgba(255, 255, 255, 0.08);
-  --glass-bg-darker: rgba(20, 12, 10, 0.42);
-  --glass-border: rgba(201, 162, 75, 0.35);
-  --glass-border-on-dark: rgba(230, 198, 135, 0.28);
+  --glass-bg-light: rgba(255, 255, 255, 0.045);
+  --glass-bg-lighter: rgba(255, 255, 255, 0.08);
+  --glass-bg-dark: rgba(255, 255, 255, 0.05);
+  --glass-bg-darker: rgba(6, 5, 6, 0.55);
+  --glass-border: rgba(229, 9, 20, 0.28);
+  --glass-border-on-dark: rgba(255, 59, 92, 0.22);
   --glass-blur: 18px;
   --glass-blur-sm: 10px;
 
-  // ---- Shadows (soft / diffuse, no hard offsets) --------------------------------------------------
-  --shadow-soft-sm: 0 4px 18px rgba(60, 40, 20, 0.1);
-  --shadow-soft: 0 20px 50px -12px rgba(60, 40, 20, 0.22);
-  --shadow-soft-lg: 0 32px 80px -20px rgba(60, 32, 20, 0.32);
-  --shadow-gold-glow: 0 0 40px rgba(201, 162, 75, 0.35);
-  --shadow-soft-on-dark: 0 24px 60px rgba(0, 0, 0, 0.45);
+  // ---- Shadows (soft / diffuse black, plus crimson glow accents) --------------------------------------------------
+  --shadow-soft-sm: 0 4px 18px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 20px 50px -12px rgba(0, 0, 0, 0.55);
+  --shadow-soft-lg: 0 32px 80px -20px rgba(0, 0, 0, 0.65);
+  --shadow-gold-glow: 0 0 40px rgba(229, 9, 20, 0.45); // primary crimson hover glow
+  --shadow-glow-lg: 0 0 70px rgba(229, 9, 20, 0.5);
+  --shadow-soft-on-dark: 0 24px 60px rgba(0, 0, 0, 0.65);
 
   // ---- Typography --------------------------------------------------
   --font-display: "Fraunces", "Iowan Old Style", serif;
@@ -138,4 +161,20 @@ $bp-xxl: 1600px;
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border-on-dark);
   box-shadow: var(--shadow-soft-on-dark);
+}
+
+// Crimson border-glow pulse for hero-priority interactive surfaces.
+@mixin glow-pulse-border {
+  transition: border-color var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
+  @include fine-pointer {
+    &:hover { border-color: var(--crimson); box-shadow: var(--shadow-gold-glow); }
+  }
+}
+
+// Subtle 3D tilt-lift used across cards / tiles.
+@mixin tilt-lift {
+  transition: transform var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast) var(--ease-out-soft);
+  @include fine-pointer {
+    &:hover { transform: translateY(-6px) scale(1.02); box-shadow: var(--shadow-gold-glow); }
+  }
 }

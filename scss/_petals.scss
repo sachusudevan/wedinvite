@@ -22,12 +22,12 @@
   border-radius: 0% 65% 65% 65%;
   transform: rotate(var(--rot, 25deg));
   opacity: 0;
-  background: linear-gradient(135deg, var(--blush) 0%, var(--blush-deep) 55%, var(--gold-light) 100%);
-  box-shadow: 0 0 10px rgba(201, 162, 75, 0.25);
+  background: linear-gradient(135deg, var(--blush) 0%, var(--blush-deep) 55%, var(--rose) 100%);
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.35);
   animation: petalFall var(--dur, 13s) ease-in var(--delay, 0s) infinite;
 
   &--gold {
-    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 60%, var(--gold-deep) 100%);
+    background: linear-gradient(135deg, var(--rose) 0%, var(--crimson) 60%, var(--crimson-deep) 100%);
   }
 }
 

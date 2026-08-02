@@ -17,7 +17,8 @@
 
 .cursor-dot {
   width: 7px; height: 7px;
-  background: var(--gold-light);
+  background: var(--rose);
+  box-shadow: 0 0 8px rgba(255, 59, 92, 0.8);
 }
 
 .cursor-ring {
@@ -26,13 +27,15 @@
   transition: width var(--dur-fast) var(--ease-out-soft),
               height var(--dur-fast) var(--ease-out-soft),
               opacity var(--dur-fast) var(--ease-out-soft),
-              border-color var(--dur-fast) var(--ease-out-soft);
+              border-color var(--dur-fast) var(--ease-out-soft),
+              box-shadow var(--dur-fast) var(--ease-out-soft);
 }
 
 .cursor-ring.is-active {
   width: 64px; height: 64px;
-  background: rgba(227, 198, 135, 0.12);
-  border-color: var(--gold-light);
+  background: rgba(229, 9, 20, 0.14);
+  border-color: var(--rose);
+  box-shadow: 0 0 26px rgba(229, 9, 20, 0.4);
 }
 
 .cursor-ring .cursor-label {

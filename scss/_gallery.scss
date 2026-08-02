@@ -15,18 +15,18 @@
 .gallery-filter-btn {
   padding: 0.6rem 1.4rem;
   border-radius: var(--radius-pill);
-  border: 1px solid var(--gold);
+  border: 1px solid var(--crimson);
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--wine-deep);
-  transition: background var(--dur-fast) var(--ease-out-soft), color var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
+  color: var(--crimson-soft);
+  transition: background var(--dur-fast) var(--ease-out-soft), color var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast) var(--ease-out-soft);
 
-  &.is-active { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--wine-deep); border-color: transparent; }
+  &.is-active { background: linear-gradient(135deg, var(--rose), var(--crimson)); color: var(--white); border-color: transparent; }
   @include fine-pointer {
-    &:hover:not(.is-active) { box-shadow: var(--shadow-gold-glow); }
+    &:hover:not(.is-active) { box-shadow: var(--shadow-gold-glow); border-color: var(--rose); color: var(--rose); }
   }
 }
 
@@ -52,7 +52,44 @@
 .gallery-hero-fig img {
   width: 100%; height: 100%;
   object-fit: cover;
+  filter: saturate(0.3) contrast(1.15) brightness(0.72) sepia(0.1) hue-rotate(-8deg);
   transition: transform 1s var(--ease-out-soft);
+}
+
+.gallery-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(10,10,12,0.55) 0%, rgba(10,10,12,0.15) 30%, rgba(10,10,12,0.3) 70%, rgba(10,10,12,0.85) 100%),
+    linear-gradient(0deg, rgba(229,9,20,0.14), transparent 45%);
+}
+
+// ---- Skeleton shimmer while lazy images load (js toggles .is-loaded) --------------------------------------------------
+.gallery-hero-fig,
+.gallery-grid-item {
+  background: linear-gradient(100deg, var(--surface) 38%, #2a0a0e 50%, var(--surface) 62%);
+  background-size: 260% 100%;
+  animation: shimmerPass 1.8s ease-in-out infinite;
+
+  img { opacity: 0; transition: opacity var(--dur-med) var(--ease-out-soft); }
+
+  &.is-loaded {
+    animation: none;
+    background: none;
+    img { opacity: 1; }
+  }
+}
+
+@keyframes shimmerPass {
+  0% { background-position: 140% 0; }
+  100% { background-position: -40% 0; }
+}
+
+@include reduce-motion {
+  .gallery-hero-fig, .gallery-grid-item { animation: none; }
 }
 
 .gallery-hero-caption {
@@ -62,7 +99,7 @@
   align-items: center;
   gap: 1.2rem;
   padding: clamp(1.4rem, 4vw, 2.6rem) var(--gutter);
-  background: linear-gradient(0deg, rgba(36,21,18,0.85) 0%, transparent 75%);
+  background: linear-gradient(0deg, rgba(10,10,12,0.88) 0%, transparent 75%);
   color: var(--ivory);
 }
 
@@ -92,7 +129,7 @@
   text-transform: uppercase;
   color: var(--ivory);
   transition: background var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast);
-  @include fine-pointer { &:hover { background: rgba(201,162,75,0.25); border-color: var(--gold-light); } }
+  @include fine-pointer { &:hover { background: rgba(229,9,20,0.25); border-color: var(--rose); box-shadow: var(--shadow-gold-glow); } }
 }
 
 .gallery-hero:hover .gallery-hero-fig img { transform: scale(1.05); }
@@ -127,7 +164,12 @@
     width: 100%; height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.7s var(--ease-out-soft);
+    filter: saturate(0.4) contrast(1.1) brightness(0.8);
+    transition: transform 0.7s var(--ease-out-soft), filter var(--dur-fast) var(--ease-out-soft);
+  }
+
+  @include fine-pointer {
+    &:hover img { filter: saturate(0.7) contrast(1.1) brightness(0.95); }
   }
 
   @include fine-pointer {
@@ -142,7 +184,7 @@
   display: flex;
   align-items: flex-end;
   padding: 1.1rem;
-  background: linear-gradient(0deg, rgba(36,21,18,0.78), transparent 55%);
+  background: linear-gradient(0deg, rgba(10,10,12,0.82), transparent 55%);
   opacity: 0;
   transition: opacity var(--dur-fast) var(--ease-out-soft);
 
@@ -170,7 +212,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(36, 21, 18, 0.92);
+  background: rgba(6, 5, 6, 0.94);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   opacity: 0;
@@ -221,7 +263,7 @@
   @include glass-dark;
   font-size: 1.3rem;
   transition: background var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast);
-  @include fine-pointer { &:hover { background: rgba(201,162,75,0.25); border-color: var(--gold-light); } }
+  @include fine-pointer { &:hover { background: rgba(229,9,20,0.25); border-color: var(--rose); box-shadow: var(--shadow-gold-glow); } }
 }
 
 .lightbox-close { top: 1.6rem; right: 1.6rem; }
@@ -236,5 +278,5 @@
   border: 1px solid var(--line);
   display: flex; align-items: center; justify-content: center;
   transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
-  @include fine-pointer { &:hover { background: var(--wine-deep); color: var(--ivory); border-color: var(--wine-deep); } }
+  @include fine-pointer { &:hover { background: var(--crimson); color: var(--white); border-color: var(--crimson); box-shadow: var(--shadow-gold-glow); } }
 }

@@ -71,8 +71,8 @@
     order: 2;
     width: 12px; height: 12px;
     border-radius: 50%;
-    background: var(--gold);
-    box-shadow: 0 0 0 6px var(--bg-page), 0 0 16px 2px rgba(201, 162, 75, 0.5);
+    background: var(--crimson);
+    box-shadow: 0 0 0 6px var(--bg-page), 0 0 16px 2px rgba(229, 9, 20, 0.55);
     align-self: center;
     justify-self: center;
   }
@@ -146,8 +146,13 @@
   font-weight: 600;
   font-size: clamp(1.3rem, 3vw, 2rem);
   line-height: 1.45;
-  color: var(--wine-deep);
+  color: var(--white);
+  transition: border-color var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft);
 
-  &::before { content: '"'; color: var(--gold); font-style: normal; }
-  &::after { content: '"'; color: var(--gold); font-style: normal; }
+  &::before { content: '"'; color: var(--crimson); font-style: normal; }
+  &::after { content: '"'; color: var(--crimson); font-style: normal; }
+
+  @include fine-pointer {
+    &:hover { border-color: var(--crimson); box-shadow: var(--shadow-gold-glow); }
+  }
 }

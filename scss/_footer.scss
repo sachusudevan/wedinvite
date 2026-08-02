@@ -23,7 +23,9 @@
 .thankyou-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(36,21,18,0.55), rgba(36,21,18,0.92));
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 40%, rgba(229, 9, 20, 0.18), transparent 70%),
+    linear-gradient(180deg, rgba(10,10,12,0.6), rgba(10,10,12,0.94));
 }
 
 .thankyou-content {
@@ -53,7 +55,8 @@
   font-family: var(--font-script);
   font-weight: 400;
   font-size: clamp(1.8rem, 4.4vw, 2.6rem);
-  color: var(--gold-light);
+  color: var(--rose);
+  text-shadow: 0 0 26px rgba(255, 59, 92, 0.4);
 }
 
 .footer {
@@ -62,14 +65,31 @@
   color: var(--ivory);
   text-align: center;
   padding: clamp(3rem, 8vw, 4.5rem) 1.5rem clamp(6rem, 10vw, 4.5rem);
+  overflow: hidden;
 
   &::before {
     content: "";
     position: absolute;
     top: 0; left: 15%; right: 15%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    background: linear-gradient(90deg, transparent, var(--rose), transparent);
+    box-shadow: 0 0 16px rgba(229, 9, 20, 0.5);
   }
+
+  // Sub-layer ambient radial glow beneath the footer content.
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%; top: 10%;
+    width: 70vw; height: 70vw;
+    max-width: 900px; max-height: 900px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.12), transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  > * { position: relative; z-index: 1; }
 }
 
 .footer-monogram {
@@ -77,9 +97,59 @@
   font-weight: 400;
   font-size: 2.4rem;
   color: var(--ivory);
-  span { color: var(--gold-light); }
+  span { color: var(--rose); text-shadow: 0 0 22px rgba(255, 59, 92, 0.5); }
 }
 
 .footer-names { margin-top: 0.8rem; font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 1.5rem; color: var(--ivory); }
-.footer-date { margin-top: 0.4rem; font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
+.footer-date { margin-top: 0.4rem; font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); }
+
+// ---- Dynamic hover nodes: directions / share / music, each with its own radial glow --------------------------------------------------
+.footer-nodes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.footer-node {
+  position: relative;
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  color: var(--ivory);
+  @include glass-dark;
+  transition: transform var(--dur-fast) var(--ease-spring), border-color var(--dur-fast) var(--ease-out-soft), box-shadow var(--dur-fast) var(--ease-out-soft), color var(--dur-fast) var(--ease-out-soft);
+
+  svg { width: 18px; height: 18px; position: relative; z-index: 1; }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -14px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.45), transparent 70%);
+    opacity: 0;
+    transition: opacity var(--dur-fast) var(--ease-out-soft);
+    z-index: 0;
+  }
+
+  @include fine-pointer {
+    &:hover {
+      transform: translateY(-4px) scale(1.08);
+      border-color: var(--rose);
+      color: var(--white);
+      box-shadow: var(--shadow-gold-glow);
+    }
+    &:hover::before { opacity: 1; }
+  }
+
+  &.is-copied {
+    border-color: var(--crimson);
+    color: var(--white);
+    background: var(--crimson);
+    box-shadow: var(--shadow-gold-glow);
+  }
+}
+
 .footer-credit { margin-top: 1.6rem; font-size: 0.78rem; color: var(--ivory); opacity: 0.5; }
