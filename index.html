@@ -330,13 +330,16 @@
 <!-- ============ HERO ============ -->
 <section class="hero" id="hero">
   <div class="hero-bg" id="heroBg">
-    <img
-      src="assets/images/optimized/md/hero-embrace.webp"
-      srcset="assets/images/optimized/sm/hero-embrace.webp 480w, assets/images/optimized/md/hero-embrace.webp 800w, assets/images/optimized/lg/hero-embrace.webp 941w"
-      sizes="100vw"
-      alt="Arya and Sachu"
-      fetchpriority="high"
-      decoding="async">
+    <picture>
+      <source media="(min-width: 1020px)" srcset="assets/images/optimized/lg/hero-embrace.webp 1100w, assets/images/optimized/lg/hero-embrace-xl.webp 1920w" sizes="100vw">
+      <img
+        src="assets/images/optimized/md/hero-embrace-portrait.webp"
+        srcset="assets/images/optimized/sm/hero-embrace-portrait.webp 480w, assets/images/optimized/md/hero-embrace-portrait.webp 800w"
+        sizes="100vw"
+        alt="Arya and Sachu"
+        fetchpriority="high"
+        decoding="async">
+    </picture>
     <div class="hero-overlay"></div>
     <div class="hero-grain"></div>
   </div>
@@ -386,8 +389,8 @@
 
     <div class="couple-panel" data-fx="unfold">
       <div class="couple-banner">
-        <img src="assets/images/optimized/lg/hero-embrace.webp"
-             srcset="assets/images/optimized/md/hero-embrace.webp 800w, assets/images/optimized/lg/hero-embrace.webp 941w"
+        <img src="assets/images/optimized/lg/couple-banner.webp"
+             srcset="assets/images/optimized/md/couple-banner.webp 800w, assets/images/optimized/lg/couple-banner.webp 1100w"
              sizes="(min-width: 1020px) 900px, 100vw" alt="Arya and Sachu" loading="lazy" decoding="async">
         <div class="couple-banner-overlay"></div>
       </div>
@@ -571,7 +574,7 @@
   <!-- Cinematic hero image -->
   <div class="gallery-hero" data-fx="develop" id="galleryHero">
     <figure class="gallery-hero-fig gallery-item" data-category="together" data-caption="So close to forever" data-index="0">
-      <img src="assets/images/optimized/lg/gallery-feature.webp" srcset="assets/images/optimized/md/gallery-feature.webp 800w, assets/images/optimized/lg/gallery-feature.webp 1024w" sizes="100vw" alt="So close to forever" loading="lazy" decoding="async">
+      <img src="assets/images/optimized/lg/gallery-feature.webp" srcset="assets/images/optimized/md/gallery-feature.webp 800w, assets/images/optimized/lg/gallery-feature.webp 1100w" sizes="100vw" alt="So close to forever" loading="lazy" decoding="async">
       <figcaption class="gallery-hero-caption">
         <span class="gallery-hero-num">01</span>
         <span class="gallery-hero-text">So close to forever</span>
@@ -584,27 +587,27 @@
   <div class="container">
     <div class="gallery-grid" id="galleryGrid">
       <figure class="gallery-grid-item gallery-item" data-fx="develop" data-category="candid" data-caption="Resting in your arms" data-index="1">
-        <img src="assets/images/optimized/md/ceremony-embrace.webp" srcset="assets/images/optimized/sm/ceremony-embrace.webp 480w, assets/images/optimized/md/ceremony-embrace.webp 800w" sizes="(min-width:1020px) 30vw,(min-width:560px) 45vw,90vw" alt="Resting in your arms" loading="lazy" decoding="async">
+        <img src="assets/images/optimized/md/gallery-resting-arms.webp" srcset="assets/images/optimized/sm/gallery-resting-arms.webp 480w, assets/images/optimized/md/gallery-resting-arms.webp 800w" sizes="(min-width:1020px) 30vw,(min-width:560px) 45vw,90vw" alt="Resting in your arms" loading="lazy" decoding="async">
         <div class="gallery-grid-overlay"><span>Resting in your arms</span></div>
       </figure>
       <figure class="gallery-grid-item gallery-item gallery-grid-item--tall" data-fx="develop" data-category="together" data-caption="Just you and me" data-index="2">
-        <img src="assets/images/optimized/md/falling-in-love.webp" srcset="assets/images/optimized/sm/falling-in-love.webp 480w, assets/images/optimized/md/falling-in-love.webp 800w" sizes="(min-width:1020px) 30vw,(min-width:560px) 45vw,90vw" alt="Just you and me" loading="lazy" decoding="async">
+        <img src="assets/images/optimized/md/gallery-just-you-me.webp" srcset="assets/images/optimized/sm/gallery-just-you-me.webp 480w, assets/images/optimized/md/gallery-just-you-me.webp 800w" sizes="(min-width:1020px) 30vw,(min-width:560px) 45vw,90vw" alt="Just you and me" loading="lazy" decoding="async">
         <div class="gallery-grid-overlay"><span>Just you and me</span></div>
       </figure>
       <figure class="gallery-grid-item gallery-item" data-fx="develop" data-category="candid" data-caption="Laughter looks good on us" data-index="3">
-        <img src="assets/images/optimized/md/first-meeting.webp" srcset="assets/images/optimized/sm/first-meeting.webp 480w, assets/images/optimized/md/first-meeting.webp 800w" sizes="(min-width:1020px) 30vw,(min-width:560px) 45vw,90vw" alt="Laughter looks good on us" loading="lazy" decoding="async">
+        <img src="assets/images/optimized/md/gallery-laughter.webp" srcset="assets/images/optimized/sm/gallery-laughter.webp 480w, assets/images/optimized/md/gallery-laughter.webp 800w" sizes="(min-width:1020px) 30vw,(min-width:560px) 45vw,90vw" alt="Laughter looks good on us" loading="lazy" decoding="async">
         <div class="gallery-grid-overlay"><span>Laughter looks good on us</span></div>
       </figure>
       <figure class="gallery-grid-item gallery-item gallery-grid-item--wide" data-fx="develop" data-category="together" data-caption="Home is your hug" data-index="4">
-        <img src="assets/images/optimized/md/the-proposal.webp" srcset="assets/images/optimized/sm/the-proposal.webp 480w, assets/images/optimized/md/the-proposal.webp 800w" sizes="(min-width:1020px) 45vw,(min-width:560px) 80vw,90vw" alt="Home is your hug" loading="lazy" decoding="async">
+        <img src="assets/images/optimized/md/gallery-home-hug.webp" srcset="assets/images/optimized/sm/gallery-home-hug.webp 480w, assets/images/optimized/md/gallery-home-hug.webp 800w" sizes="(min-width:1020px) 45vw,(min-width:560px) 80vw,90vw" alt="Home is your hug" loading="lazy" decoding="async">
         <div class="gallery-grid-overlay"><span>Home is your hug</span></div>
       </figure>
       <figure class="gallery-grid-item gallery-item" data-fx="develop" data-category="candid" data-caption="Coffee dates &amp; conversations" data-index="5">
-        <img src="assets/images/optimized/md/first-date.webp" srcset="assets/images/optimized/sm/first-date.webp 480w, assets/images/optimized/md/first-date.webp 800w" sizes="(min-width:1020px) 30vw,(min-width:560px) 45vw,90vw" alt="Coffee dates and conversations" loading="lazy" decoding="async">
+        <img src="assets/images/optimized/md/gallery-coffee-dates.webp" srcset="assets/images/optimized/sm/gallery-coffee-dates.webp 480w, assets/images/optimized/md/gallery-coffee-dates.webp 800w" sizes="(min-width:1020px) 30vw,(min-width:560px) 45vw,90vw" alt="Coffee dates and conversations" loading="lazy" decoding="async">
         <div class="gallery-grid-overlay"><span>Coffee dates &amp; conversations</span></div>
       </figure>
       <figure class="gallery-grid-item gallery-item" data-fx="develop" data-category="together" data-caption="Every moment, together" data-index="6">
-        <img src="assets/images/optimized/md/hero-embrace.webp" srcset="assets/images/optimized/sm/hero-embrace.webp 480w, assets/images/optimized/md/hero-embrace.webp 800w" sizes="(min-width:1020px) 30vw,(min-width:560px) 45vw,90vw" alt="Every moment, together" loading="lazy" decoding="async">
+        <img src="assets/images/optimized/md/gallery-every-moment.webp" srcset="assets/images/optimized/sm/gallery-every-moment.webp 480w, assets/images/optimized/md/gallery-every-moment.webp 800w" sizes="(min-width:1020px) 30vw,(min-width:560px) 45vw,90vw" alt="Every moment, together" loading="lazy" decoding="async">
         <div class="gallery-grid-overlay"><span>Every moment, together</span></div>
       </figure>
       <figure class="gallery-grid-item gallery-item" data-fx="develop" data-category="together" data-caption="Chasing horizons together" data-index="7">
@@ -657,7 +660,7 @@
 <!-- ============ THANK YOU ============ -->
 <section class="thankyou" id="thankyou">
   <div class="thankyou-bg">
-    <img src="assets/images/optimized/md/ceremony-embrace.webp" srcset="assets/images/optimized/sm/ceremony-embrace.webp 480w, assets/images/optimized/md/ceremony-embrace.webp 800w, assets/images/optimized/lg/ceremony-embrace.webp 1003w" sizes="100vw" alt="Arya and Sachu" loading="lazy" decoding="async">
+    <img src="assets/images/optimized/md/thankyou-bg.webp" srcset="assets/images/optimized/sm/thankyou-bg.webp 480w, assets/images/optimized/md/thankyou-bg.webp 800w, assets/images/optimized/lg/thankyou-bg.webp 1100w" sizes="100vw" alt="Arya and Sachu" loading="lazy" decoding="async">
   </div>
   <div class="thankyou-overlay"></div>
   <div class="thankyou-content" data-fx="unfold">
@@ -688,7 +691,6 @@
   </nav>
 
   <div class="mini-flourish light center"><span></span><i>&#9670;</i><span></span></div>
-  <p class="footer-credit">Made with ♥ for our forever &middot; 2026</p>
 </footer>
 
 <a href="#hero" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
