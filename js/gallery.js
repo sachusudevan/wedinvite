@@ -57,7 +57,21 @@ WED.onReady(() => {
 
   function largeSrc(item) {
     const img = item.querySelector("img");
-    return img.src.replace("/md/", "/lg/").replace("/sm/", "/lg/");
+    const lgSrc = img.src.replace("/md/", "/lg/").replace("/sm/", "/lg/");
+    return lgSrc === img.src ? img.src : lgSrc;
+  }
+
+  function preloadLargeSrc(item, onResolve) {
+    const candidate = largeSrc(item);
+    const fallback = item.querySelector("img").src;
+    if (candidate === fallback) {
+      onResolve(fallback);
+      return;
+    }
+    const probe = new Image();
+    probe.onload = () => onResolve(candidate);
+    probe.onerror = () => onResolve(fallback);
+    probe.src = candidate;
   }
 
   function openLightbox(index) {
@@ -66,7 +80,7 @@ WED.onReady(() => {
     currentIndex = ((index % visible.length) + visible.length) % visible.length;
     const item = visible[currentIndex];
     const swap = () => {
-      lightboxImg.src = largeSrc(item);
+      preloadLargeSrc(item, (src) => { lightboxImg.src = src; });
       lightboxImg.alt = item.getAttribute("data-caption") || "";
       lightboxCaption.textContent = item.getAttribute("data-caption") || "";
       if (lightboxCounter) lightboxCounter.textContent = `${currentIndex + 1} / ${visible.length}`;
